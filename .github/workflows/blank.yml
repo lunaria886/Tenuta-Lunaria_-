@@ -7,13 +7,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: Tenuta_Lunaria_App_Supabase
-
     steps:
       - name: Scarica il progetto
         uses: actions/checkout@v4
+
+      - name: Trova la cartella del progetto
+        run: |
+          PROJECT_DIR=$(dirname "$(find . -name package.json -not -path './node_modules/*' | head -n 1)")
+          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+          echo "Progetto trovato in: $PROJECT_DIR"
 
       - name: Installa Node.js
         uses: actions/setup-node@v4
@@ -22,15 +24,19 @@ jobs:
 
       - name: Installa dipendenze
         run: npm install
+        working-directory: ${{ env.PROJECT_DIR }}
 
       - name: Installa Capacitor Android
         run: npm install @capacitor/android
+        working-directory: ${{ env.PROJECT_DIR }}
 
       - name: Aggiungi Android
         run: npx cap add android
+        working-directory: ${{ env.PROJECT_DIR }}
 
       - name: Sincronizza Capacitor
         run: npx cap sync android
+        working-directory: ${{ env.PROJECT_DIR }}
 
       - name: Configura Java
         uses: actions/setup-java@v4
@@ -43,9 +49,10 @@ jobs:
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
+        working-directory: ${{ env.PROJECT_DIR }}
 
       - name: Carica APK
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: Tenuta_Lunaria_App_Supabase/android/app/build/outputs/apk/debug/app-debug.apk
+          path: ${{ env.PROJECT_DIR }}/android/app/build/outputs/apk/debug/app-debug.apk
