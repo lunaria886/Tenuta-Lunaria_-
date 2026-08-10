@@ -141,8 +141,9 @@ async function loadIdeas(){
       }else ideas=[];
     }else ideas=data;
     remoteReady=true; saveLocal(); render();
-  }catch(e){
-    console.error(e);
+}catch(e){
+    console.error("ERRORE SUPABASE:", e);
+    alert("ERRORE SUPABASE: " + (e.message || JSON.stringify(e)));
     ideas=localIdeas();
     saveLocal(); render();
     const el=document.getElementById("ideas");
