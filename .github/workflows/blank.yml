@@ -1,0 +1,51 @@
+name: Build APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Tenuta_Lunaria_App_Supabase
+
+    steps:
+      - name: Scarica il progetto
+        uses: actions/checkout@v4
+
+      - name: Installa Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installa dipendenze
+        run: npm install
+
+      - name: Installa Capacitor Android
+        run: npm install @capacitor/android
+
+      - name: Aggiungi Android
+        run: npx cap add android
+
+      - name: Sincronizza Capacitor
+        run: npx cap sync android
+
+      - name: Configura Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Compila APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Carica APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: Tenuta_Lunaria_App_Supabase/android/app/build/outputs/apk/debug/app-debug.apk
