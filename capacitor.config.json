@@ -1,0 +1,6 @@
+{
+  "appId": "it.tenutalunaria.app",
+  "appName": "Tenuta Lunaria",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
