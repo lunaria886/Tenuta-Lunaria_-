@@ -462,17 +462,18 @@ async function saveIdea(){
 }
 function filterCat(c){currentCat=c;document.getElementById("search").value="";render()}
 function render(){
- const q=document.getElementById("search").value.toLowerCase();
- const list=ideas.filter(i=>(!currentCat||i.category===currentCat)&&(!q||(i.title+" "+(i.body||"")+" "+(i.category||"")).toLowerCase().includes(q)));
- document.getElementById("ideas").innerHTML=list.length?list.map((i)=>`
- <div class="idea" onclick="viewIdea(${ideas.indexOf(i)})">
-  <div class="idea-top"><div class="idea-title">${esc(i.title)}</div><span class="badge">${esc(i.category||"Altro")}</span></div>
-  <div class="meta">${esc(i.author||"")} · ${esc(i.date||"")} · ${esc(i.status||"Idea")}</div>
- </div>`).join(""):`<div class="empty">Nessuna idea qui.<br>È un buon momento per inventarne una. ✨</div>`;
- document.getElementById("count").textContent=ideas.length;
- document.getElementById("active").textContent=ideas.filter(i=>(i.status||"Idea")!=="Approvata").length;
- document.getElementById("mine").textContent=ideas.filter(i=>i.author==="Arianna").length;
+  const searchEl = document.getElementById("search");
+  const q = searchEl ? searchEl.value.toLowerCase() : "";
+
+  const list = ideas.filter(i =>
+    (!currentCat || i.category === currentCat) &&
+    (!q || (i.title + " " + (i.body || "") + " " + (i.category || ""))
+      .toLowerCase()
+      .includes(q))
+  );
+
   renderHome();
+}
 function renderHome(){
   const recent = document.getElementById("recentIdeas");
   const highlight = document.getElementById("highlightIdea");
