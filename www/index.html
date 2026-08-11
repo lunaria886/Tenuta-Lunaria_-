@@ -591,21 +591,52 @@ function viewIdea(idx){
 function closeEditModal(){
   document.getElementById("editModal").classList.remove("open");
 }
-function saveEditedIdea(){
+async function saveEditedIdea(){
   const modal = document.getElementById("editModal");
   const idx = Number(modal.dataset.index);
   const i = ideas[idx];
 
-  i.title = document.getElementById("editTitle").value.trim() || i.title;
-  i.body = document.getElementById("editBody").value.trim();
-  i.category = document.getElementById("editCategory").value;
-  i.status = document.getElementById("editStatus").value;
+  if(!i) return;
 
-  saveLocal();
-  closeEditModal();
-  render();
+  const title = document.getElementById("editTitle").value.trim() || i.title;
+  const body = document.getElementById("editBody").value.trim();
+  const category = document.getElementById("editCategory").value;
+  const status = document.getElementById("editStatus").value;
 
-  alert("Idea modificata 💜");
+  try{
+    if(remoteReady && i.id){
+      const { data, error } = await supabaseClient
+        .from("ideas")
+        .update({
+          title: title,
+          body: body,
+          category: category,
+          status: status
+        })
+        .eq("id", i.id)
+        .select("*")
+        .single();
+
+      if(error) throw error;
+
+      ideas[idx] = data;
+    }else{
+      i.title = title;
+      i.body = body;
+      i.category = category;
+      i.status = status;
+    }
+
+    saveLocal();
+    closeEditModal();
+    render();
+
+    alert("Idea modificata e sincronizzata 💜");
+
+  }catch(e){
+    console.error(e);
+    alert("Non riesco a salvare la modifica su Supabase. Riprova.");
+  }
 }
 async function deleteIdea(){
   const modal = document.getElementById("editModal");
