@@ -666,7 +666,9 @@ async function loadIdeas(){
 function toggleMenu(){
 document.getElementById("sideMenu").classList.toggle("open");
 }
-
+function closeMenu(){
+  document.getElementById("sideMenu").classList.remove("open");
+}
 function openSection(section){
   closeMenu();
 
@@ -719,7 +721,6 @@ if(section === "todo"){
   renderTodos();
   return;
 }
-  if(section === "costs"){
     if(section === "grants"){
   content.innerHTML = `
     <div>
@@ -886,7 +887,7 @@ if(section === "todo"){
   return;
 }
     if(section === "reminders"){
-  content.innerHTML = `
+      content.innerHTML = `
     <div>
 
       <div style="
@@ -934,6 +935,7 @@ if(section === "todo"){
   renderReminders();
   return;
 }
+ if(section === "costs"){
   content.innerHTML = `
     <div>
 
@@ -974,26 +976,7 @@ if(section === "todo"){
   renderCosts();
   return;
 }
-  content.innerHTML = `
-    <div class="empty">
-      <div style="font-size:38px;margin-bottom:10px">
-        ${section === "todo" ? "📋" :
-          section === "costs" ? "💰" :
-          section === "grants" ? "📑" :
-          section === "names" ? "✨" :
-          section === "voice" ? "🎙️" :
-          section === "agenda" ? "📅" : "🔔"}
-      </div>
-      <strong>${names[section] || "Sezione"}</strong>
-      <p style="margin-top:8px">
-        Questa sezione è pronta. Ora possiamo costruirla.
-      </p>
-    </div>
-  `;
-
-  homeSections.style.display = "none";
-  appSection.style.display = "block";
-}
+ 
 let reminders = JSON.parse(
   localStorage.getItem("lunariaReminders") || "[]"
 );
@@ -1627,9 +1610,6 @@ function renderTodos(){
 function closeSection(){
   document.getElementById("appSection").style.display = "none";
   document.querySelector(".home-sections").style.display = "grid";
-}
-
-  alert(names[section] + "\n\nQuesta sezione la costruiamo adesso 💜");
 }
   function openModal(){
   document.getElementById("modal").classList.add("open");
