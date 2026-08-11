@@ -389,43 +389,72 @@ font-size:11px;
     <button class="icon-btn" onclick="toggleMenu()">✕</button>
   </div>
 
-  <div class="side-menu-content">
+ <div class="side-menu-content">
 
-```
-<button class="menu-item">
-  <span>💡</span>
-  <div>
-    <strong>Idee</strong>
-    <small>Tutte le idee archiviate</small>
-  </div>
-</button>
+  <button class="menu-item" onclick="openSection('ideas')">
+    <span>💡</span>
+    <div>
+      <strong>Idee</strong>
+      <small>Tutte le idee archiviate</small>
+    </div>
+  </button>
 
-<button class="menu-item">
-  <span>📋</span>
-  <div>
-    <strong>Da fare</strong>
-    <small>Attività da completare</small>
-  </div>
-</button>
+  <button class="menu-item" onclick="openSection('todo')">
+    <span>📋</span>
+    <div>
+      <strong>Da fare</strong>
+      <small>Attività e cose da completare</small>
+    </div>
+  </button>
 
-<button class="menu-item">
-  <span>🌿</span>
-  <div>
-    <strong>Tenuta</strong>
-    <small>Coltivazione e terreno</small>
-  </div>
-</button>
+  <button class="menu-item" onclick="openSection('costs')">
+    <span>💰</span>
+    <div>
+      <strong>Costi</strong>
+      <small>Spese, preventivi e investimenti</small>
+    </div>
+  </button>
 
-<button class="menu-item">
-  <span>🧪</span>
-  <div>
-    <strong>Laboratorio</strong>
-    <small>Strumenti e produzione</small>
-  </div>
-</button>
-```
+  <button class="menu-item" onclick="openSection('grants')">
+    <span>📑</span>
+    <div>
+      <strong>Bandi</strong>
+      <small>Opportunità e finanziamenti</small>
+    </div>
+  </button>
 
-  </div>
+  <button class="menu-item" onclick="openSection('names')">
+    <span>✨</span>
+    <div>
+      <strong>Nomi &amp; Branding</strong>
+      <small>Nomi, prodotti e identità del brand</small>
+    </div>
+  </button>
+
+  <button class="menu-item" onclick="openSection('voice')">
+    <span>🎙️</span>
+    <div>
+      <strong>Note vocali</strong>
+      <small>Idee da registrare al volo</small>
+    </div>
+  </button>
+
+  <button class="menu-item" onclick="openSection('agenda')">
+    <span>📅</span>
+    <div>
+      <strong>Agenda</strong>
+      <small>Appuntamenti e scadenze</small>
+    </div>
+  </button>
+
+  <button class="menu-item" onclick="openSection('reminders')">
+    <span>🔔</span>
+    <div>
+      <strong>Promemoria</strong>
+      <small>Cose da non dimenticare</small>
+    </div>
+  </button>
+
 </div>
 
 <div class="welcome">
@@ -465,7 +494,38 @@ font-size:11px;
 </div>
 
 <input id="search" class="search" placeholder="🔎 Cerca un'idea, un profumo, un prodotto..." oninput="render()">
+<div id="appSection" style="display:none;margin-top:20px">
+  <section class="panel">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">🌙 TENUTA LUNARIA</div>
+        <h3 id="sectionTitle">Sezione</h3>
+      </div>
+      <button class="ghost" onclick="closeSection()">← Torna alla home</button>
+    </div>
 
+    <div id="sectionContent">
+
+  <div id="todoSection" style="display:none">
+
+    <div style="display:flex;gap:10px;margin-bottom:15px">
+      <input
+        id="todoInput"
+        class="search"
+        placeholder="✏️ Cosa devi fare?"
+      >
+      <button class="primary" onclick="addTodo()">＋ Aggiungi</button>
+    </div>
+
+    <div id="todoList">
+      <div class="empty">Ancora nessuna attività.</div>
+    </div>
+
+  </div>
+
+</div>
+  </section>
+</div>  
 <div class="home-sections">
 
   <section class="panel recent-panel">
@@ -607,6 +667,970 @@ function toggleMenu(){
 document.getElementById("sideMenu").classList.toggle("open");
 }
 
+function openSection(section){
+  closeMenu();
+
+  const appSection = document.getElementById("appSection");
+  const homeSections = document.querySelector(".home-sections");
+  const search = document.getElementById("search");
+  const title = document.getElementById("sectionTitle");
+  const content = document.getElementById("sectionContent");
+
+  const names = {
+    todo: "📋 Da fare",
+    costs: "💰 Costi",
+    grants: "📑 Bandi",
+    names: "✨ Nomi & Branding",
+    voice: "🎙️ Note vocali",
+    agenda: "📅 Agenda",
+    reminders: "🔔 Promemoria"
+  };
+
+  if(section === "ideas"){
+    appSection.style.display = "none";
+    homeSections.style.display = "grid";
+    search.focus();
+    return;
+  }
+
+  title.textContent = names[section] || "Sezione";
+if(section === "todo"){
+  content.innerHTML = `
+    <div id="todoSection">
+
+      <div style="display:flex;gap:10px;margin-bottom:15px">
+        <input
+          id="todoInput"
+          class="search"
+          placeholder="✏️ Cosa devi fare?"
+          onkeydown="if(event.key==='Enter') addTodo()"
+        >
+        <button class="primary" onclick="addTodo()">＋ Aggiungi</button>
+      </div>
+
+      <div id="todoList"></div>
+
+    </div>
+  `;
+
+  homeSections.style.display = "none";
+  appSection.style.display = "block";
+
+  renderTodos();
+  return;
+}
+  if(section === "costs"){
+    if(section === "grants"){
+  content.innerHTML = `
+    <div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr .8fr auto;gap:10px;margin-bottom:15px">
+        <input
+          id="grantTitle"
+          class="search"
+          placeholder="📑 Nome del bando"
+        >
+
+        <input
+          id="grantEntity"
+          class="search"
+          placeholder="🏛️ Ente"
+        >
+
+        <input
+          id="grantDeadline"
+          class="search"
+          type="date"
+        >
+
+        <button class="primary" onclick="addGrant()">＋ Aggiungi</button>
+      </div>
+
+      <div id="grantList">
+        <div class="empty">Ancora nessun bando.</div>
+      </div>
+
+    </div>
+  `;
+
+  homeSections.style.display = "none";
+  appSection.style.display = "block";
+
+  renderGrants();
+  return;
+}
+    if(section === "names"){
+  content.innerHTML = `
+    <div>
+
+      <div style="display:grid;grid-template-columns:1fr .8fr auto;gap:10px;margin-bottom:15px">
+
+        <input
+          id="nameIdea"
+          class="search"
+          placeholder="✨ Scrivi un nome..."
+        >
+
+        <select id="nameType" class="search">
+          <option>Prodotto</option>
+          <option>Profumo</option>
+          <option>Linea</option>
+          <option>Collezione</option>
+          <option>Branding</option>
+          <option>Altro</option>
+        </select>
+
+        <button class="primary" onclick="addName()">＋ Aggiungi</button>
+
+      </div>
+
+      <div id="nameList">
+        <div class="empty">Ancora nessun nome salvato.</div>
+      </div>
+
+    </div>
+  `;
+
+  homeSections.style.display = "none";
+  appSection.style.display = "block";
+
+  renderNames();
+  return;
+}
+    if(section === "voice"){
+  content.innerHTML = `
+    <div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px">
+        <button class="primary" id="startRecording" onclick="startVoiceRecording()">
+          🎙️ Inizia registrazione
+        </button>
+
+        <button class="ghost" id="stopRecording" onclick="stopVoiceRecording()" disabled>
+          ⏹️ Ferma
+        </button>
+      </div>
+
+      <div id="recordingStatus" class="empty">
+        Nessuna registrazione in corso.
+      </div>
+
+      <div id="voiceList"></div>
+
+    </div>
+  `;
+
+  homeSections.style.display = "none";
+  appSection.style.display = "block";
+
+  renderVoiceNotes();
+  return;
+}
+    if(section === "agenda"){
+  content.innerHTML = `
+    <div>
+
+      <div style="
+        display:grid;
+        grid-template-columns:1.2fr .8fr .6fr;
+        gap:10px;
+        margin-bottom:10px;
+      ">
+
+        <input
+          id="agendaTitle"
+          class="search"
+          placeholder="📅 Cosa devi fare?"
+        >
+
+        <input
+          id="agendaDate"
+          class="search"
+          type="date"
+        >
+
+        <input
+          id="agendaTime"
+          class="search"
+          type="time"
+        >
+
+      </div>
+
+      <textarea
+        id="agendaNote"
+        class="search"
+        placeholder="📝 Nota (facoltativa)"
+        style="min-height:80px;margin-bottom:10px"
+      ></textarea>
+
+      <button
+        class="primary"
+        onclick="addAgendaEvent()"
+      >
+        ＋ Aggiungi evento
+      </button>
+
+      <div
+        id="agendaList"
+        style="margin-top:18px"
+      ></div>
+
+    </div>
+  `;
+
+  homeSections.style.display = "none";
+  appSection.style.display = "block";
+
+  renderAgenda();
+  return;
+}
+    if(section === "reminders"){
+  content.innerHTML = `
+    <div>
+
+      <div style="
+        display:grid;
+        grid-template-columns:1.2fr .8fr .6fr auto;
+        gap:10px;
+        margin-bottom:15px;
+      ">
+
+        <input
+          id="reminderTitle"
+          class="search"
+          placeholder="🔔 Cosa devo ricordarti?"
+        >
+
+        <input
+          id="reminderDate"
+          class="search"
+          type="date"
+        >
+
+        <input
+          id="reminderTime"
+          class="search"
+          type="time"
+        >
+
+        <button
+          class="primary"
+          onclick="addReminder()"
+        >
+          ＋ Aggiungi
+        </button>
+
+      </div>
+
+      <div id="reminderList"></div>
+
+    </div>
+  `;
+
+  homeSections.style.display = "none";
+  appSection.style.display = "block";
+
+  renderReminders();
+  return;
+}
+  content.innerHTML = `
+    <div>
+
+      <div style="display:grid;grid-template-columns:1.5fr .7fr auto;gap:10px;margin-bottom:15px">
+        <input
+          id="costDescription"
+          class="search"
+          placeholder="💰 Es. Distillatore"
+        >
+
+        <input
+          id="costAmount"
+          class="search"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="€ Importo"
+        >
+
+        <button class="primary" onclick="addCost()">＋ Aggiungi</button>
+      </div>
+
+      <div id="costTotal"
+        style="font-weight:800;font-size:18px;margin-bottom:15px">
+        Totale: € 0,00
+      </div>
+
+      <div id="costList">
+        <div class="empty">Ancora nessun costo.</div>
+      </div>
+
+    </div>
+  `;
+
+  homeSections.style.display = "none";
+  appSection.style.display = "block";
+
+  renderCosts();
+  return;
+}
+  content.innerHTML = `
+    <div class="empty">
+      <div style="font-size:38px;margin-bottom:10px">
+        ${section === "todo" ? "📋" :
+          section === "costs" ? "💰" :
+          section === "grants" ? "📑" :
+          section === "names" ? "✨" :
+          section === "voice" ? "🎙️" :
+          section === "agenda" ? "📅" : "🔔"}
+      </div>
+      <strong>${names[section] || "Sezione"}</strong>
+      <p style="margin-top:8px">
+        Questa sezione è pronta. Ora possiamo costruirla.
+      </p>
+    </div>
+  `;
+
+  homeSections.style.display = "none";
+  appSection.style.display = "block";
+}
+let reminders = JSON.parse(
+  localStorage.getItem("lunariaReminders") || "[]"
+);
+
+function saveReminders(){
+  localStorage.setItem(
+    "lunariaReminders",
+    JSON.stringify(reminders)
+  );
+}
+
+function addReminder(){
+  const title =
+    document.getElementById("reminderTitle").value.trim();
+
+  const date =
+    document.getElementById("reminderDate").value;
+
+  const time =
+    document.getElementById("reminderTime").value;
+
+  if(!title){
+    return alert("Scrivi cosa devo ricordarti.");
+  }
+
+  if(!date){
+    return alert("Inserisci una data.");
+  }
+
+  reminders.push({
+    id:Date.now(),
+    title:title,
+    date:date,
+    time:time,
+    done:false
+  });
+
+  reminders.sort((a,b) => {
+    const first = new Date(
+      a.date + "T" + (a.time || "00:00")
+    );
+
+    const second = new Date(
+      b.date + "T" + (b.time || "00:00")
+    );
+
+    return first - second;
+  });
+
+  saveReminders();
+
+  document.getElementById("reminderTitle").value = "";
+  document.getElementById("reminderDate").value = "";
+  document.getElementById("reminderTime").value = "";
+
+  renderReminders();
+}
+
+function toggleReminder(id){
+  const reminder = reminders.find(r => r.id === id);
+
+  if(!reminder) return;
+
+  reminder.done = !reminder.done;
+
+  saveReminders();
+  renderReminders();
+}
+
+function renderReminders(){
+  const list = document.getElementById("reminderList");
+
+  if(!list) return;
+
+  if(!reminders.length){
+    list.innerHTML =
+      '<div class="empty">Ancora nessun promemoria.</div>';
+    return;
+  }
+
+  list.innerHTML = reminders.map(reminder => `
+    <div style="
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px;
+      margin-bottom:9px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:15px;
+      ${reminder.done ? "opacity:.55;" : ""}
+    ">
+
+      <input
+        type="checkbox"
+        ${reminder.done ? "checked" : ""}
+        onchange="toggleReminder(${reminder.id})"
+        style="width:20px;height:20px"
+      >
+
+      <div style="flex:1">
+
+        <div style="
+          font-weight:750;
+          ${reminder.done ? "text-decoration:line-through;" : ""}
+        ">
+          🔔 ${esc(reminder.title)}
+        </div>
+
+        <div style="
+          color:var(--muted);
+          font-size:11px;
+          margin-top:4px;
+        ">
+          ${new Date(
+            reminder.date + "T00:00:00"
+          ).toLocaleDateString("it-IT")}
+          ${reminder.time ? " · " + esc(reminder.time) : ""}
+        </div>
+
+      </div>
+
+    </div>
+  `).join("");
+}
+  let agendaEvents = JSON.parse(
+  localStorage.getItem("lunariaAgenda") || "[]"
+);
+
+function saveAgenda(){
+  localStorage.setItem(
+    "lunariaAgenda",
+    JSON.stringify(agendaEvents)
+  );
+}
+
+function addAgendaEvent(){
+  const title =
+    document.getElementById("agendaTitle").value.trim();
+
+  const date =
+    document.getElementById("agendaDate").value;
+
+  const time =
+    document.getElementById("agendaTime").value;
+
+  const note =
+    document.getElementById("agendaNote").value.trim();
+
+  if(!title){
+    return alert("Inserisci il nome dell'evento.");
+  }
+
+  if(!date){
+    return alert("Inserisci una data.");
+  }
+
+  agendaEvents.push({
+    id:Date.now(),
+    title:title,
+    date:date,
+    time:time,
+    note:note
+  });
+
+  agendaEvents.sort((a,b) => {
+    const first = new Date(
+      a.date + "T" + (a.time || "00:00")
+    );
+
+    const second = new Date(
+      b.date + "T" + (b.time || "00:00")
+    );
+
+    return first - second;
+  });
+
+  saveAgenda();
+
+  document.getElementById("agendaTitle").value = "";
+  document.getElementById("agendaDate").value = "";
+  document.getElementById("agendaTime").value = "";
+  document.getElementById("agendaNote").value = "";
+
+  renderAgenda();
+}
+
+function renderAgenda(){
+  const list = document.getElementById("agendaList");
+
+  if(!list) return;
+
+  if(!agendaEvents.length){
+    list.innerHTML =
+      '<div class="empty">Ancora nessun evento in agenda.</div>';
+    return;
+  }
+
+  list.innerHTML = agendaEvents.map(event => `
+    <div style="
+      padding:15px;
+      margin-bottom:9px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:15px;
+    ">
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:10px;
+      ">
+
+        <strong>
+          📅 ${esc(event.title)}
+        </strong>
+
+        <span class="badge">
+          ${new Date(
+            event.date + "T00:00:00"
+          ).toLocaleDateString("it-IT")}
+          ${event.time ? " · " + esc(event.time) : ""}
+        </span>
+
+      </div>
+
+      ${
+        event.note
+          ? `<div style="
+              color:var(--muted);
+              font-size:12px;
+              margin-top:8px;
+            ">${esc(event.note)}</div>`
+          : ""
+      }
+
+    </div>
+  `).join("");
+}
+  let voiceNotes = JSON.parse(localStorage.getItem("lunariaVoiceNotes") || "[]");
+let mediaRecorder = null;
+let audioChunks = [];
+
+function saveVoiceNotes(){
+  localStorage.setItem(
+    "lunariaVoiceNotes",
+    JSON.stringify(voiceNotes)
+  );
+}
+
+async function startVoiceRecording(){
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio:true
+    });
+
+    audioChunks = [];
+
+    mediaRecorder = new MediaRecorder(stream);
+
+    mediaRecorder.ondataavailable = event => {
+      if(event.data.size > 0){
+        audioChunks.push(event.data);
+      }
+    };
+
+    mediaRecorder.onstart = () => {
+      document.getElementById("recordingStatus").textContent =
+        "🔴 Registrazione in corso...";
+
+      document.getElementById("startRecording").disabled = true;
+      document.getElementById("stopRecording").disabled = false;
+    };
+
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(audioChunks, {
+        type:"audio/webm"
+      });
+
+      const url = URL.createObjectURL(blob);
+
+      voiceNotes.unshift({
+        id:Date.now(),
+        date:new Date().toLocaleString("it-IT"),
+        url:url
+      });
+
+      /*
+       * La registrazione resta disponibile nella sessione
+       * corrente. Non la salviamo nel localStorage perché
+       * un Blob audio non può essere conservato lì in questo modo.
+       */
+
+      document.getElementById("recordingStatus").textContent =
+        "✅ Registrazione terminata.";
+
+      document.getElementById("startRecording").disabled = false;
+      document.getElementById("stopRecording").disabled = true;
+
+      renderVoiceNotes();
+
+      stream.getTracks().forEach(track => track.stop());
+    };
+
+    mediaRecorder.start();
+
+  }catch(e){
+    console.error(e);
+
+    alert(
+      "Non posso accedere al microfono. " +
+      "Controlla i permessi del browser."
+    );
+  }
+}
+
+function stopVoiceRecording(){
+  if(mediaRecorder && mediaRecorder.state !== "inactive"){
+    mediaRecorder.stop();
+  }
+}
+
+function renderVoiceNotes(){
+  const list = document.getElementById("voiceList");
+
+  if(!list) return;
+
+  if(!voiceNotes.length){
+    list.innerHTML =
+      '<div class="empty">Ancora nessuna nota vocale.</div>';
+    return;
+  }
+
+  list.innerHTML = voiceNotes.map(note => `
+    <div style="
+      padding:14px;
+      margin-bottom:9px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:15px;
+    ">
+
+      <div style="
+        font-size:12px;
+        color:var(--muted);
+        margin-bottom:8px;
+      ">
+        🎙️ ${esc(note.date)}
+      </div>
+
+      <audio
+        controls
+        src="${note.url}"
+        style="width:100%"
+      ></audio>
+
+    </div>
+  `).join("");
+}
+  let names = JSON.parse(localStorage.getItem("lunariaNames") || "[]");
+
+function saveNames(){
+  localStorage.setItem("lunariaNames", JSON.stringify(names));
+}
+
+function addName(){
+  const name = document.getElementById("nameIdea").value.trim();
+  const type = document.getElementById("nameType").value;
+
+  if(!name) return alert("Scrivi almeno un nome.");
+
+  names.unshift({
+    id: Date.now(),
+    name: name,
+    type: type
+  });
+
+  saveNames();
+
+  document.getElementById("nameIdea").value = "";
+
+  renderNames();
+}
+
+function renderNames(){
+  const list = document.getElementById("nameList");
+
+  if(!list) return;
+
+  if(!names.length){
+    list.innerHTML = '<div class="empty">Ancora nessun nome salvato.</div>';
+    return;
+  }
+
+  list.innerHTML = names.map(item => `
+    <div style="
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:13px;
+      margin-bottom:8px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:15px;
+    ">
+
+      <span style="font-size:22px">✨</span>
+
+      <div style="flex:1">
+        <div style="font-weight:750">
+          ${esc(item.name)}
+        </div>
+
+        <div style="
+          color:var(--muted);
+          font-size:11px;
+          margin-top:4px;
+        ">
+          ${esc(item.type)}
+        </div>
+      </div>
+
+    </div>
+  `).join("");
+}
+  let grants = JSON.parse(localStorage.getItem("lunariaGrants") || "[]");
+
+function saveGrants(){
+  localStorage.setItem("lunariaGrants", JSON.stringify(grants));
+}
+
+function addGrant(){
+  const title = document.getElementById("grantTitle").value.trim();
+  const entity = document.getElementById("grantEntity").value.trim();
+  const deadline = document.getElementById("grantDeadline").value;
+
+  if(!title) return alert("Inserisci almeno il nome del bando.");
+
+  grants.unshift({
+    id: Date.now(),
+    title: title,
+    entity: entity,
+    deadline: deadline
+  });
+
+  saveGrants();
+
+  document.getElementById("grantTitle").value = "";
+  document.getElementById("grantEntity").value = "";
+  document.getElementById("grantDeadline").value = "";
+
+  renderGrants();
+}
+
+function renderGrants(){
+  const list = document.getElementById("grantList");
+
+  if(!list) return;
+
+  if(!grants.length){
+    list.innerHTML = '<div class="empty">Ancora nessun bando.</div>';
+    return;
+  }
+
+  list.innerHTML = grants.map(grant => `
+    <div style="
+      padding:15px;
+      margin-bottom:9px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:15px;
+    ">
+      <div style="font-weight:750;font-size:16px">
+        📑 ${esc(grant.title)}
+      </div>
+
+      <div style="
+        color:var(--muted);
+        font-size:12px;
+        margin-top:6px;
+      ">
+        ${grant.entity ? "🏛️ " + esc(grant.entity) : ""}
+        ${grant.deadline ? " · 📅 " + new Date(grant.deadline + "T00:00:00").toLocaleDateString("it-IT") : ""}
+      </div>
+    </div>
+  `).join("");
+}
+  let costs = JSON.parse(localStorage.getItem("lunariaCosts") || "[]");
+
+function saveCosts(){
+  localStorage.setItem("lunariaCosts", JSON.stringify(costs));
+}
+
+function addCost(){
+  const description = document.getElementById("costDescription").value.trim();
+  const amount = Number(document.getElementById("costAmount").value);
+
+  if(!description) return alert("Scrivi cosa rappresenta questo costo.");
+  if(!amount || amount < 0) return alert("Inserisci un importo valido.");
+
+  costs.unshift({
+    id: Date.now(),
+    description: description,
+    amount: amount
+  });
+
+  saveCosts();
+
+  document.getElementById("costDescription").value = "";
+  document.getElementById("costAmount").value = "";
+
+  renderCosts();
+}
+
+function renderCosts(){
+  const list = document.getElementById("costList");
+  const total = document.getElementById("costTotal");
+
+  if(!list || !total) return;
+
+  const sum = costs.reduce((acc, cost) => acc + Number(cost.amount || 0), 0);
+
+  total.textContent =
+    "Totale: € " +
+    sum.toLocaleString("it-IT", {
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
+    });
+
+  if(!costs.length){
+    list.innerHTML = '<div class="empty">Ancora nessun costo.</div>';
+    return;
+  }
+
+  list.innerHTML = costs.map(cost => `
+    <div style="
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:13px;
+      margin-bottom:8px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:14px;
+    ">
+      <span style="font-size:22px">💰</span>
+
+      <span style="flex:1">
+        ${esc(cost.description)}
+      </span>
+
+      <strong>
+        € ${Number(cost.amount).toLocaleString("it-IT", {
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        })}
+      </strong>
+    </div>
+  `).join("");
+}
+let todos = JSON.parse(localStorage.getItem("lunariaTodos") || "[]");
+
+function saveTodos(){
+  localStorage.setItem("lunariaTodos", JSON.stringify(todos));
+}
+
+function addTodo(){
+  const input = document.getElementById("todoInput");
+  const text = input.value.trim();
+
+  if(!text) return;
+
+  todos.unshift({
+    id: Date.now(),
+    text: text,
+    done: false
+  });
+
+  saveTodos();
+  input.value = "";
+  renderTodos();
+}
+
+function toggleTodo(id){
+  const todo = todos.find(t => t.id === id);
+
+  if(!todo) return;
+
+  todo.done = !todo.done;
+  saveTodos();
+  renderTodos();
+}
+
+function renderTodos(){
+  const list = document.getElementById("todoList");
+
+  if(!list) return;
+
+  if(!todos.length){
+    list.innerHTML = '<div class="empty">Ancora nessuna attività.</div>';
+    return;
+  }
+
+  list.innerHTML = todos.map(todo => `
+    <div style="
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px;
+      margin-bottom:8px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:14px;
+    ">
+      <input
+        type="checkbox"
+        ${todo.done ? "checked" : ""}
+        onchange="toggleTodo(${todo.id})"
+        style="width:18px;height:18px"
+      >
+
+      <span style="
+        flex:1;
+        ${todo.done ? "text-decoration:line-through;color:var(--muted)" : ""}
+      ">
+        ${esc(todo.text)}
+      </span>
+    </div>
+  `).join("");
+}  
+function closeSection(){
+  document.getElementById("appSection").style.display = "none";
+  document.querySelector(".home-sections").style.display = "grid";
+}
+
+  alert(names[section] + "\n\nQuesta sezione la costruiamo adesso 💜");
+}
   function openModal(){
   document.getElementById("modal").classList.add("open");
   document.getElementById("title").focus();
