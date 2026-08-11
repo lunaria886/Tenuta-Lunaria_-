@@ -395,7 +395,14 @@ textarea{min-height:130px;resize:vertical}.row{display:grid;grid-template-column
       <option>Idea</option><option>Da valutare</option><option>Da provare</option><option>In sviluppo</option><option>Approvata</option>
     </select></div>
   </div>
-  <div class="actions"><button class="ghost" onclick="closeModal()">Annulla</button><button class="primary" onclick="saveIdea()">Salva idea</button></div>
+  <div class="actions">
+  <button class="ghost" onclick="closeEditModal()">Annulla</button>
+  <button
+    style="background:#f4e5eb;color:#9a4f6b"
+    onclick="deleteIdea()"
+  >🗑️ Elimina</button>
+  <button class="primary" onclick="saveEditedIdea()">💾 Salva modifiche</button>
+</div>
 </div>
 </div>
 <div id="editModal" class="modal">
@@ -584,7 +591,6 @@ function viewIdea(idx){
 function closeEditModal(){
   document.getElementById("editModal").classList.remove("open");
 }
-
 function saveEditedIdea(){
   const modal = document.getElementById("editModal");
   const idx = Number(modal.dataset.index);
@@ -601,7 +607,42 @@ function saveEditedIdea(){
 
   alert("Idea modificata 💜");
 }
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+async function deleteIdea(){
+  const modal = document.getElementById("editModal");
+  const idx = Number(modal.dataset.index);
+  const i = ideas[idx];
+
+  if(!i) return;
+
+  const conferma = confirm(
+    "Vuoi davvero eliminare questa idea?\n\n" +
+    (i.title || "Idea senza titolo")
+  );
+
+  if(!conferma) return;
+
+  try{
+    if(remoteReady && i.id){
+      const { error } = await supabaseClient
+        .from("ideas")
+        .delete()
+        .eq("id", i.id);
+
+      if(error) throw error;
+    }
+
+    ideas.splice(idx,1);
+    saveLocal();
+    closeEditModal();
+    render();
+
+    alert("Idea eliminata 🗑️");
+  }catch(e){
+    console.error(e);
+    alert("Non riesco a eliminare l'idea da Supabase. Riprova.");
+  }
+}
+  function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 function exportData(){
  const blob=new Blob([JSON.stringify(ideas,null,2)],{type:"application/json"});
  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="lunaria-idee.json";a.click();URL.revokeObjectURL(a.href)
