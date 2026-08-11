@@ -398,7 +398,50 @@ textarea{min-height:130px;resize:vertical}.row{display:grid;grid-template-column
   <div class="actions"><button class="ghost" onclick="closeModal()">Annulla</button><button class="primary" onclick="saveIdea()">Salva idea</button></div>
 </div>
 </div>
+<div id="editModal" class="modal">
+  <div class="box">
+    <h2 style="margin:0">✏️ Modifica idea</h2>
 
+    <label>Titolo</label>
+    <input id="editTitle" placeholder="Titolo dell'idea">
+
+    <label>Raccontamela</label>
+    <textarea id="editBody" placeholder="Modifica la descrizione dell'idea"></textarea>
+
+    <div class="row">
+      <div>
+        <label>Categoria</label>
+        <select id="editCategory">
+          <option>Cosmetici</option>
+          <option>Profumi</option>
+          <option>Bagno</option>
+          <option>Coltivazione</option>
+          <option>Laboratorio</option>
+          <option>Branding</option>
+          <option>Costi</option>
+          <option>Bandi</option>
+          <option>Altro</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Stato</label>
+        <select id="editStatus">
+          <option>Idea</option>
+          <option>Da valutare</option>
+          <option>Da provare</option>
+          <option>In sviluppo</option>
+          <option>Approvata</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="ghost" onclick="closeEditModal()">Annulla</button>
+      <button class="primary" onclick="saveEditedIdea()">💾 Salva modifiche</button>
+    </div>
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://uqjuajbmdanozcrgaret.supabase.co";
@@ -529,30 +572,31 @@ function renderHome(){
 function viewIdea(idx){
   const i = ideas[idx];
 
-  const nuovoTitolo = prompt("Titolo dell'idea:", i.title || "");
-  if(nuovoTitolo === null) return;
+  document.getElementById("editTitle").value = i.title || "";
+  document.getElementById("editBody").value = i.body || "";
+  document.getElementById("editCategory").value = i.category || "Altro";
+  document.getElementById("editStatus").value = i.status || "Idea";
 
-  const nuovaDescrizione = prompt("Descrizione:", i.body || "");
-  if(nuovaDescrizione === null) return;
+  document.getElementById("editModal").dataset.index = idx;
+  document.getElementById("editModal").classList.add("open");
+}
 
-  const nuovaCategoria = prompt(
-    "Categoria:",
-    i.category || "Altro"
-  );
-  if(nuovaCategoria === null) return;
+function closeEditModal(){
+  document.getElementById("editModal").classList.remove("open");
+}
 
-  const nuovoStato = prompt(
-    "Stato:",
-    i.status || "Idea"
-  );
-  if(nuovoStato === null) return;
+function saveEditedIdea(){
+  const modal = document.getElementById("editModal");
+  const idx = Number(modal.dataset.index);
+  const i = ideas[idx];
 
-  i.title = nuovoTitolo.trim() || i.title;
-  i.body = nuovaDescrizione.trim();
-  i.category = nuovaCategoria.trim() || "Altro";
-  i.status = nuovoStato.trim() || "Idea";
+  i.title = document.getElementById("editTitle").value.trim() || i.title;
+  i.body = document.getElementById("editBody").value.trim();
+  i.category = document.getElementById("editCategory").value;
+  i.status = document.getElementById("editStatus").value;
 
   saveLocal();
+  closeEditModal();
   render();
 
   alert("Idea modificata 💜");
