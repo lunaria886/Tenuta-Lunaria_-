@@ -453,9 +453,9 @@ font-size:11px;
       <strong>Promemoria</strong>
       <small>Cose da non dimenticare</small>
     </div>
-  </button>
+    </button>
 
-  </div>
+</div>
 </div>
 
 <div class="welcome">
@@ -626,9 +626,10 @@ font-size:11px;
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const SUPABASE_URL="https://uqjuajbmdanozcrgaret.supabase.co";
-const SUPABASE_KEY="sb_publishable_9W2pY19PKO3-WkWdEDs_jw_LGtfhsAA";
-const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const supabaseClient =
+  typeof supabase !== "undefined"
+    ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+    : null;
 const seed=[
  {title:"Spumante alla lavanda + mandarino cinese",body:"Un profilo frizzante, agrumato e giocoso. Da capire la parte formulativa.",category:"Bagno",status:"Da provare",author:"Arianna",date:"oggi"},
  {title:"Linea profumata ispirata all'estate",body:"Creare una famiglia di prodotti che permetta di stratificare più profumi.",category:"Profumi",status:"Da valutare",author:"Arianna",date:"ieri"},
