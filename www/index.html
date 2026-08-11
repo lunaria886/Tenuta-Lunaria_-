@@ -346,7 +346,9 @@ padding:14px;
 color:var(--ink);
 }
 
-.menu-item:hover
+.menu-item:hover{
+background:#faf7fc;
+}
 
 .menu-item > span{
 font-size:23px;
@@ -367,7 +369,9 @@ font-size:11px;
 }
 
 </style>
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#8f6bb3"></head>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#8f6bb3">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
 <body>
 <div class="app">
 <header class="topbar">
@@ -394,7 +398,7 @@ font-size:11px;
   <button class="menu-item" onclick="openSection('ideas')">
     <span>💡</span>
     <div>
-      <strong>Idee</strong>
+            <strong>Idee</strong>
       <small>Tutte le idee archiviate</small>
     </div>
   </button>
@@ -624,10 +628,11 @@ font-size:11px;
 </div>
 </div>
 </div>
+</div>
 
 <script>
-const SUPABASE_URL = "";
-const SUPABASE_KEY = "";
+const SUPABASE_URL = "https://uqjuajbmdanozcrgaret.supabase.co";
+const SUPABASE_KEY = "sb_publishable_9W2pY19PKO3-WkWdEDs_jw_LGtfhsAA";
 
 const supabaseClient =
   typeof supabase !== "undefined" && SUPABASE_URL && SUPABASE_KEY
@@ -646,8 +651,15 @@ function localIdeas(){return JSON.parse(localStorage.getItem("lunariaIdeas")||"n
 function saveLocal(){localStorage.setItem("lunariaIdeas",JSON.stringify(ideas))}
 
 async function loadIdeas(){
+  if(!supabaseClient){
+    // Supabase non è configurato (SUPABASE_URL/SUPABASE_KEY vuoti): lavoriamo solo in locale, senza mostrare errori.
+    remoteReady=false;
+    ideas=localIdeas();
+    saveLocal(); render();
+    return;
+  }
   try{
-    const {data,error}=await supabaseClient.from("ideas").select("*").order("created_at",{ascending:false});
+    const {data,error}=await supabaseClient.from("ideas").select("*").order("id",{ascending:false});
     if(error) throw error;
     if((data||[]).length===0){
       const existing=localIdeas();
@@ -661,11 +673,9 @@ async function loadIdeas(){
     remoteReady=true; saveLocal(); render();
 }catch(e){
     console.error("ERRORE SUPABASE:", e);
-    alert("ERRORE SUPABASE: " + (e.message || JSON.stringify(e)));
+    remoteReady=false;
     ideas=localIdeas();
     saveLocal(); render();
-    const el=document.getElementById("ideas");
-    if(ideas.length) el.insertAdjacentHTML("beforebegin",'<div style="font-size:12px;color:#9a6a3a;margin-bottom:10px">⚠️ Connessione a Supabase non disponibile: mostro le idee salvate su questo dispositivo.</div>');
   }
 }
 function toggleMenu(){
@@ -787,7 +797,6 @@ if(section === "todo"){
         </select>
 
         <button class="primary" onclick="addName()">＋ Aggiungi</button>
-
       </div>
 
       <div id="nameList">
@@ -1188,7 +1197,7 @@ function renderAgenda(){
       border:1px solid var(--line);
       border-radius:15px;
     ">
-
+  
       <div style="
         display:flex;
         justify-content:space-between;
@@ -1588,7 +1597,7 @@ function renderTodos(){
   list.innerHTML = todos.map(todo => `
     <div style="
       display:flex;
-      align-items:center;
+            align-items:center;
       gap:10px;
       padding:12px;
       margin-bottom:8px;
@@ -1648,9 +1657,10 @@ function render(){
       .includes(q))
   );
 
-  renderHome();
+  renderHome(list, q);
 }
-function renderHome(){
+function renderHome(filtered, isSearching){
+  const list = filtered || ideas;
   const recent = document.getElementById("recentIdeas");
   const highlight = document.getElementById("highlightIdea");
   const homeCount = document.getElementById("homeIdeaCount");
@@ -1660,7 +1670,7 @@ function renderHome(){
   }
 
   if(recent){
-    const latest = ideas.slice(0,4);
+    const latest = isSearching ? list : list.slice(0,4);
 
     recent.innerHTML = latest.length
       ? latest.map(i => `
