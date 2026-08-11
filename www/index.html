@@ -622,12 +622,11 @@ font-size:11px;
   >🗑️ Elimina</button>
   <button class="primary" onclick="saveEditedIdea()">💾 Salva modifiche</button>
 </div>
-  </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
+const SUPABASE_URL = "";
+const SUPABASE_KEY = "";
+
 const supabaseClient =
-  typeof supabase !== "undefined"
+  typeof supabase !== "undefined" && SUPABASE_URL && SUPABASE_KEY
     ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
     : null;
 const seed=[
