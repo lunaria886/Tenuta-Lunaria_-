@@ -527,8 +527,35 @@ function renderHome(){
   }
 }
 function viewIdea(idx){
- const i=ideas[idx];
- alert(i.title+"\n\n"+(i.body||"Nessuna descrizione.")+"\n\n"+(i.category||"Altro")+" · "+(i.status||"Idea")+"\n"+(i.author||"")+" · "+(i.date||""));
+  const i = ideas[idx];
+
+  const nuovoTitolo = prompt("Titolo dell'idea:", i.title || "");
+  if(nuovoTitolo === null) return;
+
+  const nuovaDescrizione = prompt("Descrizione:", i.body || "");
+  if(nuovaDescrizione === null) return;
+
+  const nuovaCategoria = prompt(
+    "Categoria:",
+    i.category || "Altro"
+  );
+  if(nuovaCategoria === null) return;
+
+  const nuovoStato = prompt(
+    "Stato:",
+    i.status || "Idea"
+  );
+  if(nuovoStato === null) return;
+
+  i.title = nuovoTitolo.trim() || i.title;
+  i.body = nuovaDescrizione.trim();
+  i.category = nuovaCategoria.trim() || "Altro";
+  i.status = nuovoStato.trim() || "Idea";
+
+  saveLocal();
+  render();
+
+  alert("Idea modificata 💜");
 }
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 function exportData(){
