@@ -59,9 +59,7 @@
 .welcome h2{
   margin:4px 0 6px;
   font-size:27px;
-}
-
-.welcome p{
+}.welcome p{
   margin:0;
   opacity:.9;
 }
@@ -133,9 +131,7 @@
 
 .section-heading h3{
   margin:4px 0 0;
-}
-
-.section-dot{
+  .section-dot{
   color:var(--lav);
   font-size:10px;
 }
@@ -213,9 +209,7 @@
   display:flex;
   flex-wrap:wrap;
   gap:7px;
-}
-
-.highlight-tag{
+}.highlight-tag{
   padding:5px 8px;
   border-radius:999px;
   background:white;
@@ -307,9 +301,7 @@ box-shadow:-12px 0 35px rgba(74,48,94,.18);
 z-index:20;
 transition:right .25s ease;
 border-left:1px solid var(--line);
-}
-
-.side-menu.open{
+}.side-menu.open{
 right:0;
 }
 
@@ -398,7 +390,7 @@ font-size:11px;
   <button class="menu-item" data-action="openSection" data-section="ideas">
     <span>💡</span>
     <div>
-            <strong>Idee</strong>
+      <strong>Idee</strong>
       <small>Tutte le idee archiviate</small>
     </div>
   </button>
@@ -418,8 +410,7 @@ font-size:11px;
       <small>Spese, preventivi e investimenti</small>
     </div>
   </button>
-
-  <button class="menu-item" data-action="openSection" data-section="grants">
+   button class="menu-item" data-action="openSection" data-section="grants">
     <span>📑</span>
     <div>
       <strong>Bandi</strong>
@@ -497,8 +488,7 @@ font-size:11px;
   </button>
 
 </div>
-
-<input id="search" class="search" placeholder="🔎 Cerca un'idea, un profumo, un prodotto...">
+  <input id="search" class="search" placeholder="🔎 Cerca un'idea, un profumo, un prodotto...">
 <div id="appSection" style="display:none;margin-top:20px">
   <section class="panel">
     <div class="section-heading">
@@ -617,8 +607,7 @@ font-size:11px;
         </select>
       </div>
     </div>
-
-    <div class="actions">
+    iv class="actions">
   <button class="ghost" data-action="closeEditModal">Annulla</button>
   <button
     style="background:#f4e5eb;color:#9a4f6b"
@@ -701,9 +690,7 @@ function openSection(section){
     voice: "🎙️ Note vocali",
     agenda: "📅 Agenda",
     reminders: "🔔 Promemoria"
-  };
-
-  if(section === "ideas"){
+  };if(section === "ideas"){
     appSection.style.display = "none";
     homeSections.style.display = "grid";
     search.focus();
@@ -777,8 +764,11 @@ if(section === "todo"){
     if(section === "names"){
   content.innerHTML = `
     <div>
-
-      <div style="display:grid;grid-template-columns:1fr .8fr auto;gap:10px;margin-bottom:15px">
+    
+  
+  
+}
+  <div style="display:grid;grid-template-columns:1fr .8fr auto;gap:10px;margin-bottom:15px">
 
         <input
           id="nameIdea"
@@ -797,7 +787,7 @@ if(section === "todo"){
 
         <button class="primary" data-action="addName">＋ Aggiungi</button>
 
-</div>
+      </div>
 
       <div id="nameList">
         <div class="empty">Ancora nessun nome salvato.</div>
@@ -885,7 +875,6 @@ if(section === "todo"){
       >
         ＋ Aggiungi evento
       </button>
-
       <div
         id="agendaList"
         style="margin-top:18px"
@@ -968,7 +957,6 @@ if(section === "todo"){
           step="0.01"
           placeholder="€ Importo"
         >
-
         <button class="primary" data-action="addCost">＋ Aggiungi</button>
       </div>
 
@@ -990,7 +978,8 @@ if(section === "todo"){
   renderCosts();
   return;
 }
- 
+}
+
 let reminders = JSON.parse(
   localStorage.getItem("lunariaReminders") || "[]"
 );
@@ -1198,7 +1187,7 @@ function renderAgenda(){
       border-radius:15px;
     ">
 
-          <div style="
+      <div style="
         display:flex;
         justify-content:space-between;
         gap:10px;
@@ -1466,7 +1455,6 @@ function renderGrants(){
       <div style="font-weight:750;font-size:16px">
         📑 ${esc(grant.title)}
       </div>
-
       <div style="
         color:var(--muted);
         font-size:12px;
@@ -1567,9 +1555,7 @@ function addTodo(){
     id: Date.now(),
     text: text,
     done: false
-  });
-
-  saveTodos();
+  });saveTodos();
   input.value = "";
   renderTodos();
 }
@@ -1598,7 +1584,7 @@ function renderTodos(){
     <div style="
       display:flex;
       align-items:center;
-            gap:10px;
+      gap:10px;
       padding:12px;
       margin-bottom:8px;
       background:#fff;
@@ -1698,8 +1684,7 @@ function renderHome(filtered, isSearching){
       i.status==="Da provare" ||
       i.status==="Da valutare"
     ) || ideas[0];
-
-    if(candidate){
+    f(candidate){
       highlight.innerHTML = `
         <div class="highlight-inner">
           <h4>💜 ${esc(candidate.title)}</h4>
@@ -1779,7 +1764,6 @@ async function deleteIdea(){
   const modal = document.getElementById("editModal");
   const idx = Number(modal.dataset.index);
   const i = ideas[idx];
-
   if(!i) return;
 
   const conferma = confirm(
