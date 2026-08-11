@@ -396,12 +396,8 @@ textarea{min-height:130px;resize:vertical}.row{display:grid;grid-template-column
     </select></div>
   </div>
   <div class="actions">
-  <button class="ghost" onclick="closeEditModal()">Annulla</button>
-  <button
-    style="background:#f4e5eb;color:#9a4f6b"
-    onclick="deleteIdea()"
-  >🗑️ Elimina</button>
-  <button class="primary" onclick="saveEditedIdea()">💾 Salva modifiche</button>
+  <button class="ghost" onclick="closeModal()">Annulla</button>
+  <button class="primary" onclick="saveIdea()">Salva idea</button>
 </div>
 </div>
 </div>
@@ -444,9 +440,13 @@ textarea{min-height:130px;resize:vertical}.row{display:grid;grid-template-column
     </div>
 
     <div class="actions">
-      <button class="ghost" onclick="closeEditModal()">Annulla</button>
-      <button class="primary" onclick="saveEditedIdea()">💾 Salva modifiche</button>
-    </div>
+  <button class="ghost" onclick="closeEditModal()">Annulla</button>
+  <button
+    style="background:#f4e5eb;color:#9a4f6b"
+    onclick="deleteIdea()"
+  >🗑️ Elimina</button>
+  <button class="primary" onclick="saveEditedIdea()">💾 Salva modifiche</button>
+</div>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
