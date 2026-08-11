@@ -384,18 +384,18 @@ font-size:11px;
   </div>
 
   <div class="top-actions">
-    <button class="icon-btn" onclick="toggleMenu()" aria-label="Apri menu">☰</button>
+    <button class="icon-btn" data-action="toggleMenu" aria-label="Apri menu">☰</button>
   </div>
 </header>
 <div id="sideMenu" class="side-menu">
   <div class="side-menu-header">
     <strong>🌙 Tenuta Lunaria</strong>
-    <button class="icon-btn" onclick="toggleMenu()">✕</button>
+    <button class="icon-btn" data-action="toggleMenu">✕</button>
   </div>
 
  <div class="side-menu-content">
 
-  <button class="menu-item" onclick="openSection('ideas')">
+  <button class="menu-item" data-action="openSection" data-section="ideas">
     <span>💡</span>
     <div>
             <strong>Idee</strong>
@@ -403,7 +403,7 @@ font-size:11px;
     </div>
   </button>
 
-  <button class="menu-item" onclick="openSection('todo')">
+  <button class="menu-item" data-action="openSection" data-section="todo">
     <span>📋</span>
     <div>
       <strong>Da fare</strong>
@@ -411,7 +411,7 @@ font-size:11px;
     </div>
   </button>
 
-  <button class="menu-item" onclick="openSection('costs')">
+  <button class="menu-item" data-action="openSection" data-section="costs">
     <span>💰</span>
     <div>
       <strong>Costi</strong>
@@ -419,7 +419,7 @@ font-size:11px;
     </div>
   </button>
 
-  <button class="menu-item" onclick="openSection('grants')">
+  <button class="menu-item" data-action="openSection" data-section="grants">
     <span>📑</span>
     <div>
       <strong>Bandi</strong>
@@ -427,7 +427,7 @@ font-size:11px;
     </div>
   </button>
 
-  <button class="menu-item" onclick="openSection('names')">
+  <button class="menu-item" data-action="openSection" data-section="names">
     <span>✨</span>
     <div>
       <strong>Nomi &amp; Branding</strong>
@@ -435,7 +435,7 @@ font-size:11px;
     </div>
   </button>
 
-  <button class="menu-item" onclick="openSection('voice')">
+  <button class="menu-item" data-action="openSection" data-section="voice">
     <span>🎙️</span>
     <div>
       <strong>Note vocali</strong>
@@ -443,7 +443,7 @@ font-size:11px;
     </div>
   </button>
 
-  <button class="menu-item" onclick="openSection('agenda')">
+  <button class="menu-item" data-action="openSection" data-section="agenda">
     <span>📅</span>
     <div>
       <strong>Agenda</strong>
@@ -451,7 +451,7 @@ font-size:11px;
     </div>
   </button>
 
-  <button class="menu-item" onclick="openSection('reminders')">
+  <button class="menu-item" data-action="openSection" data-section="reminders">
     <span>🔔</span>
     <div>
       <strong>Promemoria</strong>
@@ -468,11 +468,11 @@ font-size:11px;
     <h2>Buongiorno, Arianna 💜</h2>
     <p>Che cosa facciamo crescere oggi?</p>
   </div>
-<button class="primary" onclick="openModal()">＋ Nuova idea</button></div>
+<button class="primary" data-action="openModal">＋ Nuova idea</button></div>
 
 <div class="quick-grid">
 
-  <button class="quick-card" onclick="document.getElementById('search').focus()">
+  <button class="quick-card" data-action="focusSearch">
     <span class="quick-icon">💡</span>
     <strong>Idee</strong>
     <small><span id="homeIdeaCount">0</span> idee archiviate</small>
@@ -498,7 +498,7 @@ font-size:11px;
 
 </div>
 
-<input id="search" class="search" placeholder="🔎 Cerca un'idea, un profumo, un prodotto..." oninput="render()">
+<input id="search" class="search" placeholder="🔎 Cerca un'idea, un profumo, un prodotto...">
 <div id="appSection" style="display:none;margin-top:20px">
   <section class="panel">
     <div class="section-heading">
@@ -506,7 +506,7 @@ font-size:11px;
         <div class="eyebrow">🌙 TENUTA LUNARIA</div>
         <h3 id="sectionTitle">Sezione</h3>
       </div>
-      <button class="ghost" onclick="closeSection()">← Torna alla home</button>
+      <button class="ghost" data-action="closeSection">← Torna alla home</button>
     </div>
 
     <div id="sectionContent">
@@ -519,7 +519,7 @@ font-size:11px;
         class="search"
         placeholder="✏️ Cosa devi fare?"
       >
-      <button class="primary" onclick="addTodo()">＋ Aggiungi</button>
+      <button class="primary" data-action="addTodo">＋ Aggiungi</button>
     </div>
 
     <div id="todoList">
@@ -575,8 +575,8 @@ font-size:11px;
     </select></div>
   </div>
   <div class="actions">
-  <button class="ghost" onclick="closeModal()">Annulla</button>
-  <button class="primary" onclick="saveIdea()">Salva idea</button>
+  <button class="ghost" data-action="closeModal">Annulla</button>
+  <button class="primary" data-action="saveIdea">Salva idea</button>
 </div>
 </div>
 </div>
@@ -619,12 +619,12 @@ font-size:11px;
     </div>
 
     <div class="actions">
-  <button class="ghost" onclick="closeEditModal()">Annulla</button>
+  <button class="ghost" data-action="closeEditModal">Annulla</button>
   <button
     style="background:#f4e5eb;color:#9a4f6b"
-    onclick="deleteIdea()"
+    data-action="deleteIdea"
   >🗑️ Elimina</button>
-  <button class="primary" onclick="saveEditedIdea()">💾 Salva modifiche</button>
+  <button class="primary" data-action="saveEditedIdea">💾 Salva modifiche</button>
 </div>
 </div>
 </div>
@@ -720,9 +720,8 @@ if(section === "todo"){
           id="todoInput"
           class="search"
           placeholder="✏️ Cosa devi fare?"
-          onkeydown="if(event.key==='Enter') addTodo()"
-        >
-        <button class="primary" onclick="addTodo()">＋ Aggiungi</button>
+          >
+        <button class="primary" data-action="addTodo">＋ Aggiungi</button>
       </div>
 
       <div id="todoList"></div>
@@ -759,7 +758,7 @@ if(section === "todo"){
           type="date"
         >
 
-        <button class="primary" onclick="addGrant()">＋ Aggiungi</button>
+        <button class="primary" data-action="addGrant">＋ Aggiungi</button>
       </div>
 
       <div id="grantList">
@@ -796,8 +795,9 @@ if(section === "todo"){
           <option>Altro</option>
         </select>
 
-        <button class="primary" onclick="addName()">＋ Aggiungi</button>
-      </div>
+        <button class="primary" data-action="addName">＋ Aggiungi</button>
+
+</div>
 
       <div id="nameList">
         <div class="empty">Ancora nessun nome salvato.</div>
@@ -817,11 +817,11 @@ if(section === "todo"){
     <div>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px">
-        <button class="primary" id="startRecording" onclick="startVoiceRecording()">
+        <button class="primary" id="startRecording" data-action="startVoiceRecording">
           🎙️ Inizia registrazione
         </button>
 
-        <button class="ghost" id="stopRecording" onclick="stopVoiceRecording()" disabled>
+        <button class="ghost" id="stopRecording" data-action="stopVoiceRecording" disabled>
           ⏹️ Ferma
         </button>
       </div>
@@ -881,7 +881,7 @@ if(section === "todo"){
 
       <button
         class="primary"
-        onclick="addAgendaEvent()"
+        data-action="addAgendaEvent"
       >
         ＋ Aggiungi evento
       </button>
@@ -931,7 +931,7 @@ if(section === "todo"){
 
         <button
           class="primary"
-          onclick="addReminder()"
+          data-action="addReminder"
         >
           ＋ Aggiungi
         </button>
@@ -969,7 +969,7 @@ if(section === "todo"){
           placeholder="€ Importo"
         >
 
-        <button class="primary" onclick="addCost()">＋ Aggiungi</button>
+        <button class="primary" data-action="addCost">＋ Aggiungi</button>
       </div>
 
       <div id="costTotal"
@@ -1087,7 +1087,7 @@ function renderReminders(){
       <input
         type="checkbox"
         ${reminder.done ? "checked" : ""}
-        onchange="toggleReminder(${reminder.id})"
+        data-action="toggleReminder" data-id="${reminder.id}"
         style="width:20px;height:20px"
       >
 
@@ -1197,8 +1197,8 @@ function renderAgenda(){
       border:1px solid var(--line);
       border-radius:15px;
     ">
-  
-      <div style="
+
+          <div style="
         display:flex;
         justify-content:space-between;
         gap:10px;
@@ -1597,8 +1597,8 @@ function renderTodos(){
   list.innerHTML = todos.map(todo => `
     <div style="
       display:flex;
-            align-items:center;
-      gap:10px;
+      align-items:center;
+            gap:10px;
       padding:12px;
       margin-bottom:8px;
       background:#fff;
@@ -1608,7 +1608,7 @@ function renderTodos(){
       <input
         type="checkbox"
         ${todo.done ? "checked" : ""}
-        onchange="toggleTodo(${todo.id})"
+        data-action="toggleTodo" data-id="${todo.id}"
         style="width:18px;height:18px"
       >
 
@@ -1674,7 +1674,7 @@ function renderHome(filtered, isSearching){
 
     recent.innerHTML = latest.length
       ? latest.map(i => `
-        <div class="recent-item" onclick="viewIdea(${ideas.indexOf(i)})" style="cursor:pointer">
+        <div class="recent-item" data-action="viewIdea" data-idx="${ideas.indexOf(i)}" style="cursor:pointer">
           <div class="recent-icon">
             ${i.category==="Laboratorio" ? "🧪" :
               i.category==="Coltivazione" ? "🌿" :
@@ -1816,6 +1816,49 @@ function exportData(){
  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="lunaria-idee.json";a.click();URL.revokeObjectURL(a.href)
 }
 loadIdeas();
+
+// Collega tutti i pulsanti (data-action) alle rispettive funzioni.
+// Funziona anche dentro contenitori APK più restrittivi, a differenza degli onclick diretti nell'HTML.
+document.addEventListener("click", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  const action = el.dataset.action;
+  if(action === "toggleMenu") toggleMenu();
+  else if(action === "openSection") openSection(el.dataset.section);
+  else if(action === "openModal") openModal();
+  else if(action === "focusSearch") document.getElementById("search").focus();
+  else if(action === "closeSection") closeSection();
+  else if(action === "closeModal") closeModal();
+  else if(action === "saveIdea") saveIdea();
+  else if(action === "closeEditModal") closeEditModal();
+  else if(action === "deleteIdea") deleteIdea();
+  else if(action === "saveEditedIdea") saveEditedIdea();
+  else if(action === "addTodo") addTodo();
+  else if(action === "addGrant") addGrant();
+  else if(action === "addName") addName();
+  else if(action === "startVoiceRecording") startVoiceRecording();
+  else if(action === "stopVoiceRecording") stopVoiceRecording();
+  else if(action === "addAgendaEvent") addAgendaEvent();
+  else if(action === "addReminder") addReminder();
+  else if(action === "addCost") addCost();
+  else if(action === "viewIdea") viewIdea(Number(el.dataset.idx));
+});
+
+document.addEventListener("change", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  const action = el.dataset.action;
+  if(action === "toggleTodo") toggleTodo(Number(el.dataset.id));
+  else if(action === "toggleReminder") toggleReminder(Number(el.dataset.id));
+});
+
+document.addEventListener("keydown", function(e){
+  if(e.key === "Enter" && e.target && e.target.id === "todoInput") addTodo();
+});
+
+const searchInput = document.getElementById("search");
+if(searchInput) searchInput.addEventListener("input", render);
+
 </script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script></body>
 </html>
