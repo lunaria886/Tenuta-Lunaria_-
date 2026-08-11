@@ -320,8 +320,7 @@ textarea{min-height:130px;resize:vertical}.row{display:grid;grid-template-column
     <h2>Buongiorno, Arianna 💜</h2>
     <p>Che cosa facciamo crescere oggi?</p>
   </div>
-  <button class="primary" onclick="openModal()">＋ Nuova idea</button>
-</div>
+<button id="newIdeaBtn" class="primary">＋ Nuova idea</button></div>
 
 <div class="quick-grid">
 
@@ -444,6 +443,7 @@ function openModal(){
   document.getElementById("modal").classList.add("open");
   document.getElementById("title").focus();
 }
+  document.getElementById("newIdeaBtn").addEventListener("click", openModal);
 
 function closeModal(){
   document.getElementById("modal").classList.remove("open");
