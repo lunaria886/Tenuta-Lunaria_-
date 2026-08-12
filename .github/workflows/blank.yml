@@ -33,9 +33,11 @@ jobs:
           java-version: 21
 
       - name: Configura WebView per microfono
-        run: |          mkdir -p android/app/src/main/java/it/tenutalunaria/app
-          cat > android/app/src/main/java/com/lunaria/tenutalunaria/MainActivity.java <<'EOF'
-          package com.lunaria.tenutalunaria;
+        run: |
+          mkdir -p android/app/src/main/java/it/tenutalunaria/app
+
+          cat > android/app/src/main/java/it/tenutalunaria/app/MainActivity.java <<'EOF'
+          package it.tenutalunaria.app;
 
           import android.Manifest;
           import android.content.pm.PackageManager;
@@ -113,8 +115,6 @@ jobs:
               }
           }
           EOF
-          
-          sed -i 's/package com.lunaria.tenutalunaria;/package com.lunaria.tenutalunaria;/' android/app/src/main/java/com/lunaria/tenutalunaria/MainActivity.java
 
       - name: Sincronizza Capacitor
         run: npx cap sync android
