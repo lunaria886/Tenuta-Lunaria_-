@@ -26,14 +26,99 @@ jobs:
         run: |
           sed -i '/<manifest/a\    <uses-permission android:name="android.permission.RECORD_AUDIO" />' android/app/src/main/AndroidManifest.xml
 
-      - name: Sincronizza Capacitor
-        run: npx cap sync android
-
       - name: Configura Java
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
+
+      - name: Configura WebView per microfono
+        run: |
+          mkdir -p android/app/src/main/java/com/lunaria/tenutalunaria
+          cat > android/app/src/main/java/com/lunaria/tenutalunaria/MainActivity.java <<'EOF'
+          package com.lunaria.tenutalunaria;
+
+          import android.Manifest;
+          import android.content.pm.PackageManager;
+          import android.os.Bundle;
+          import android.webkit.PermissionRequest;
+          import android.webkit.WebChromeClient;
+
+          import com.getcapacitor.BridgeActivity;
+
+          public class MainActivity extends BridgeActivity {
+
+              private PermissionRequest pendingRequest;
+
+              @Override
+              public void onCreate(Bundle savedInstanceState) {
+                  super.onCreate(savedInstanceState);
+
+                  getBridge().getWebView().setWebChromeClient(new WebChromeClient() {
+                      @Override
+                      public void onPermissionRequest(final PermissionRequest request) {
+                          runOnUiThread(() -> {
+                              if (request.getResources() != null) {
+                                  for (String resource : request.getResources()) {
+                                      if (PermissionRequest.RESOURCE_AUDIO_CAPTURE.equals(resource)) {
+                                          pendingRequest = request;
+
+                                          if (checkSelfPermission(Manifest.permission.RECORD_AUDIO)
+                                                  == PackageManager.PERMISSION_GRANTED) {
+                                              request.grant(new String[]{
+                                                      PermissionRequest.RESOURCE_AUDIO_CAPTURE
+                                              });
+                                          } else {
+                                              requestPermissions(
+                                                      new String[]{Manifest.permission.RECORD_AUDIO},
+                                                      1001
+                                              );
+                                          }
+                                          return;
+                                      }
+                                  }
+                              }
+
+                              request.deny();
+                          });
+                      }
+                  });
+              }
+
+              @Override
+              public void onRequestPermissionsResult(
+                      int requestCode,
+                      String[] permissions,
+                      int[] grantResults) {
+
+                  super.onRequestPermissionsResult(
+                          requestCode,
+                          permissions,
+                          grantResults
+                  );
+
+                  if (requestCode == 1001 && pendingRequest != null) {
+                      if (grantResults.length > 0
+                              && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                          pendingRequest.grant(new String[]{
+                                  PermissionRequest.RESOURCE_AUDIO_CAPTURE
+                          });
+
+                      } else {
+                          pendingRequest.deny();
+                      }
+
+                      pendingRequest = null;
+                  }
+              }
+          }
+          EOF
+          
+          sed -i 's/package com.lunaria.tenutalunaria;/package com.lunaria.tenutalunaria;/' android/app/src/main/java/com/lunaria/tenutalunaria/MainActivity.java
+
+      - name: Sincronizza Capacitor
+        run: npx cap sync android
 
       - name: Compila APK
         run: |
