@@ -20,10 +20,12 @@ jobs:
         run: npm install
 
       - name: Aggiungi Android
-        run: npx cap add android
+  run: |
+    npx cap add android
+    sed -i '/<manifest/a\    <uses-permission android:name="android.permission.RECORD_AUDIO" />' android/app/src/main/AndroidManifest.xml
 
-      - name: Sincronizza Capacitor
-        run: npx cap sync android
+- name: Sincronizza Capacitor
+  run: npx cap sync android
 
       - name: Configura Java
         uses: actions/setup-java@v5
