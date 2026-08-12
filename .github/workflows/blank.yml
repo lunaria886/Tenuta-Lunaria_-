@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 24
 
-            - name: Installa dipendenze
+      - name: Installa dipendenze
         run: npm install
 
       - name: Aggiungi Android
