@@ -16,16 +16,18 @@ jobs:
         with:
           node-version: 24
 
-      - name: Installa dipendenze
+            - name: Installa dipendenze
         run: npm install
 
       - name: Aggiungi Android
-  run: |
-    npx cap add android
-    sed -i '/<manifest/a\    <uses-permission android:name="android.permission.RECORD_AUDIO" />' android/app/src/main/AndroidManifest.xml
+        run: npx cap add android
 
-- name: Sincronizza Capacitor
-  run: npx cap sync android
+      - name: Aggiungi permesso microfono
+        run: |
+          sed -i '/<manifest/a\    <uses-permission android:name="android.permission.RECORD_AUDIO" />' android/app/src/main/AndroidManifest.xml
+
+      - name: Sincronizza Capacitor
+        run: npx cap sync android
 
       - name: Configura Java
         uses: actions/setup-java@v5
