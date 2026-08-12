@@ -33,8 +33,7 @@ jobs:
           java-version: 21
 
       - name: Configura WebView per microfono
-        run: |
-          mkdir -p android/app/src/main/java/com/lunaria/tenutalunaria
+        run: |          mkdir -p android/app/src/main/java/it/tenutalunaria/app
           cat > android/app/src/main/java/com/lunaria/tenutalunaria/MainActivity.java <<'EOF'
           package com.lunaria.tenutalunaria;
 
