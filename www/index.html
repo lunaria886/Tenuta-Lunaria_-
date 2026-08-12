@@ -870,93 +870,55 @@ async function loadIdeas(){
   }
 }
 
-  /* ---------- Archivio condiviso ---------- */
+/* ---------- Archivio condiviso ---------- */
 async function sharedFetch(section){
   if(!supabaseClient) return [];
 
   const {data,error}=await supabaseClient
     .from("shared_items")
     .select("*")
-    .eq("category",section)
+    .eq("section",section)
     .order("created_at",{ascending:false});
 
   if(error) throw error;
 
-  return (data||[]).map(r=>{
-    let obj={};
-
-    try{
-      obj=r.body ? JSON.parse(r.body) : {};
-    }catch(e){
-      obj={};
-    }
-
-    return {
-      ...obj,
-      _remoteId:r.id,
-      _author:r.author,
-      _created_at:r.created_at,
-      _category:r.category,
-      _status:r.status
-    };
-  });
-}
-
-function sharedObjectToRow(section,obj){
-  const clean={...obj};
-
-  delete clean._remoteId;
-  delete clean._author;
-  delete clean._created_at;
-  delete clean._category;
-  delete clean._status;
-  delete clean.id;
-
-  const title=
-    obj.title ||
-    obj.name ||
-    obj.description ||
-    obj.phase ||
-    obj.type ||
-    section;
-
-  return {
-    title:String(title),
-    body:JSON.stringify(clean),
-    category:section,
-    status:obj.status || null,
-    author:currentUser
-  };
+  return (data||[]).map(r=>({
+    ...r.data,
+    _remoteId:r.id,
+    _author:r.author,
+    _created_at:r.created_at
+  }));
 }
 
 async function sharedInsert(section,obj){
   if(!supabaseClient || !sharedReady) return obj;
 
-  const row=sharedObjectToRow(section,obj);
+  const clean={...obj};
+
+  delete clean._remoteId;
+  delete clean._author;
+  delete clean._created_at;
+
+  const newId=Date.now();
 
   const {data,error}=await supabaseClient
     .from("shared_items")
-    .insert(row)
+    .insert({
+      id:newId,
+      section,
+      data:clean,
+      author:currentUser
+    })
     .select("*")
     .single();
 
   if(error) throw error;
 
-  let saved={};
-
-  try{
-    saved=data.body ? JSON.parse(data.body) : {};
-  }catch(e){
-    saved={};
-  }
-
   return {
-    ...saved,
+    ...data.data,
     _remoteId:data.id,
     _author:data.author,
-    _created_at:data.created_at,
-    _category:data.category,
-    _status:data.status
+    _created_at:data.created_at
   };
 }
 
@@ -965,32 +927,29 @@ async function sharedUpdate(section,obj){
 
   if(!id) return sharedInsert(section,obj);
 
-  const row=sharedObjectToRow(section,obj);
+  const clean={...obj};
+
+  delete clean._remoteId;
+  delete clean._author;
+  delete clean._created_at;
 
   const {data,error}=await supabaseClient
     .from("shared_items")
-    .update(row)
+    .update({
+      data:clean,
+      author:currentUser
+    })
     .eq("id",id)
     .select("*")
     .single();
 
   if(error) throw error;
 
-  let saved={};
-
-  try{
-    saved=data.body ? JSON.parse(data.body) : {};
-  }catch(e){
-    saved={};
-  }
-
   return {
-    ...saved,
+    ...data.data,
     _remoteId:data.id,
     _author:data.author,
-    _created_at:data.created_at,
-    _category:data.category,
-    _status:data.status
+    _created_at:data.created_at
   };
 }
 
@@ -1004,172 +963,6 @@ async function sharedDelete(section,id){
 
   if(error) throw error;
 }
-
-async function migrateSection(section){
-  if(!supabaseClient) return [];
-
-  const existing=await sharedFetch(section);
-
-  if(existing.length){
-    setSectionArray(section,existing);
-    return existing;
-  }
-
-  const local=sectionArray(section);
-
-  if(!local.length) return [];
-
-  const rows=local.map(x=>sharedObjectToRow(section,x));
-
-  const {data,error}=await supabaseClient
-    .from("shared_items")
-    .insert(rows)
-    .select("*");
-
-  if(error) throw error;
-
-  const arr=(data||[]).map(r=>{
-    let obj={};
-
-    try{
-      obj=r.body ? JSON.parse(r.body) : {};
-    }catch(e){
-      obj={};
-    }
-
-    return {
-      ...obj,
-      _remoteId:r.id,
-      _author:r.author,
-      _created_at:r.created_at,
-      _category:r.category,
-      _status:r.status
-    };
-  });
-
-  setSectionArray(section,arr);
-
-  return arr;
-}
-
-async function loadSharedAll(){
-  if(!supabaseClient){
-    sharedReady=false;
-    return;
-  }
-
-  let failures=[];
-
-  try{
-    const probe=await supabaseClient
-      .from("shared_items")
-      .select("id")
-      .limit(1);
-
-    if(probe.error) throw probe.error;
-
-    sharedReady=true;
-
-    for(const section of Object.values(SECTION_KEYS)){
-      try{
-        await migrateSection(section);
-      }catch(e){
-        failures.push(section+": "+supaError(e));
-        console.error("ERRORE MIGRAZIONE "+section,e);
-      }
-    }
-
-    renderCurrentSection();
-
-    if(failures.length){
-      console.warn("Sezioni non sincronizzate:",failures);
-    }
-
-  }catch(e){
-    sharedReady=false;
-    console.error("ERRORE ARCHIVIO CONDIVISO",e);
-    showSupabaseError(
-      "Supabase non è pronto per l'archivio condiviso.",
-      e
-    );
-  }
-}
-
-function subscribeRealtime(){
-  if(!supabaseClient)return;
-
-  supabaseClient.channel("lunaria-shared-items")
-    .on(
-      "postgres_changes",
-      {
-        event:"*",
-        schema:"public",
-        table:"shared_items"
-      },
-      payload=>{
-        const section=
-          payload.new?.category ||
-          payload.old?.category;
-
-        if(!section)return;
-
-        refreshSectionFromRemote(section);
-      }
-    )
-    .subscribe();
-
-  supabaseClient.channel("lunaria-comments")
-    .on(
-      "postgres_changes",
-      {
-        event:"*",
-        schema:"public",
-        table:"comments"
-      },
-      payload=>{
-        const section=
-          payload.new?.section ||
-          payload.old?.section;
-
-        const itemId=
-          payload.new?.item_id ||
-          payload.old?.item_id;
-
-        if(section&&itemId){
-          renderComments(section,itemId);
-        }
-      }
-    )
-    .subscribe();
-
-  supabaseClient.channel("lunaria-ideas")
-    .on(
-      "postgres_changes",
-      {
-        event:"*",
-        schema:"public",
-        table:"ideas"
-      },
-      ()=>loadIdeas()
-    )
-    .subscribe();
-}
-
-async function refreshSectionFromRemote(section){
-  if(!sharedReady||!supabaseClient||!SECTION_KEYS[section])return;
-
-  try{
-    const arr=await sharedFetch(section);
-
-    setSectionArray(section,arr);
-
-    renderCurrentSection();
-
-  }catch(e){
-    console.error("Sincronizzazione",section,e);
-  }
-    }
-  
 
 /* ---------- Commenti ---------- */
 async function getComments(section,itemId){
@@ -1303,6 +1096,7 @@ function renderVoiceNotes(){
 
 /* ---------- CRUD condiviso ---------- */
 async function addShared(section,obj,after){
+  obj.id=obj.id||Date.now();
   obj._author=currentUser;
 
   if(sharedReady){
