@@ -997,10 +997,36 @@ function toggleComments(section,id){
 /* ---------- Rendering ---------- */
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 function renderCurrentSection(){
-  const app=document.getElementById("appSection"); if(app&&app.style.display!=="none"){
-    const title=document.getElementById("sectionTitle")?.textContent||"";
-    const map={"📋 Da fare":"todo","💰 Costi":"costs","📑 Bandi":"grants","✨ Nomi & Branding":"names","🎙️ Note vocali":"voice","📅 Agenda":"agenda","🔔 Promemoria":"reminders","🧪 Laboratorio":"lab","🌿 Coltivazione":"coltivazione","🧴 Prodotti":"products","🛠️ Attrezzi":"tools"};
-    const sec=map[title]; if(sec) openSection(sec,true);
+  const app=document.getElementById("appSection");
+  if(!app || app.style.display==="none") return;
+
+  const title=document.getElementById("sectionTitle")?.textContent||"";
+  const map={
+    "📋 Da fare":"todo",
+    "💰 Costi":"costs",
+    "📑 Bandi":"grants",
+    "✨ Nomi & Branding":"names",
+    "🎙️ Note vocali":"voice",
+    "📅 Agenda":"agenda",
+    "🔔 Promemoria":"reminders",
+    "🧪 Laboratorio":"lab",
+    "🌿 Coltivazione":"coltivazione",
+    "🧴 Prodotti":"products",
+    "🛠️ Attrezzi":"tools"
+  };
+
+  const section=map[title];
+  if(!section) return;
+
+  // Non ricreare gli input mentre l'utente sta scrivendo.
+  const active=document.activeElement;
+  if(active && app.contains(active) &&
+     ["INPUT","TEXTAREA","SELECT"].includes(active.tagName)){
+    return;
+  }
+
+  openSection(section,true);
+}
   }
 }
 function renderTodos(){
