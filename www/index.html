@@ -1099,30 +1099,144 @@ async function deleteTool(id){await deleteShared("tools",id,"tools",renderTools)
 
 /* ---------- Note vocali condivise ---------- */
 async function startVoiceRecording(){
- try{
-  const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-  audioChunks=[];mediaRecorder=new MediaRecorder(stream);
-  mediaRecorder.ondataavailable=e=>{if(e.data.size)audioChunks.push(e.data)};
-  mediaRecorder.onstart=()=>{document.getElementById("recordingStatus").textContent="🔴 Registrazione in corso...";document.getElementById("startRecording").disabled=true;document.getElementById("stopRecording").disabled=false};
-  mediaRecorder.onstop=async()=>{
-   const blob=new Blob(audioChunks,{type:"audio/webm"});stream.getTracks().forEach(t=>t.stop());
-   const reader=new FileReader();
-   reader.onload=async()=>{
-    const obj={id:Date.now(),date:new Date().toLocaleString("it-IT"),dataUrl:reader.result};
-    const localUrl=URL.createObjectURL(blob);obj.url=localUrl;
-    if(sharedReady){
-      try{const remote=await sharedInsert("voice",obj);obj._remoteId=remote._remoteId;obj._author=currentUser;}catch(e){showSupabaseError("La nota vocale è rimasta solo su questo telefono perché non sono riuscita a sincronizzarla.",e)}
+  try {
+    console.log("🎙️ Avvio registrazione vocale...");
+
+    if (!window.isSecureContext) {
+      throw new Error("L'app non è in un contesto sicuro.");
     }
-    voiceNotes.unshift(obj);writeLocal("lunariaVoiceNotes",voiceNotes);renderVoiceNotes();
-    document.getElementById("recordingStatus").textContent="✅ Registrazione terminata.";
-    document.getElementById("startRecording").disabled=false;document.getElementById("stopRecording").disabled=true;
-   };
-   reader.readAsDataURL(blob);
-  };
-  mediaRecorder.start();
- }catch(e){console.error(e);alert("Non posso accedere al microfono. Controlla i permessi del browser.")}
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error("getUserMedia non è disponibile nella WebView.");
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true
+      }
+    });
+
+    console.log("🎙️ Microfono autorizzato.");
+
+    audioChunks = [];
+
+    let mimeType = "audio/webm";
+
+    if (!MediaRecorder.isTypeSupported("audio/webm")) {
+      if (MediaRecorder.isTypeSupported("audio/mp4")) {
+        mimeType = "audio/mp4";
+      } else if (MediaRecorder.isTypeSupported("audio/ogg")) {
+        mimeType = "audio/ogg";
+      } else {
+        mimeType = "";
+      }
+    }
+
+    mediaRecorder = mimeType
+      ? new MediaRecorder(stream, { mimeType })
+      : new MediaRecorder(stream);
+
+    mediaRecorder.ondataavailable = e => {
+      if (e.data && e.data.size > 0) {
+        audioChunks.push(e.data);
+      }
+    };
+
+    mediaRecorder.onstart = () => {
+      document.getElementById("recordingStatus").textContent =
+        "🔴 Registrazione in corso...";
+
+      document.getElementById("startRecording").disabled = true;
+      document.getElementById("stopRecording").disabled = false;
+    };
+
+    mediaRecorder.onerror = e => {
+      console.error("Errore MediaRecorder:", e);
+      stream.getTracks().forEach(t => t.stop());
+    };
+
+    mediaRecorder.onstop = async () => {
+      try {
+        const actualType = mimeType || "audio/webm";
+        const blob = new Blob(audioChunks, { type: actualType });
+
+        stream.getTracks().forEach(t => t.stop());
+
+        const reader = new FileReader();
+
+        reader.onload = async () => {
+          const obj = {
+            id: Date.now(),
+            date: new Date().toLocaleString("it-IT"),
+            dataUrl: reader.result
+          };
+
+          const localUrl = URL.createObjectURL(blob);
+          obj.url = localUrl;
+
+          if (sharedReady) {
+            try {
+              const remote = await sharedInsert("voice", obj);
+              obj._remoteId = remote._remoteId;
+              obj._author = currentUser;
+            } catch (e) {
+              showSupabaseError(
+                "La nota vocale è rimasta solo su questo telefono perché non sono riuscita a sincronizzarla.",
+                e
+              );
+            }
+          }
+
+          voiceNotes.unshift(obj);
+          writeLocal("lunariaVoiceNotes", voiceNotes);
+          renderVoiceNotes();
+
+          document.getElementById("recordingStatus").textContent =
+            "✅ Registrazione terminata.";
+
+          document.getElementById("startRecording").disabled = false;
+          document.getElementById("stopRecording").disabled = true;
+        };
+
+        reader.readAsDataURL(blob);
+
+      } catch (e) {
+        console.error("Errore durante il salvataggio della registrazione:", e);
+
+        document.getElementById("recordingStatus").textContent =
+          "❌ Errore durante il salvataggio.";
+
+        document.getElementById("startRecording").disabled = false;
+        document.getElementById("stopRecording").disabled = true;
+      }
+    };
+
+    mediaRecorder.start();
+
+  } catch (e) {
+    console.error("🎙️ ERRORE MICROFONO:", e);
+
+    let message = "Non posso accedere al microfono.";
+
+    if (e && e.name) {
+      message += "\n\nErrore: " + e.name;
+
+      if (e.message) {
+        message += "\n" + e.message;
+      }
+    }
+
+    alert(message);
+  }
 }
-function stopVoiceRecording(){if(mediaRecorder&&mediaRecorder.state!=="inactive")mediaRecorder.stop()}
+
+function stopVoiceRecording(){
+  if(mediaRecorder && mediaRecorder.state !== "inactive"){
+    mediaRecorder.stop();
+  }
+}
 
 /* ---------- Idee ---------- */
 async function saveIdea(){
