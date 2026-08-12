@@ -879,10 +879,33 @@ async function sharedFetch(section){
 }
 async function sharedInsert(section,obj){
   if(!supabaseClient || !sharedReady) return obj;
-  const clean={...obj}; delete clean._remoteId; delete clean._author; delete clean._created_at;
-  const {data,error}=await supabaseClient.from("shared_items").insert({section,data:clean,author:currentUser}).select("*").single();
+
+  const clean={...obj};
+  delete clean._remoteId;
+  delete clean._author;
+  delete clean._created_at;
+
+  const newId=crypto.randomUUID();
+
+  const {data,error}=await supabaseClient
+    .from("shared_items")
+    .insert({
+      id:newId,
+      section,
+      data:clean,
+      author:currentUser
+    })
+    .select("*")
+    .single();
+
   if(error) throw error;
-  return {...data.data,_remoteId:data.id,_author:data.author,_created_at:data.created_at};
+
+  return {
+    ...data.data,
+    _remoteId:data.id,
+    _author:data.author,
+    _created_at:data.created_at
+  };
 }
 async function sharedUpdate(section,obj){
   const id=obj._remoteId;
