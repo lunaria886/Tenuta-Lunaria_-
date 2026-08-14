@@ -12,5 +12,8 @@
     "@capacitor/cli": "latest",
     "@capacitor/camera": "latest",
     "@capacitor/local-notifications": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "latest"
   }
 }
