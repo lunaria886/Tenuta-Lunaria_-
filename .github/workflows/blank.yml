@@ -23,7 +23,7 @@ jobs:
         run: npx cap add android
 
       - name: Genera icona app
-        run: npx capacitor-assets generate --android
+  run: npx capacitor-assets generate --android --assetPath .
 
       - name: Aggiungi permesso microfono
         run: |
