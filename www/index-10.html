@@ -1,0 +1,1700 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tenuta Lunaria — Idea Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== NUOVA HOME TENUTA LUNARIA ===== */
+
+.topbar{
+  padding:4px 0 22px;
+}
+
+.logo-mark{
+  width:52px;
+  height:52px;
+  border-radius:18px;
+  background:linear-gradient(150deg,#6d4e8f,#c68196);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:28px;
+  box-shadow:0 10px 25px rgba(44,25,56,.22);
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.icon-btn{
+  width:46px;
+  height:46px;
+  padding:0;
+  border-radius:15px;
+  background:rgba(255,255,255,.8);
+  border:1px solid var(--line);
+  color:var(--ink);
+  font-size:21px;
+  box-shadow:0 6px 18px rgba(74,48,94,.08);
+}
+
+.welcome{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='white' stroke-width='1.4' opacity='0.16'%3E%3Cpath d='M110 210 C110 150 105 110 100 60'/%3E%3Cellipse cx='96' cy='55' rx='7' ry='16' transform='rotate(-18 96 55)'/%3E%3Cellipse cx='104' cy='40' rx='6.5' ry='15' transform='rotate(-6 104 40)'/%3E%3Cellipse cx='113' cy='30' rx='6' ry='14' transform='rotate(10 113 30)'/%3E%3Cellipse cx='120' cy='48' rx='6.5' ry='15' transform='rotate(24 120 48)'/%3E%3Cellipse cx='115' cy='64' rx='7' ry='16' transform='rotate(40 115 64)'/%3E%3Cpath d='M108 130 q-22 -6 -30 -26'/%3E%3Cpath d='M112 160 q24 -4 34 -22'/%3E%3C/g%3E%3C/svg%3E") no-repeat bottom right / 190px,
+    radial-gradient(circle at 85% 20%,rgba(255,255,255,.3),transparent 30%),
+    linear-gradient(135deg,#6d4e8f,#a4638a);
+  color:white;
+  border-radius:28px;
+  padding:28px;
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
+}
+
+.welcome h2{
+  font-family:'Playfair Display',Georgia,serif;
+  font-weight:600;
+  font-style:italic;
+  margin:4px 0 6px;
+  font-size:28px;
+}
+
+.welcome p{
+  margin:0;
+  opacity:.9;
+}
+
+.eyebrow{
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+  color:var(--gold);
+  opacity:.95;
+}
+
+.welcome .eyebrow{
+  opacity:.85;
+  color:#f3dfc4;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.quick-card{
+  text-align:left;
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  color:var(--ink);
+  box-shadow:0 10px 26px rgba(44,25,56,.08);
+  transition:.2s;
+}
+
+.quick-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 32px rgba(44,25,56,.14);
+  border-color:var(--gold);
+}
+
+.quick-icon{
+  display:block;
+  font-size:25px;
+  margin-bottom:10px;
+}
+
+.quick-card strong{
+  display:block;
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:17px;
+  margin-bottom:5px;
+}
+
+.quick-card small{
+  color:var(--muted);
+  line-height:1.35;
+}
+
+.home-sections{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+}
+
+.section-heading{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.section-heading h3{
+  font-family:'Playfair Display',Georgia,serif;
+  font-weight:600;
+  margin:5px 0 0;
+  position:relative;
+  display:inline-block;
+  padding-bottom:9px;
+}
+
+.section-heading h3::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:34px;
+  height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+
+.section-dot{
+  color:var(--lav);
+  font-size:10px;
+}
+
+.recent-list{
+  display:grid;
+  gap:9px;
+}
+
+.recent-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#fff;
+  transition:.2s;
+}
+
+.recent-item:hover{
+  border-color:var(--gold);
+  box-shadow:0 8px 20px rgba(44,25,56,.08);
+}
+
+.recent-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:linear-gradient(150deg,#efe4f5,#f6e8ec);
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+}
+
+.recent-content{
+  min-width:0;
+  flex:1;
+}
+
+.recent-title{
+  font-weight:750;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.recent-meta{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.highlight-card{
+  min-height:150px;
+  display:flex;
+  align-items:center;
+}
+
+.highlight-inner{
+  width:100%;
+  padding:18px;
+  border-radius:18px;
+  background:linear-gradient(150deg,#fbf3f7,#efe4f0);
+  border:1px solid var(--line);
+}
+
+.highlight-inner h4{
+  font-family:'Playfair Display',Georgia,serif;
+  font-weight:600;
+  margin:0 0 8px;
+  font-size:18px;
+}
+
+.highlight-inner p{
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+}
+
+.highlight-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.highlight-tag{
+  padding:5px 8px;
+  border-radius:999px;
+  background:white;
+  border:1px solid var(--line);
+  font-size:11px;
+  color:#6d4e8f;
+}
+
+@media(max-width:850px){
+  .quick-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .home-sections{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  .welcome{
+    align-items:flex-start;
+    flex-direction:column;
+    padding:22px;
+  }
+
+  .welcome .primary{
+    width:100%;
+  }
+
+  .quick-grid{
+    gap:9px;
+  }
+
+  .quick-card{
+    padding:15px;
+  }
+}
+  :root{
+  --lav:#6d4e8f; --lav2:#c9aee0; --ink:#2c2233; --muted:#8b7d92;
+  --cream:#fbf6f9; --card:rgba(255,255,255,.9); --line:#ecdcec;
+  --green:#7b9b82; --rose:#c68196; --gold:#b8935f;
+  --shadow:0 18px 42px rgba(44,25,56,.15);
+}
+*{box-sizing:border-box} html,body{overflow-x:hidden} body{overscroll-behavior-x:none} .favorite-btn{background:transparent!important;border:0!important;padding:4px 7px!important;font-size:20px!important;box-shadow:none!important} .status-choice{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.status-choice button{padding:6px 9px;font-size:11px}.status-choice button.active{background:#6d4e8f;color:#fff}
+#appSection .panel{border-top:5px solid var(--accent,var(--lav));transition:border-color .2s ease}
+.tab-fade{animation:fadeInTab .28s ease}
+@keyframes fadeInTab{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.empty::before{content:"🌙";display:block;font-size:30px;margin-bottom:8px;opacity:.45}
+#recordingStatus.empty::before{content:none;display:none}
+.logo-mark{position:relative}
+.logo-mark::after{content:"";position:absolute;inset:-7px;border-radius:24px;background:radial-gradient(circle,rgba(201,174,224,.55),transparent 72%);z-index:-1;filter:blur(5px)}
+.home-panel{position:relative;overflow:hidden}
+.home-panel::before{content:"";position:absolute;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(109,78,143,.09),transparent 70%);pointer-events:none}
+body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+background:
+radial-gradient(circle at 12% 0%,rgba(201,174,224,.4),transparent 32%),
+radial-gradient(circle at 92% 12%,rgba(198,129,150,.22),transparent 30%),
+linear-gradient(150deg,#f3e9f5,#fbf6f9 45%,#f3e9f5);
+min-height:100vh}
+.app{max-width:1100px;margin:auto;padding:28px 18px 70px}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:13px}
+.moon{width:48px;height:48px;border-radius:50%;background:linear-gradient(150deg,var(--lav),var(--gold));color:white;display:grid;place-items:center;font-size:25px;box-shadow:var(--shadow)}
+h1{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:29px;margin:0;letter-spacing:.3px}
+.subtitle{color:var(--muted);font-size:13px;font-style:italic}
+button{border:0;border-radius:14px;padding:12px 17px;font-weight:700;cursor:pointer;font-family:inherit}
+.primary{background:linear-gradient(135deg,var(--lav),#83619f);color:white;box-shadow:0 10px 24px rgba(109,78,143,.32)}
+.ghost{background:#fff8;border:1px solid var(--line);color:var(--ink)}
+.search{background:var(--card);border:1.5px solid var(--line);padding:14px 16px;border-radius:16px;width:100%;outline:none;font-size:15px}
+.hero{background:linear-gradient(135deg,rgba(109,78,143,.95),rgba(198,129,150,.85));color:white;border-radius:25px;padding:26px;box-shadow:var(--shadow);margin-bottom:22px}
+.hero h2{font-family:'Playfair Display',Georgia,serif;margin:0 0 8px;font-size:25px}.hero p{margin:0 0 18px;opacity:.9}.hero .primary{background:white;color:var(--lav)}
+.grid{display:grid;grid-template-columns:1.35fr .65fr;gap:20px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+.panel h3{font-family:'Playfair Display',Georgia,serif;font-weight:600;margin:0 0 14px}.ideas{display:grid;gap:10px}
+.idea{padding:15px;border:1px solid var(--line);border-radius:16px;background:#fff;cursor:pointer;transition:.15s}
+.idea:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(74,48,94,.08)}
+.idea-top{display:flex;justify-content:space-between;gap:10px}.idea-title{font-weight:750}.meta{font-size:12px;color:var(--muted);margin-top:7px}
+.badge{font-size:11px;padding:5px 9px;border-radius:999px;background:linear-gradient(150deg,#efe4f5,#f6e8ec);color:#6d4e8f;white-space:nowrap;font-weight:600}
+.categories{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.cat{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;cursor:pointer}
+.cat span{display:block;font-size:20px;margin-bottom:4px}.cat small{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px}.stat b{font-size:22px;display:block}.stat small{color:var(--muted)}
+.modal{position:fixed;inset:0;background:rgba(43,29,53,.38);display:none;align-items:center;justify-content:center;padding:18px;z-index:5}
+.modal.open{display:flex}.box{width:min(650px,100%);background:#fff;border-radius:26px;padding:26px;box-shadow:0 32px 74px rgba(30,15,42,.3)}
+.box h2{font-family:'Playfair Display',Georgia,serif;font-weight:600}
+label{display:block;font-size:14px;font-weight:700;margin:16px 0 8px}
+input,textarea,select{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;font:inherit;font-size:16px;outline:none;background:#fff}
+input:focus,textarea:focus,select:focus{border-color:var(--lav)}
+textarea{min-height:160px;resize:vertical;line-height:1.5}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.empty{text-align:center;color:var(--muted);padding:25px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.app{padding:18px 13px 50px}header{align-items:flex-start}.stats{grid-template-columns:1fr 1fr 1fr}.hero{padding:21px}
+  #sectionContent [style*="grid-template-columns"]{grid-template-columns:1fr !important}
+}
+.side-menu{
+position:fixed;
+top:0;
+left:-320px;
+width:300px;
+height:100vh;
+max-height:100vh;
+overflow-y:auto;
+-webkit-overflow-scrolling:touch;
+background:#fff;
+box-shadow:12px 0 35px rgba(74,48,94,.18);
+z-index:20;
+transition:left .25s ease;
+border-right:1px solid var(--line);
+}
+
+.side-menu.open{
+left:0;
+}
+
+.side-menu-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px;
+border-bottom:1px solid var(--line);
+}
+
+.side-menu-header .icon-btn{
+width:40px;
+height:40px;
+font-size:18px;
+}
+
+.side-menu-content{
+display:grid;
+gap:8px;
+padding:16px 16px 28px;
+}
+
+.menu-item{
+width:100%;
+display:flex;
+align-items:center;
+gap:13px;
+text-align:left;
+background:#fff;
+border:1px solid var(--line);
+border-radius:16px;
+padding:14px;
+color:var(--ink);
+transition:.18s;
+}
+
+.menu-item:hover{
+background:#faf3f6;
+border-color:var(--gold);
+transform:translateX(3px);
+}
+
+.menu-item > span{
+font-size:23px;
+width:30px;
+text-align:center;
+}
+
+.menu-item strong{
+display:block;
+font-family:'Playfair Display',Georgia,serif;
+font-size:15px;
+}
+
+.menu-item small{
+display:block;
+color:var(--muted);
+margin-top:3px;
+font-size:11px;
+}
+
+</style>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#6d4e8f">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand">
+    <div class="logo-mark">☾</div>
+    <div>
+      <h1>Tenuta Lunaria</h1>
+      <div class="subtitle">Il tuo spazio creativo e operativo</div>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <button id="notificationBtn" class="icon-btn" data-action="enableNotifications" aria-label="Attiva notifiche" title="Attiva notifiche">🔕</button>
+    <button class="icon-btn" data-action="toggleMenu" aria-label="Apri menu">☰</button>
+  </div>
+</header>
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-header">
+    <strong>🌙 Tenuta Lunaria</strong>
+    <button class="icon-btn" data-action="toggleMenu">✕</button>
+  </div>
+
+ <div class="side-menu-content">
+
+  <button class="menu-item" data-action="openSection" data-section="ideas">
+    <span>💡</span>
+    <div>
+      <strong>Idee</strong>
+      <small>Tutte le idee archiviate</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="todo">
+    <span>📋</span>
+    <div>
+      <strong>Da fare</strong>
+      <small>Attività e cose da completare</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="costs">
+    <span>💰</span>
+    <div>
+      <strong>Costi</strong>
+      <small>Spese, preventivi e investimenti</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="grants">
+    <span>📑</span>
+    <div>
+      <strong>Bandi</strong>
+      <small>Opportunità e finanziamenti</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="names">
+    <span>✨</span>
+    <div>
+      <strong>Nomi &amp; Branding</strong>
+      <small>Nomi, prodotti e identità del brand</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="voice">
+    <span>🎙️</span>
+    <div>
+      <strong>Note vocali</strong>
+      <small>Idee da registrare al volo</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="agenda">
+    <span>📅</span>
+    <div>
+      <strong>Agenda</strong>
+      <small>Appuntamenti e scadenze</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="reminders">
+    <span>🔔</span>
+    <div>
+      <strong>Promemoria</strong>
+      <small>Cose da non dimenticare</small>
+    </div>
+    </button>
+
+  <button class="menu-item" data-action="openSection" data-section="lab">
+    <span>🧪</span>
+    <div>
+      <strong>Laboratorio</strong>
+      <small>Essiccazione, distillazione, miscelazione</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="coltivazione">
+    <span>🌿</span>
+    <div>
+      <strong>Coltivazione</strong>
+      <small>Lavorazioni sul campo di lavanda</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="featured"><span>⭐</span><div><strong>In evidenza</strong><small>Preferiti di tutte le sezioni</small></div></button>
+
+  <button class="menu-item" data-action="openSection" data-section="cosmetica"><span>🌸</span><div><strong>Cosmetica</strong><small>Formule e idee cosmetiche</small></div></button>
+
+  <button class="menu-item" data-action="openSection" data-section="packaging"><span>📦</span><div><strong>Packaging</strong><small>Confezioni, etichette e campioni</small></div></button>
+
+  <button class="menu-item" data-action="openSection" data-section="products">
+    <span>🧴</span>
+    <div>
+      <strong>Prodotti</strong>
+      <small>Catalogo dei prodotti in sviluppo</small>
+    </div>
+  </button>
+
+  <button class="menu-item" data-action="openSection" data-section="tools">
+    <span>🛠️</span>
+    <div>
+      <strong>Attrezzi</strong>
+      <small>Attrezzatura e relativi costi</small>
+    </div>
+  </button>
+
+</div>
+</div>
+
+<div class="welcome">
+  <div>
+    <div class="eyebrow">🌙 TENUTA LUNARIA</div>
+    <h2>Buongiorno, Arianna 💜</h2>
+    <p>Che cosa facciamo crescere oggi?</p>
+  </div>
+<button class="primary" data-action="openModal">＋ Nuova idea</button></div>
+<div id="notificationStatus" style="margin:0 16px 12px;padding:9px 12px;border-radius:12px;background:rgba(126,87,194,.08);font-size:12px;color:#666;">Tocca 🔔 per attivare e testare le notifiche.</div>
+
+<section class="panel home-panel" style="margin-bottom:18px">
+ <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:14px" id="homeTabBar">
+   <button class="active" data-action="setHomeTab" data-tab="due" style="white-space:nowrap;padding:8px 13px;font-size:13px">⏰ Scadenze</button>
+   <button class="ghost" data-action="setHomeTab" data-tab="featured" style="white-space:nowrap;padding:8px 13px;font-size:13px">⭐ In evidenza</button>
+   <button class="ghost" data-action="setHomeTab" data-tab="todo" style="white-space:nowrap;padding:8px 13px;font-size:13px">📋 Da fare</button>
+   <button class="ghost" data-action="setHomeTab" data-tab="reminders" style="white-space:nowrap;padding:8px 13px;font-size:13px">🔔 Promemoria</button>
+   <button class="ghost" data-action="setHomeTab" data-tab="ideas" style="white-space:nowrap;padding:8px 13px;font-size:13px">💡 Idee recenti</button>
+ </div>
+ <div id="homeTabDue" class="home-tab-panel"></div>
+ <div id="homeTabFeatured" class="home-tab-panel" style="display:none"></div>
+ <div id="homeTabTodo" class="home-tab-panel" style="display:none"></div>
+ <div id="homeTabReminders" class="home-tab-panel" style="display:none"></div>
+ <div id="homeTabIdeas" class="home-tab-panel" style="display:none"><div id="recentIdeas" class="recent-list"></div></div>
+ <div id="homeStats" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)"></div>
+</section>
+
+<input id="search" class="search" placeholder="🔎 Cerca un'idea, un profumo, un prodotto...">
+<div id="appSection" style="display:none;margin-top:20px">
+  <section class="panel">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">🌙 TENUTA LUNARIA</div>
+        <h3 id="sectionTitle">Sezione</h3>
+      </div>
+      <button class="ghost" data-action="closeSection">← Torna alla home</button>
+    </div>
+
+    <div id="sectionContent">
+
+  <div id="todoSection" style="display:none">
+
+    <div style="display:flex;gap:10px;margin-bottom:15px">
+      <input
+        id="todoInput"
+        class="search"
+        placeholder="✏️ Cosa devi fare?"
+      >
+      <button class="primary" data-action="addTodo">＋ Aggiungi</button>
+    </div>
+
+    <div id="todoList">
+      <div class="empty">Ancora nessuna attività.</div>
+    </div>
+
+  </div>
+
+</div>
+  </section>
+</div>  
+<div class="home-sections" style="display:none">
+</div>
+
+<div id="modal" class="modal">
+<div class="box">
+  <h2 style="margin:0">💡 Nuova idea</h2>
+  <label>Titolo / nome potenziale del prodotto</label><input id="title" placeholder="Es. Spumante alla lavanda e mandarino cinese">
+  <label>Raccontamela</label><textarea id="body" placeholder="Scrivi anche solo una frase. Il resto può venire dopo."></textarea>
+  <div class="row">
+    <div><label>Categoria</label><select id="category">
+      <option>Bombe da bagno</option>
+      <option>Spumanti da bagno</option>
+      <option>Saponette</option>
+      <option>Candele</option>
+      <option>Acque profumate</option>
+      <option>Roll-on tempie</option>
+      <option>Profumo solido</option>
+      <option>Olio massaggio solido</option>
+      <option>Olio massaggio liquido</option>
+      <option>Tisane</option>
+      <option>Miele</option>
+      <option>Polverine corpo</option><option>Spray per il cuscino</option><option>Cosmetica</option><option>Packaging</option>
+      <option>Distillati e miscele</option>
+      <option>Maschere viso</option>
+      <option>Maschere mani</option>
+      <option>Maschere piedi</option>
+      <option>Maschere intimo</option>
+      <option>Scrub</option>
+      <option>Sali da bagno</option>
+      <option>Coltivazione</option>
+      <option>Laboratorio</option><option>Branding</option><option>Costi</option><option>Bandi</option><option>Altro</option>
+    </select></div>
+    <div><label>Stato</label><select id="status">
+      <option>Idea</option><option>Da valutare</option><option>Da provare</option><option>In sviluppo</option><option>Approvata</option>
+    </select></div>
+  </div>
+  <div class="actions">
+  <button class="ghost" data-action="closeModal">Annulla</button>
+  <button class="primary" data-action="saveIdea">Salva idea</button>
+</div>
+</div>
+</div>
+<div id="editModal" class="modal">
+  <div class="box">
+    <h2 style="margin:0">✏️ Modifica idea</h2>
+
+    <label>Titolo / nome potenziale del prodotto</label>
+    <input id="editTitle" placeholder="Titolo dell'idea">
+
+    <label>Raccontamela</label>
+    <textarea id="editBody" placeholder="Modifica la descrizione dell'idea"></textarea>
+
+    <div class="row">
+      <div>
+        <label>Categoria</label>
+        <select id="editCategory">
+          <option>Bombe da bagno</option>
+          <option>Spumanti da bagno</option>
+          <option>Saponette</option>
+          <option>Candele</option>
+          <option>Acque profumate</option>
+          <option>Roll-on tempie</option>
+          <option>Profumo solido</option>
+          <option>Olio massaggio solido</option>
+          <option>Olio massaggio liquido</option>
+          <option>Tisane</option>
+          <option>Miele</option>
+          <option>Polverine corpo</option><option>Spray per il cuscino</option><option>Cosmetica</option><option>Packaging</option>
+          <option>Distillati e miscele</option>
+          <option>Maschere viso</option>
+          <option>Maschere mani</option>
+          <option>Maschere piedi</option>
+          <option>Maschere intimo</option>
+          <option>Scrub</option>
+          <option>Sali da bagno</option>
+          <option>Coltivazione</option>
+          <option>Laboratorio</option>
+          <option>Branding</option>
+          <option>Costi</option>
+          <option>Bandi</option>
+          <option>Altro</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Stato</label>
+        <select id="editStatus">
+          <option>Idea</option>
+          <option>Da valutare</option>
+          <option>Da provare</option>
+          <option>In sviluppo</option>
+          <option>Approvata</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="ideaCommentArea"></div>
+
+    <div class="actions">
+  <button class="ghost" data-action="closeEditModal">Annulla</button>
+  <button
+    style="background:#f4e5eb;color:#9a4f6b"
+    data-action="deleteIdea"
+  >🗑️ Elimina</button>
+  <button class="primary" data-action="saveEditedIdea">💾 Salva modifiche</button>
+</div>
+</div>
+</div>
+</div>
+<input type="file" id="globalImageInput" accept="image/*" style="display:none">
+
+<script>
+/* ===== TENUTA LUNARIA — CONDIVISIONE ARIANNA / ALESSANDRO ===== */
+const SUPABASE_URL = "https://uqjuajbmdanozcrgaret.supabase.co";
+const SUPABASE_KEY = "sb_publishable_9W2pY19PKO3-WkWdEDs_jw_LGtfhsAA";
+const supabaseClient =
+  typeof supabase !== "undefined" && SUPABASE_URL && SUPABASE_KEY
+    ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+    : null;
+
+const USERS = ["Arianna","Alessandro"];
+let currentUser = "";
+let remoteReady = false;
+let sharedReady = false;
+let currentCat = "";
+let ideas = [];
+const seed=[
+ {title:"Spumante alla lavanda + mandarino cinese",body:"Un profilo frizzante, agrumato e giocoso. Da capire la parte formulativa.",category:"Spumanti da bagno",status:"Da provare",author:"Arianna",date:"oggi"},
+ {title:"Linea profumata ispirata all'estate",body:"Creare una famiglia di prodotti che permetta di stratificare più profumi.",category:"Profumi",status:"Da valutare",author:"Arianna",date:"ieri"},
+ {title:"Idee per il futuro laboratorio",body:"Tenere raccolte qui le idee su attrezzature, spazi e processi.",category:"Laboratorio",status:"Idea",author:"Alessandro",date:"ieri"}
+];
+const PRODUCT_TYPES=["Bombe da bagno","Spumanti da bagno","Saponette","Candele","Acque profumate","Roll-on tempie","Profumo solido","Olio massaggio solido","Olio massaggio liquido","Tisane","Miele","Polverine corpo","Distillati e miscele","Maschere viso","Maschere mani","Maschere piedi","Maschere intimo","Scrub","Sali da bagno","Spray per il cuscino"];
+
+let todos=[], grants=[], names=[], voiceNotes=[], agendaEvents=[], reminders=[], costs=[], labEntries=[], coltEntries=[], products=[], tools=[], cosmeticaEntries=[], packagingEntries=[];
+let mediaRecorder=null, audioChunks=[];
+
+/* ---------- Identità ---------- */
+function chooseUser(){
+  return new Promise(resolve=>{
+    const old=document.getElementById("userPicker");
+    if(old) old.remove();
+    const modal=document.createElement("div");
+    modal.id="userPicker";
+    modal.className="modal open";
+    modal.style.zIndex="100";
+    modal.innerHTML=`
+      <div class="box" style="max-width:480px;text-align:center">
+        <div style="font-size:42px;margin-bottom:6px">🌙</div>
+        <h2 style="margin:0 0 8px">Chi sta usando Tenuta Lunaria?</h2>
+        <p style="color:var(--muted);line-height:1.5;margin-bottom:22px">Scegli chi sei per registrare correttamente autore di idee, attività e commenti.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          ${USERS.map(u=>`<button class="primary" data-user="${u}" style="padding:18px;font-size:16px">🌿 ${u}</button>`).join("")}
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.querySelectorAll("[data-user]").forEach(btn=>btn.addEventListener("click",()=>{
+      currentUser=btn.dataset.user;
+      modal.remove();
+      updateWelcome();
+      resolve(currentUser);
+    }));
+  });
+}
+function updateWelcome(){
+  const h=document.querySelector(".welcome h2");
+  if(h) h.textContent=`Buongiorno, ${currentUser} 💜`;
+}
+function dateLabel(){return new Date().toLocaleString("it-IT",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});}
+
+/* ---------- Errori ---------- */
+function supaError(e){
+  if(!e) return "Errore sconosciuto.";
+  if(typeof e==="string") return e;
+  const parts=[e.message,e.details,e.hint,e.code].filter(Boolean);
+  return parts.length?parts.join(" · "):JSON.stringify(e);
+}
+function showSupabaseError(prefix,e){
+  console.error(prefix,e);
+  alert(prefix+"\n\n"+supaError(e));
+}
+
+/* ---------- Local fallback / migration ---------- */
+function readLocal(key,fallback=[]){
+  try{return JSON.parse(localStorage.getItem(key)||"null") ?? fallback}catch{return fallback}
+}
+function writeLocal(key,val){localStorage.setItem(key,JSON.stringify(val))}
+function saveAllLocal(){
+  writeLocal("lunariaTodos",todos); writeLocal("lunariaGrants",grants); writeLocal("lunariaNames",names);
+  writeLocal("lunariaAgenda",agendaEvents); writeLocal("lunariaReminders",reminders); writeLocal("lunariaCosts",costs);
+  writeLocal("lunariaLab",labEntries); writeLocal("lunariaColtivazione",coltEntries); writeLocal("lunariaProducts",products); writeLocal("lunariaTools",tools); writeLocal("lunariaCosmetica",cosmeticaEntries); writeLocal("lunariaPackaging",packagingEntries);
+}
+const SECTION_KEYS={
+  todo:"todo", grants:"grants", names:"names", agenda:"agenda", reminders:"reminders", costs:"costs",
+  lab:"lab", coltivazione:"coltivazione", products:"products", tools:"tools", cosmetica:"cosmetica", packaging:"packaging", voice:"voice"
+};
+function sectionArray(section){return ({todo:todos,grants:grants,names,agenda:agendaEvents,reminders,costs,lab:labEntries,coltivazione:coltEntries,products,tools,cosmetica:cosmeticaEntries,packaging:packagingEntries,voice:voiceNotes})[section]||[]}
+function setSectionArray(section,arr){
+  if(section==="todo") todos=arr; else if(section==="grants") grants=arr; else if(section==="names") names=arr;
+  else if(section==="agenda") agendaEvents=arr; else if(section==="reminders") reminders=arr; else if(section==="costs") costs=arr;
+  else if(section==="lab") labEntries=arr; else if(section==="coltivazione") coltEntries=arr; else if(section==="products") products=arr;
+  else if(section==="tools") tools=arr; else if(section==="cosmetica") cosmeticaEntries=arr; else if(section==="packaging") packagingEntries=arr; else if(section==="voice") voiceNotes=arr;
+  saveAllLocal();
+  if(typeof renderHomeTabs==="function")renderHomeTabs();
+}
+function localLoad(){
+  todos=readLocal("lunariaTodos"); grants=readLocal("lunariaGrants"); names=readLocal("lunariaNames");
+  agendaEvents=readLocal("lunariaAgenda"); reminders=readLocal("lunariaReminders"); costs=readLocal("lunariaCosts");
+  labEntries=readLocal("lunariaLab"); coltEntries=readLocal("lunariaColtivazione"); products=readLocal("lunariaProducts"); tools=readLocal("lunariaTools");
+  voiceNotes=readLocal("lunariaVoiceNotes"); cosmeticaEntries=readLocal("lunariaCosmetica"); packagingEntries=readLocal("lunariaPackaging");
+}
+
+/* ---------- Idee: tabella esistente ---------- */
+function localIdeas(){return readLocal("lunariaIdeas",seed)}
+function saveIdeasLocal(){writeLocal("lunariaIdeas",ideas)}
+async function loadIdeas(){
+  if(!supabaseClient){ideas=localIdeas();saveIdeasLocal();render();return;}
+  try{
+    const {data,error}=await supabaseClient.from("ideas").select("*").order("id",{ascending:false});
+    if(error) throw error;
+    if((data||[]).length===0){
+      const existing=localIdeas();
+      if(existing.length){
+        const rows=existing.map(i=>({title:i.title,body:i.body||"",category:i.category||"Altro",status:i.status||"Idea",author:i.author||currentUser,date:i.date||"oggi"}));
+        const {data:inserted,error:ie}=await supabaseClient.from("ideas").insert(rows).select("*");
+        if(ie) throw ie;
+        ideas=inserted||[];
+      }else ideas=[];
+    }else ideas=data;
+    remoteReady=true;saveIdeasLocal();render();
+  }catch(e){
+    remoteReady=false;ideas=localIdeas();saveIdeasLocal();render();
+    console.error("ERRORE SUPABASE IDEE",e);
+  }
+}
+
+/* ---------- Archivio condiviso ---------- */
+async function sharedFetch(section){
+  if(!supabaseClient) return [];
+  const {data,error}=await supabaseClient.from("shared_items").select("*").eq("section",section).order("created_at",{ascending:false});
+  if(error) throw error;
+  return (data||[]).map(r=>({...r.data,_remoteId:r.id,_author:r.author,_created_at:r.created_at}));
+}
+async function sharedInsert(section,obj){
+  if(!supabaseClient || !sharedReady) return obj;
+  const newId=crypto.randomUUID();
+  const clean={...obj}; delete clean._remoteId; delete clean._author; delete clean._created_at; delete clean.id;
+  clean.id=newId;
+  const {data,error}=await supabaseClient.from("shared_items").insert({id:newId,section,data:clean,author:currentUser}).select("*").single();
+  if(error) throw error;
+  return {...data.data,_remoteId:data.id,_author:data.author,_created_at:data.created_at};
+}
+async function sharedUpdate(section,obj){
+  const id=obj._remoteId;
+  if(!id) return sharedInsert(section,obj);
+  const clean={...obj}; delete clean._remoteId; delete clean._author; delete clean._created_at;
+  const {data,error}=await supabaseClient.from("shared_items").update({data:clean,author:currentUser}).eq("id",id).select("*").single();
+  if(error) throw error;
+  return {...data.data,_remoteId:data.id,_author:data.author,_created_at:data.created_at};
+}
+async function sharedDelete(section,id){
+  if(!supabaseClient || !sharedReady) return;
+  const {error}=await supabaseClient.from("shared_items").delete().eq("id",id);
+  if(error) throw error;
+}
+async function migrateSection(section){
+  if(!supabaseClient) return [];
+  const existing=await sharedFetch(section);
+  if(existing.length){setSectionArray(section,existing);return existing;}
+  const local=sectionArray(section);
+  if(!local.length)return [];
+  const rows=local.map(x=>{const id=crypto.randomUUID();const clean={...x};delete clean._remoteId;delete clean._author;delete clean._created_at;delete clean.id;clean.id=id;return {id,section,data:clean,author:x._author||currentUser};});
+  const {data,error}=await supabaseClient.from("shared_items").insert(rows).select("*");
+  if(error) throw error;
+  const arr=(data||[]).map(r=>({...r.data,_remoteId:r.id,_author:r.author,_created_at:r.created_at}));
+  setSectionArray(section,arr);return arr;
+}
+async function loadSharedAll(){
+  if(!supabaseClient){sharedReady=false;return;}
+  let failures=[];
+  try{
+    // Verifica prima che la tabella condivisa sia raggiungibile.
+    const probe=await supabaseClient.from("shared_items").select("id").limit(1);
+    if(probe.error) throw probe.error;
+    sharedReady=true;
+    for(const section of Object.values(SECTION_KEYS)){
+      try{ await migrateSection(section); }
+      catch(e){ failures.push(section+": "+supaError(e)); console.error("ERRORE MIGRAZIONE "+section,e); }
+    }
+    renderCurrentSection();
+    if(failures.length) console.warn("Sezioni non sincronizzate:",failures);
+  }catch(e){
+    sharedReady=false;
+    console.error("ERRORE ARCHIVIO CONDIVISO",e);
+    showSupabaseError("Supabase non è pronto per l'archivio condiviso.",e);
+  }
+}
+function subscribeRealtime(){
+  if(!supabaseClient)return;
+  supabaseClient.channel("lunaria-shared-items")
+    .on("postgres_changes",{event:"*",schema:"public",table:"shared_items"},payload=>{
+      const section=payload.new?.section||payload.old?.section;
+      if(!section)return;
+      refreshSectionFromRemote(section);
+    }).subscribe();
+  supabaseClient.channel("lunaria-comments")
+    .on("postgres_changes",{event:"*",schema:"public",table:"comments"},payload=>{
+      const section=payload.new?.section||payload.old?.section;
+      const itemId=payload.new?.item_id||payload.old?.item_id;
+      if(section&&itemId) renderComments(section,itemId);
+    }).subscribe();
+  supabaseClient.channel("lunaria-ideas")
+    .on("postgres_changes",{event:"*",schema:"public",table:"ideas"},()=>loadIdeas()).subscribe();
+}
+async function refreshSectionFromRemote(section){
+  if(!sharedReady||!supabaseClient||!SECTION_KEYS[section])return;
+  try{
+    const arr=await sharedFetch(section); setSectionArray(section,arr);
+    renderCurrentSection();
+  }catch(e){console.error("Sincronizzazione",section,e);}
+}
+
+/* ---------- Commenti ---------- */
+async function getComments(section,itemId){
+  if(!supabaseClient)return [];
+  const {data,error}=await supabaseClient.from("comments").select("*").eq("section",section).eq("item_id",String(itemId)).order("created_at",{ascending:true});
+  if(error)throw error; return data||[];
+}
+async function addComment(section,itemId,input){
+  const text=input.value.trim(); if(!text)return;
+  if(!supabaseClient){alert("I commenti richiedono la connessione a Supabase.");return;}
+  const {error}=await supabaseClient.from("comments").insert({section,item_id:String(itemId),author:currentUser,text});
+  if(error){showSupabaseError("Non riesco a salvare il commento.",error);return;}
+  input.value=""; await renderComments(section,itemId);
+}
+async function renderComments(section,itemId){
+  const box=document.querySelector(`[data-comments="${section}-${itemId}"]`);
+  if(!box)return;
+  try{
+    const comments=await getComments(section,itemId);
+    box.innerHTML=`
+      <div style="margin-top:10px;padding:11px;background:#fbf7fd;border:1px solid var(--line);border-radius:14px">
+        <strong style="font-size:12px">💬 Commenti ${comments.length?`(${comments.length})`:""}</strong>
+        <div style="margin-top:8px;display:grid;gap:7px">
+          ${comments.length?comments.map(c=>`<div style="font-size:12px;padding:8px;background:#fff;border-radius:10px"><b>${esc(c.author||"")}</b> · <span style="color:var(--muted)">${new Date(c.created_at).toLocaleString("it-IT")}</span><br>${esc(c.text)}</div>`).join(""):'<div style="color:var(--muted);font-size:12px">Nessun commento ancora.</div>'}
+        </div>
+        <div style="display:flex;gap:7px;margin-top:8px">
+          <input class="search" data-comment-input="${section}-${itemId}" placeholder="Scrivi un commento..." style="padding:9px 11px;font-size:12px">
+          <button class="primary" data-action="addComment" data-section="${section}" data-id="${itemId}" style="padding:9px 12px">Invia</button>
+        </div>
+      </div>`;
+  }catch(e){box.innerHTML=`<div style="color:#9a4f6b;font-size:12px">Commenti non disponibili: ${esc(supaError(e))}</div>`;}
+}
+function commentHTML(section,id){
+  return `<button class="ghost" data-action="toggleComments" data-section="${section}" data-id="${id}" style="padding:7px 10px;font-size:12px">💬 Commenti</button><div data-comments="${section}-${id}" style="display:none"></div>`;
+}
+function toggleComments(section,id){
+  const box=document.querySelector(`[data-comments="${section}-${id}"]`);
+  if(!box)return;
+  if(box.style.display==="none"||!box.style.display){box.style.display="block";renderComments(section,id);}else box.style.display="none";
+}
+
+/* ---------- Rendering ---------- */
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function statusTone(label){
+  const l=(label||"").toLowerCase();
+  if(["pagato","presentato","completata","definitivo","disponibile","scelto","acquistato"].some(k=>l.includes(k)))return "background:#e7f3ea;color:#3f8a56";
+  if(["scaduto","scaduta","da sostituire","alta"].some(k=>l.includes(k)))return "background:#f4e5eb;color:#9a4f6b";
+  if(["da acquistare","previsto","in corso","in preparazione","media"].some(k=>l.includes(k)))return "background:#fdf1df;color:#b9832f";
+  if(["da sviluppare","test","campione","interessante"].some(k=>l.includes(k)))return "background:#f3e8fb;color:#8a4fc9";
+  return "background:#eef0f6;color:#5b6478";
+}
+function renderCurrentSection(){
+  const app=document.getElementById("appSection"); if(app&&app.style.display!=="none"){
+    const title=document.getElementById("sectionTitle")?.textContent||"";
+    const map={"📋 Da fare":"todo","💰 Costi":"costs","📑 Bandi":"grants","✨ Nomi & Branding":"names","🎙️ Note vocali":"voice","📅 Agenda":"agenda","🔔 Promemoria":"reminders","🧪 Laboratorio":"lab","🌿 Coltivazione":"coltivazione","🧴 Prodotti":"products","🌸 Cosmetica":"cosmetica","📦 Packaging":"packaging","🛠️ Attrezzi":"tools","⭐ In evidenza":"featured"};
+    const sec=map[title]; if(sec) openSection(sec,true);
+  }
+}
+function favoriteButton(section,item){const id=item._remoteId||item.id;return `<button class="favorite-btn" title="${item.favorite?"Rimuovi dai preferiti":"Aggiungi ai preferiti"}" data-action="toggleSharedFavorite" data-section="${section}" data-id="${id}">${item.favorite?"⭐":"☆"}</button>`;}
+function ideaFavoriteButton(i){return `<button class="favorite-btn" title="${i.favorite?"Rimuovi da In evidenza":"Metti in In evidenza"}" data-action="toggleIdeaFavorite" data-id="${i.id??ideas.indexOf(i)}">${i.favorite?"⭐":"☆"}</button>`;}
+async function toggleSharedFavorite(section,id){const arr=sectionArray(section),item=arr.find(x=>String(x._remoteId||x.id)===String(id));if(!item)return;item.favorite=!item.favorite;try{if(sharedReady)Object.assign(item,await sharedUpdate(section,item));}catch(e){showSupabaseError("Non riesco a sincronizzare il preferito.",e)}setSectionArray(section,arr);renderCurrentSection();}
+
+/* ---------- Immagini (Supabase Storage: bucket lunaria-images) ---------- */
+let pendingImageTarget=null;
+document.getElementById("globalImageInput")?.addEventListener("change",async e=>{
+  const file=e.target.files&&e.target.files[0];
+  e.target.value="";
+  if(file&&pendingImageTarget) await attachImage(pendingImageTarget.section,pendingImageTarget.id,file);
+  pendingImageTarget=null;
+});
+async function pickImage(section,id){
+  const cam=window.Capacitor&&window.Capacitor.Plugins&&window.Capacitor.Plugins.Camera;
+  if(cam){
+    try{
+      const photo=await cam.getPhoto({resultType:"uri",source:"PROMPT",quality:80});
+      const resp=await fetch(photo.webPath);
+      const blob=await resp.blob();
+      const ext=(photo.format||"jpeg").toLowerCase();
+      const file=new File([blob],`foto.${ext}`,{type:`image/${ext}`});
+      await attachImage(section,id,file);
+    }catch(e){
+      if(e&&e.message&&!/cancel/i.test(e.message)) showSupabaseError("Non riesco ad aprire la fotocamera/galleria.",e);
+    }
+  }else{
+    pendingImageTarget={section,id};
+    document.getElementById("globalImageInput").click();
+  }
+}
+async function uploadImageFile(file){
+  if(!supabaseClient) throw new Error("Supabase non configurato.");
+  const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+  const path=`${crypto.randomUUID()}.${ext}`;
+  const {error}=await supabaseClient.storage.from("lunaria-images").upload(path,file,{cacheControl:"3600",upsert:false});
+  if(error) throw error;
+  const {data}=supabaseClient.storage.from("lunaria-images").getPublicUrl(path);
+  return {url:data.publicUrl,path};
+}
+async function attachImage(section,id,file){
+  if(!file) return;
+  const arr=sectionArray(section),item=arr.find(x=>String(x._remoteId||x.id)===String(id));
+  if(!item) return;
+  try{
+    const {url,path}=await uploadImageFile(file);
+    item.image=url; item.imagePath=path;
+    if(sharedReady) Object.assign(item,await sharedUpdate(section,item));
+    setSectionArray(section,arr);
+    renderCurrentSection();
+  }catch(e){ showSupabaseError("Non riesco a caricare l'immagine.",e); }
+}
+async function removeImage(section,id){
+  const arr=sectionArray(section),item=arr.find(x=>String(x._remoteId||x.id)===String(id));
+  if(!item) return;
+  if(!confirm("Rimuovere questa foto dalla voce?")) return;
+  try{
+    delete item.image; delete item.imagePath;
+    if(sharedReady) Object.assign(item,await sharedUpdate(section,item));
+    setSectionArray(section,arr);
+    closeLightbox();
+    renderCurrentSection();
+  }catch(e){ showSupabaseError("Non riesco a rimuovere l'immagine.",e); }
+}
+function imageButtonHTML(section,item){
+  const id=item._remoteId||item.id;
+  return `<button type="button" class="ghost" data-action="pickImage" data-section="${section}" data-id="${id}" style="padding:7px 9px;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;border-radius:14px" title="${item.image?"Sostituisci foto":"Aggiungi foto"}">📷</button>`;
+}
+function imageThumbHTML(section,item){
+  if(!item.image) return "";
+  const id=item._remoteId||item.id;
+  return `<img src="${item.image}" data-action="viewImage" data-section="${section}" data-id="${id}" data-url="${item.image}" style="width:52px;height:52px;object-fit:cover;border-radius:12px;cursor:pointer;margin-right:4px" alt="foto">`;
+}
+function openImageLightbox(url,section,id){
+  closeLightbox();
+  const modal=document.createElement("div");
+  modal.id="imgLightbox"; modal.className="modal open"; modal.style.zIndex="90";
+  modal.innerHTML=`<div class="box" style="max-width:520px;text-align:center">
+    <img src="${url}" style="width:100%;border-radius:16px;margin-bottom:14px">
+    <div class="actions" style="justify-content:center">
+      <button class="ghost" data-action="closeLightbox">Chiudi</button>
+      <button style="background:#f4e5eb;color:#9a4f6b" data-action="removeImage" data-section="${section}" data-id="${id}">🗑️ Rimuovi foto</button>
+    </div>
+  </div>`;
+  document.body.appendChild(modal);
+}
+function closeLightbox(){const m=document.getElementById("imgLightbox"); if(m) m.remove();}
+function toggleIdeaFavorite(id){const idx=ideas.findIndex(i=>String(i.id??ideas.indexOf(i))===String(id));if(idx<0)return;ideas[idx].favorite=!ideas[idx].favorite;saveIdeasLocal();render();}
+function renderFeatured(){const list=document.getElementById("featuredList");if(!list)return;const out=[];ideas.filter(i=>i.favorite).forEach(i=>out.push(`<div class="idea"><div class="idea-top"><div class="idea-title">💡 ${esc(i.title)}</div>${ideaFavoriteButton(i)}</div><div class="meta">${esc(i.category||"Idea")} · ${esc(i.status||"Idea")}</div>${i.body?`<div class="meta">${esc(i.body)}</div>`:""}</div>`));["todo","grants","names","agenda","reminders","costs","lab","coltivazione","products","tools","cosmetica","packaging"].forEach(sec=>sectionArray(sec).filter(x=>x.favorite).forEach(x=>out.push(`<div class="idea"><div class="idea-top"><div class="idea-title">⭐ ${esc(x.name||x.title||x.description||x.phase||x.text||"Voce")}</div>${favoriteButton(sec,x)}</div><div class="meta">${esc(secLabel(sec))} · ${esc(x._author||"")}</div>${x.note?`<div class="meta">${esc(x.note)}</div>`:""}</div>`)));list.innerHTML=out.length?out.join(""): '<div class="empty">Nessun elemento in evidenza. Tocca ☆ accanto a una voce per aggiungerla.</div>';}
+function secLabel(s){return ({todo:"Da fare",grants:"Bandi",names:"Nomi & Branding",agenda:"Agenda",reminders:"Promemoria",costs:"Costi",lab:"Laboratorio",coltivazione:"Coltivazione",products:"Prodotti",tools:"Attrezzi",cosmetica:"Cosmetica",packaging:"Packaging"})[s]||s;}
+function renderTodos(){
+ const list=document.getElementById("todoList");if(!list)return;
+ const today=new Date();today.setHours(0,0,0,0);
+ const sorted=[...todos].sort((a,b)=>{
+   const ac=a.status==="Completata"?1:0,bc=b.status==="Completata"?1:0;if(ac!==bc)return ac-bc;
+   const ap=TODO_PRIORITY_ORDER[a.priority]??1,bp=TODO_PRIORITY_ORDER[b.priority]??1;if(ap!==bp)return ap-bp;
+   if(a.due&&b.due)return a.due.localeCompare(b.due);if(a.due)return -1;if(b.due)return 1;return 0;
+ });
+ list.innerHTML=sorted.length?sorted.map(t=>{
+  const id=t._remoteId||t.id,status=t.status||(t.done?"Completata":"Da fare"),priority=t.priority||"Media";
+  let dueBadge="";
+  if(t.due&&status!=="Completata"){
+    const d=new Date(t.due+"T00:00:00"),diff=Math.round((d-today)/86400000);
+    if(diff<0)dueBadge=`<span class="badge" style="background:#f4e5eb;color:#9a4f6b">⚠️ Scaduta il ${d.toLocaleDateString("it-IT")}</span>`;
+    else if(diff<=2)dueBadge=`<span class="badge" style="background:#fdf1df;color:#b9832f">⏰ Scade il ${d.toLocaleDateString("it-IT")}</span>`;
+    else dueBadge=`<span class="badge">📅 ${d.toLocaleDateString("it-IT")}</span>`;
+  }
+  return `<div style="padding:14px;margin-bottom:9px;background:#fff;border:1px solid var(--line);border-radius:14px;${status==="Completata"?"opacity:.6":""}">
+  <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+    <div style="flex:1;font-weight:700;${status==="Completata"?"text-decoration:line-through;color:var(--muted)":""}">${esc(t.text)}</div>
+    <span class="badge" style="${TODO_PRIORITY_STYLE[priority]||""}">${priority}</span>
+  </div>
+  ${t.note?`<div style="font-size:13px;color:var(--muted);margin-top:5px">${esc(t.note)}</div>`:""}
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px">
+    <select class="search" style="width:auto;padding:6px 10px" data-action="setTodoStatus" data-id="${id}">
+      <option ${status==="Da fare"?"selected":""}>Da fare</option>
+      <option ${status==="In corso"?"selected":""}>In corso</option>
+      <option ${status==="Completata"?"selected":""}>Completata</option>
+    </select>
+    <select class="search" style="width:auto;padding:6px 10px" data-action="setTodoPriority" data-id="${id}">
+      <option ${priority==="Alta"?"selected":""}>Alta</option>
+      <option ${priority==="Media"?"selected":""}>Media</option>
+      <option ${priority==="Bassa"?"selected":""}>Bassa</option>
+    </select>
+    <input type="date" class="search" style="width:140px;padding:6px 10px" value="${t.due||""}" data-action="setTodoDue" data-id="${id}">
+    ${dueBadge}
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+    <small style="color:var(--muted)">${esc(t._author||"")}</small>
+    <div style="display:flex;gap:6px;align-items:center">${imageThumbHTML("todo",t)}${imageButtonHTML("todo",t)}${favoriteButton("todo",t)}<button data-action="deleteTodo" data-id="${id}" style="background:#f4e5eb;color:#9a4f6b;padding:6px 9px">🗑️</button></div>
+  </div>
+  ${commentHTML("todo",id)}</div>`;
+ }).join(""):'<div class="empty">Ancora nessuna attività.</div>';
+}
+function renderReminders(){
+ const list=document.getElementById("reminderList");if(!list)return;
+ list.innerHTML=reminders.length?reminders.map(r=>`<div style="padding:14px;margin-bottom:9px;background:#fff;border:1px solid var(--line);border-radius:15px;${r.done?"opacity:.55":""}">
+  <div style="display:flex;gap:10px;align-items:center"><input type="checkbox" ${r.done?"checked":""} data-action="toggleReminder" data-id="${r._remoteId||r.id}" style="width:20px;height:20px"><div style="flex:1"><b>🔔 ${esc(r.title)}</b><div style="font-size:11px;color:var(--muted)">${new Date(r.date+"T00:00:00").toLocaleDateString("it-IT")}${r.time?" · "+esc(r.time):""}${r.repeat?" · 🔁 "+esc(r.repeat):""} · ${esc(r._author||"")}</div></div>${imageThumbHTML("reminders",r)}${imageButtonHTML("reminders",r)}${favoriteButton("reminders",r)}<button data-action="deleteReminder" data-id="${r._remoteId||r.id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px">🗑️</button></div>${r.note?`<div style="font-size:13px;color:var(--muted);margin-top:8px;margin-left:30px">${esc(r.note)}</div>`:""}${commentHTML("reminders",r._remoteId||r.id)}</div>`).join(""):'<div class="empty">Ancora nessun promemoria.</div>';
+}
+function renderAgenda(){
+ const list=document.getElementById("agendaList");if(!list)return;
+ list.innerHTML=agendaEvents.length?agendaEvents.map(e=>`<div style="padding:15px;margin-bottom:9px;background:#fff;border:1px solid var(--line);border-radius:15px">
+  <div style="display:flex;justify-content:space-between;gap:10px"><strong>📅 ${esc(e.title)}</strong><span class="badge">${new Date(e.date+"T00:00:00").toLocaleDateString("it-IT")}${e.time?" · "+esc(e.time):""}</span></div>
+  ${e.location?`<div style="font-size:12px;color:var(--muted);margin-top:6px">📍 ${esc(e.location)}</div>`:""}
+  ${e.note?`<div style="color:var(--muted);font-size:12px;margin-top:8px">${esc(e.note)}</div>`:""}<div style="margin-top:8px;color:var(--muted);font-size:11px">👤 ${esc(e._author||"")}</div>
+  ${imageThumbHTML("agenda",e)}${imageButtonHTML("agenda",e)}${favoriteButton("agenda",e)}<button data-action="deleteAgenda" data-id="${e._remoteId||e.id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px 10px;margin-top:10px">🗑️ Elimina</button>${commentHTML("agenda",e._remoteId||e.id)}</div>`).join(""):'<div class="empty">Ancora nessun evento in agenda.</div>';
+}
+function renderCosts(){
+ const list=document.getElementById("costList"),total=document.getElementById("costTotal");if(!list)return;
+ const sum=costs.reduce((a,c)=>a+Number(c.amount||0)*Number(c.quantity||1),0);if(total)total.textContent="Totale: € "+sum.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
+ list.innerHTML=costs.length?costs.map(c=>{
+  const id=c._remoteId||c.id,st=c.status||"Preventivo";
+  return `<div style="padding:13px;margin-bottom:8px;background:#fff;border:1px solid var(--line);border-radius:14px">
+   <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+    <div style="flex:1"><div style="font-weight:700">💰 ${esc(c.description)}</div><div style="font-size:12px;color:var(--muted);margin-top:3px">${c.category?esc(c.category):""}${c.supplier?" · 🏭 "+esc(c.supplier):""}${c.date?" · "+new Date(c.date+"T00:00:00").toLocaleDateString("it-IT"):""}</div></div>
+    <span class="badge" style="${COST_STATUS_STYLE[st]||""}">${st}</span>
+   </div>
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+    <strong>€ ${Number(c.amount).toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})}${c.quantity&&c.quantity>1?` × ${c.quantity}`:""}</strong>
+    <small style="color:var(--muted)">${esc(c._author||"")}</small>
+   </div>
+   ${c.note?`<div style="font-size:13px;color:var(--muted);margin-top:6px">${esc(c.note)}</div>`:""}
+   <div style="display:flex;justify-content:flex-end;gap:6px;margin-top:8px">${imageThumbHTML("costs",c)}${imageButtonHTML("costs",c)}${favoriteButton("costs",c)}<button data-action="deleteCost" data-id="${id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px">🗑️</button></div>
+   ${commentHTML("costs",id)}</div>`;
+ }).join(""):'<div class="empty">Ancora nessun costo.</div>';
+}
+function renderNames(){const list=document.getElementById("nameList");if(!list)return;list.innerHTML=names.length?names.map(n=>`<div class="idea"><div class="idea-top"><div><div class="idea-title">✨ ${esc(n.name)}</div><div class="meta">${esc(n.type||"")} · ${esc(n._author||"")}</div>${n.note?`<div style="font-size:13px;color:var(--muted);margin-top:6px">${esc(n.note)}</div>`:""}<div class="status-choice"><button class="${n.nameStatus==="preferito"?"active":"ghost"}" data-action="setNameStatus" data-id="${n._remoteId||n.id}" data-status="preferito">⭐ Preferito</button><button class="${n.nameStatus==="scelto"?"active":"ghost"}" data-action="setNameStatus" data-id="${n._remoteId||n.id}" data-status="scelto">🏆 Scelta</button><button class="${n.nameStatus==="riserva"?"active":"ghost"}" data-action="setNameStatus" data-id="${n._remoteId||n.id}" data-status="riserva">↩️ Riserva</button></div></div><div>${imageThumbHTML("names",n)}${imageButtonHTML("names",n)}${favoriteButton("names",n)}<button data-action="deleteName" data-id="${n._remoteId||n.id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px">🗑️</button></div></div>${commentHTML("names",n._remoteId||n.id)}</div>`).join(""): '<div class="empty">Ancora nessun nome salvato.</div>';}
+async function setNameStatus(id,status){const item=names.find(x=>String(x._remoteId||x.id)===String(id));if(!item)return;if(status==="scelto")names.forEach(x=>{if(x.type===item.type)x.nameStatus="riserva";});item.nameStatus=status;try{if(sharedReady){for(const x of names.filter(x=>x._remoteId))Object.assign(x,await sharedUpdate("names",x));}}catch(e){showSupabaseError("Non riesco a sincronizzare lo stato del nome.",e)}setSectionArray("names",names);renderNames();}
+
+function renderGrants(){
+ const list=document.getElementById("grantList");if(!list)return;
+ const today=new Date();today.setHours(0,0,0,0);
+ list.innerHTML=grants.length?grants.map(g=>{
+  const id=g._remoteId||g.id,status=g.status||"Da valutare";
+  let closeBadge="";
+  if(g.closeDate&&status!=="Presentato"&&status!=="Scaduto"){
+    const d=new Date(g.closeDate+"T00:00:00"),diff=Math.round((d-today)/86400000);
+    if(diff<0)closeBadge=`<span class="badge" style="background:#f4e5eb;color:#9a4f6b">⚠️ Scaduto il ${d.toLocaleDateString("it-IT")}</span>`;
+    else if(diff<=7)closeBadge=`<span class="badge" style="background:#fdf1df;color:#b9832f">⏰ Chiude il ${d.toLocaleDateString("it-IT")}</span>`;
+  }
+  return `<div style="padding:15px;margin-bottom:9px;background:#fff;border:1px solid var(--line);border-radius:15px">
+   <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+    <div style="flex:1"><b>📑 ${esc(g.title)}</b><div style="font-size:12px;color:var(--muted);margin-top:6px">${g.entity?"🏛️ "+esc(g.entity):""}${g.openDate?" · Apertura: "+new Date(g.openDate+"T00:00:00").toLocaleDateString("it-IT"):""}${g.closeDate?" · Chiusura: "+new Date(g.closeDate+"T00:00:00").toLocaleDateString("it-IT"):""}</div></div>
+    <span class="badge" style="${GRANT_STATUS_STYLE[status]||""}">${status}</span>
+   </div>
+   ${closeBadge?`<div style="margin-top:8px">${closeBadge}</div>`:""}
+   ${g.amount?`<div style="margin-top:8px;font-weight:700">€ ${Number(g.amount).toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})}</div>`:""}
+   ${g.requirements?`<div style="font-size:13px;color:var(--muted);margin-top:8px"><strong>Requisiti:</strong> ${esc(g.requirements)}</div>`:""}
+   ${g.description?`<div style="font-size:13px;color:var(--muted);margin-top:8px">${esc(g.description)}</div>`:""}
+   ${g.link?`<div style="margin-top:8px"><a href="${esc(g.link)}" target="_blank" rel="noopener" style="color:#8a4fc9;font-size:13px">🔗 Apri link</a></div>`:""}
+   <div style="font-size:11px;color:var(--muted);margin-top:8px">👤 ${esc(g._author||"")}</div>
+   <div style="display:flex;justify-content:flex-end;gap:6px;margin-top:8px">${imageThumbHTML("grants",g)}${imageButtonHTML("grants",g)}${favoriteButton("grants",g)}<button data-action="deleteGrant" data-id="${id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px">🗑️</button></div>
+   ${commentHTML("grants",id)}</div>`;
+ }).join(""):'<div class="empty">Ancora nessun bando.</div>';
+}
+function renderLab(){
+ const list=document.getElementById("labList");if(!list)return;
+ list.innerHTML=labEntries.length?labEntries.map(l=>{
+  const id=l._remoteId||l.id,cat=l.category||"Fase di lavorazione",icon=LAB_CATEGORY_ICON[cat]||"🧪";
+  const meta=[];
+  if(l.quantity!=null&&l.quantity!=="")meta.push(`Quantità: ${l.quantity}`);
+  if(l.cost!=null&&l.cost!=="")meta.push(`€ ${Number(l.cost).toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})}`);
+  if(l.supplier)meta.push(`🏭 ${esc(l.supplier)}`);
+  const badges=[];
+  if(l.purchased)badges.push(`<span class="badge" style="${statusTone(l.purchased)}">${l.purchased==="Acquistato"?"✅ ":"🛒 "}${esc(l.purchased)}</span>`);
+  if(l.priority)badges.push(`<span class="badge" style="${statusTone(l.priority)}">${esc(l.priority)}</span>`);
+  return `<div style="padding:15px;margin-bottom:9px;background:#fff;border:1px solid var(--line);border-radius:15px">
+   <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+    <div style="flex:1"><b>${icon} ${esc(l.name||cat)}</b><div style="font-size:11px;color:var(--muted);margin-top:3px">${esc(cat)}</div></div>
+    ${l.date?`<span class="badge">${new Date(l.date+"T00:00:00").toLocaleDateString("it-IT")}</span>`:""}
+   </div>
+   ${badges.length?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${badges.join("")}</div>`:""}
+   ${meta.length?`<div style="font-size:12px;color:var(--muted);margin-top:8px">${meta.join(" · ")}</div>`:""}
+   ${l.note?`<div style="font-size:13px;color:var(--muted);margin-top:8px">${esc(l.note)}</div>`:""}
+   <div style="font-size:11px;color:var(--muted);margin-top:5px">👤 ${esc(l._author||"")}</div>
+   ${imageThumbHTML("lab",l)}${imageButtonHTML("lab",l)}${favoriteButton("lab",l)}<button data-action="deleteLab" data-id="${id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px;margin-top:10px">🗑️ Elimina</button>
+   ${commentHTML("lab",id)}</div>`;
+ }).join(""):'<div class="empty">Ancora nessuna voce in Laboratorio.</div>';
+}
+function renderColt(){
+ const list=document.getElementById("coltList");if(!list)return;
+ const icon={"Potatura":"✂️","Raccolta":"🌾","Semina / Trapianto":"🌱","Irrigazione":"💧","Concimazione":"🌿","Trattamento fitosanitario":"🛡️","Altra lavorazione":"🧑‍🌾"};
+ list.innerHTML=coltEntries.length?coltEntries.map(c=>{
+  const id=c._remoteId||c.id,meta=[];
+  if(c.area)meta.push(`📐 ${esc(c.area)}`);
+  if(c.quantity!=null&&c.quantity!=="")meta.push(`${c.quantity} piante`);
+  if(c.cost!=null&&c.cost!=="")meta.push(`€ ${Number(c.cost).toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})}`);
+  return `<div style="padding:15px;margin-bottom:9px;background:#fff;border:1px solid var(--line);border-radius:15px">
+   <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+    <div style="flex:1"><b>🌿 ${esc(c.crop||"Coltivazione")}${c.variety?" · "+esc(c.variety):""}</b><div style="font-size:12px;color:var(--muted);margin-top:3px">${icon[c.phase]||"🌿"} ${esc(c.phase||"")}</div></div>
+    ${c.date?`<span class="badge">${new Date(c.date+"T00:00:00").toLocaleDateString("it-IT")}</span>`:""}
+   </div>
+   ${meta.length?`<div style="font-size:12px;color:var(--muted);margin-top:8px">${meta.join(" · ")}</div>`:""}
+   ${c.note?`<div style="font-size:13px;color:var(--muted);margin-top:8px">${esc(c.note)}</div>`:""}
+   <div style="font-size:11px;color:var(--muted);margin-top:5px">👤 ${esc(c._author||"")}</div>
+   ${imageThumbHTML("coltivazione",c)}${imageButtonHTML("coltivazione",c)}${favoriteButton("coltivazione",c)}<button data-action="deleteColt" data-id="${id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px;margin-top:10px">🗑️ Elimina</button>
+   ${commentHTML("coltivazione",id)}</div>`;
+ }).join(""):'<div class="empty">Ancora nessuna lavorazione registrata.</div>';
+}
+function renderCosmetica(){const list=document.getElementById("cosmeticaList");if(!list)return;list.innerHTML=cosmeticaEntries.length?cosmeticaEntries.map(c=>`<div class="idea"><div class="idea-top"><div class="idea-title">🌸 ${esc(c.name)}</div><div>${imageThumbHTML("cosmetica",c)}${imageButtonHTML("cosmetica",c)}${favoriteButton("cosmetica",c)}<button data-action="deleteCosmetica" data-id="${c._remoteId||c.id}" style="background:#f4e5eb;color:#9a4f6b;padding:7px">🗑️</button></div></div><div class="meta"><span class="badge" style="${statusTone(c.status)}">${esc(c.status||"Idea")}</span> · ${esc(c._author||"")}</div>${c.note?`<div class="meta">${esc(c.note)}</div>`:""}</div>`).join(""): '<div class="empty">Ancora nessuna voce di cosmetica.</div>';}
+function renderPackaging(){const list=document.getElementById("packagingList");if(!list)return;list.innerHTML=packagingEntries.length?packagingEntries.map(p=>`<div class="idea"><div class="idea-top"><div class="idea-title">📦 ${esc(p.name)}</div><div>${imageThumbHTML("packaging",p)}${imageButtonHTML("packaging",p)}${favoriteButton("packaging",p)}<button data-action="deletePackaging" data-id="${p._remoteId||p.id}" style="background:#f4e5eb;color:#9a4f6b;padding:7px">🗑️</button></div></div><div class="meta"><span class="badge" style="${statusTone(p.status)}">${esc(p.status||"Idea")}</span> · ${esc(p._author||"")}</div>${p.note?`<div class="meta">${esc(p.note)}</div>`:""}</div>`).join(""): '<div class="empty">Ancora nessun packaging salvato.</div>';}
+function renderProducts(){
+ const list=document.getElementById("productList");if(!list)return;
+ list.innerHTML=products.length?products.map(p=>{
+  const id=p._remoteId||p.id,status=p.status||"Idea";
+  return `<div style="padding:15px;margin-bottom:9px;background:#fff;border:1px solid var(--line);border-radius:15px">
+   <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+    <span class="badge">${esc(p.type)}</span>
+    <span class="badge" style="${PRODUCT_STATUS_STYLE[status]||""}">${status}</span>
+   </div>
+   ${p.name?`<div style="font-weight:750;margin-top:8px">${esc(p.name)}</div>`:""}
+   <div style="font-size:12px;color:var(--muted);margin-top:5px">${p.format?"📏 "+esc(p.format):""}${p.packaging?" · 📦 "+esc(p.packaging):""}</div>
+   ${p.ingredients?`<div style="font-size:13px;color:var(--muted);margin-top:8px"><strong>Ingredienti:</strong> ${esc(p.ingredients)}</div>`:""}
+   ${p.note?`<div style="font-size:13px;color:var(--muted);margin-top:8px">${esc(p.note)}</div>`:""}
+   <div style="font-size:11px;color:var(--muted);margin-top:5px">👤 ${esc(p._author||"")}</div>
+   ${imageThumbHTML("products",p)}${imageButtonHTML("products",p)}${favoriteButton("products",p)}<button data-action="deleteProduct" data-id="${id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px;margin-top:10px">🗑️ Elimina</button>
+   ${commentHTML("products",id)}</div>`;
+ }).join(""):'<div class="empty">Ancora nessun prodotto in catalogo.</div>';
+}
+function renderTools(){
+ const list=document.getElementById("toolList"),total=document.getElementById("toolTotal");if(!list)return;
+ const sum=tools.reduce((a,t)=>a+Number(t.cost||0)*Number(t.quantity||1),0);if(total)total.textContent="Totale: € "+sum.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
+ list.innerHTML=tools.length?tools.map(t=>{
+  const id=t._remoteId||t.id,status=t.status||"Disponibile",meta=[];
+  if(t.supplier)meta.push(`🏭 ${esc(t.supplier)}`);
+  if(t.priority)meta.push(`Priorità: ${t.priority}`);
+  return `<div style="padding:13px;margin-bottom:8px;background:#fff;border:1px solid var(--line);border-radius:14px">
+   <div style="display:flex;gap:12px;align-items:flex-start">
+    <span>🛠️</span>
+    <div style="flex:1"><b>${esc(t.name)}</b>${t.quantity&&t.quantity>1?` × ${t.quantity}`:""}${t.note?`<div style="font-size:12px;color:var(--muted);margin-top:3px">${esc(t.note)}</div>`:""}</div>
+    <span class="badge" style="${TOOL_STATUS_STYLE[status]||""}">${status}</span>
+   </div>
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+    <strong>€ ${Number(t.cost).toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})}</strong>
+    <small style="color:var(--muted)">${esc(t._author||"")}</small>
+   </div>
+   ${meta.length?`<div style="font-size:12px;color:var(--muted);margin-top:6px">${meta.join(" · ")}</div>`:""}
+   <div style="display:flex;justify-content:flex-end;gap:6px;margin-top:8px">${imageThumbHTML("tools",t)}${imageButtonHTML("tools",t)}${favoriteButton("tools",t)}<button data-action="deleteTool" data-id="${id}" style="background:#f4e5eb;color:#9a4f6b;padding:8px">🗑️</button></div>
+   ${commentHTML("tools",id)}</div>`;
+ }).join(""):'<div class="empty">Ancora nessun attrezzo registrato.</div>';
+}
+function renderVoiceNotes(){
+ const list=document.getElementById("voiceList");if(!list)return;
+ list.innerHTML=voiceNotes.length?voiceNotes.map(v=>`<div style="padding:14px;margin-bottom:9px;background:#fff;border:1px solid var(--line);border-radius:15px"><div style="font-size:12px;color:var(--muted);margin-bottom:8px">🎙️ ${esc(v.date)} · ${esc(v._author||"")}</div><audio controls src="${esc(v.url||v.dataUrl||"")}" style="width:100%"></audio>${commentHTML("voice",v._remoteId||v.id)}</div>`).join(""):'<div class="empty">Ancora nessuna nota vocale.</div>';
+}
+
+/* ---------- CRUD condiviso ---------- */
+async function addShared(section,obj,after){
+  obj.id=obj.id||crypto.randomUUID();obj._author=currentUser;
+  if(sharedReady){try{obj=await sharedInsert(section,obj)}catch(e){showSupabaseError("Non riesco a sincronizzare. Salvo localmente per sicurezza.",e)}}
+  const arr=sectionArray(section);arr.unshift(obj);setSectionArray(section,arr);if(after)after();renderCurrentSection();
+}
+async function deleteShared(section,id,localArrName,renderFn){
+  const arr=sectionArray(section);const item=arr.find(x=>String(x._remoteId||x.id)===String(id));if(!item)return;
+  if(!confirm("Eliminare questa voce?"))return;
+  try{if(sharedReady&&item._remoteId)await sharedDelete(section,item._remoteId);else if(remoteReady&&supabaseClient){}}
+  catch(e){showSupabaseError("Non riesco a eliminare la voce.",e);return;}
+  setSectionArray(section,arr.filter(x=>String(x._remoteId||x.id)!==String(id)));if(renderFn)renderFn();
+}
+
+/* ---------- Notifiche locali ---------- */
+const LUNARIA_NOTIFY_TAG='lunaria-local-v3';
+let notificationReady=false;
+let notificationMode='none';
+function localNotificationPlugin(){try{return window.Capacitor?.Plugins?.LocalNotifications||null}catch(e){return null}}
+function notificationHash(x){let h=2166136261;for(let i=0;i<x.length;i++){h^=x.charCodeAt(i);h=Math.imul(h,16777619)}return Math.abs(h|0)||1}
+function notifId(key,offset=0){return notificationHash(LUNARIA_NOTIFY_TAG+'|'+key+'|'+offset)}
+function dt(date,time){if(!date)return null;const d=new Date(`${date}T${time||'09:00'}:00`);return Number.isNaN(d.getTime())?null:d}
+function notificationSourceItems(){
+ const a=[];
+ (reminders||[]).filter(x=>!x.done&&x.date).forEach(x=>{const d=dt(x.date,x.time);if(d)a.push({key:'r-'+(x._remoteId||x.id),title:'🔔 Tenuta Lunaria',body:x.title,date:d,repeat:x.repeat||''})});
+ (agendaEvents||[]).filter(x=>x.date).forEach(x=>{const d=dt(x.date,x.time);if(d)a.push({key:'a-'+(x._remoteId||x.id),title:'📅 Tenuta Lunaria',body:x.title,date:d})});
+ (todos||[]).filter(x=>x.status!=='Completata'&&x.due).forEach(x=>{const d=dt(x.due,'09:00');if(d)a.push({key:'t-'+(x._remoteId||x.id),title:'📋 Scadenza attività',body:x.text,date:d})});
+ (grants||[]).filter(x=>x.closeDate&&x.status!=='Presentato'&&x.status!=='Scaduto').forEach(x=>{const d=dt(x.closeDate,'09:00');if(d)a.push({key:'g-'+(x._remoteId||x.id),title:'📑 Scadenza bando',body:x.title,date:d})});
+ return a;
+}
+function expandRepeat(item){
+ const out=[],now=Date.now(),d=new Date(item.date);let n=0;
+ if(!item.repeat){if(d.getTime()>now)out.push(d);return out}
+ while(n<365&&d.getTime()<now){advanceRepeat(d,item.repeat);n++}
+ for(let i=0;i<60&&d.getFullYear()<new Date().getFullYear()+2;i++){out.push(new Date(d));advanceRepeat(d,item.repeat)}
+ return out;
+}
+function advanceRepeat(d,r){if(r==='Giornaliera')d.setDate(d.getDate()+1);else if(r==='Settimanale')d.setDate(d.getDate()+7);else if(r==='Mensile')d.setMonth(d.getMonth()+1);else if(r==='Annuale')d.setFullYear(d.getFullYear()+1);else d.setFullYear(d.getFullYear()+1)}
+async function refreshNotificationStatus(){
+ const p=localNotificationPlugin();
+ if(p){try{const q=await p.checkPermissions();notificationReady=q.display==='granted';notificationMode='native'}catch(e){notificationReady=false;notificationMode='native'} }
+ else if('Notification' in window){notificationReady=Notification.permission==='granted';notificationMode='browser'}
+ else {notificationReady=false;notificationMode='unsupported'}
+ const b=document.getElementById('notificationBtn'),st=document.getElementById('notificationStatus');
+ if(b){b.textContent=notificationReady?'🔔':'🔕';b.title=notificationReady?'Notifiche attive':'Attiva notifiche'}
+ if(st)st.textContent=notificationReady?'🔔 Notifiche attive.':'Tocca 🔕 per concedere il permesso e fare una prova.';
+}
+async function enableNotifications(){
+ const p=localNotificationPlugin();
+ try{
+  if(p){
+   const perm=await p.requestPermissions();
+   if(perm.display!=='granted'){await refreshNotificationStatus();alert('Permesso notifiche non concesso. Controlla Impostazioni Android → App → Tenuta Lunaria → Notifiche.');return}
+   notificationReady=true;notificationMode='native';
+   await p.schedule({notifications:[{id:notifId('test'),title:'🌙 Tenuta Lunaria',body:'Le notifiche funzionano! Questa era una prova.',schedule:{at:new Date(Date.now()+10000),allowWhileIdle:true}}]});
+   alert('Perfetto. Ho programmato una prova tra 10 secondi. Puoi anche chiudere l’app.');
+   await scheduleAllNotifications();return;
+  }
+  if('Notification' in window){const perm=await Notification.requestPermission();if(perm==='granted'){notificationReady=true;notificationMode='browser';new Notification('🌙 Tenuta Lunaria',{body:'Le notifiche funzionano! Questa era una prova.'});await scheduleAllNotifications();return}}
+  alert('Questa versione dell’app non espone un sistema di notifiche nativo. Per notifiche Android anche con app chiusa serve che l’APK sia stato compilato includendo @capacitor/local-notifications.');
+ }catch(e){console.error(e);alert('Errore nell’attivazione delle notifiche: '+(e?.message||e))}
+ await refreshNotificationStatus();
+}
+async function scheduleAllNotifications(){
+ const p=localNotificationPlugin();if(!notificationReady)return;
+ try{
+  if(p){
+   try{const pending=await p.getPending();if(pending.notifications?.length)await p.cancel({notifications:pending.notifications.map(x=>({id:x.id}))})}catch(e){}
+   const list=[];
+   notificationSourceItems().forEach(item=>expandRepeat(item).slice(0,60).forEach((d,i)=>{if(d.getTime()>Date.now()+5000)list.push({id:notifId(item.key,i),title:item.title,body:item.body,schedule:{at:d,allowWhileIdle:true}})}));
+   if(list.length)await p.schedule({notifications:list});
+   return;
+  }
+  // Browser fallback: funziona solo finché la pagina/WebView resta attiva.
+  if('Notification' in window&&Notification.permission==='granted'){
+   window.__lunariaTimers?.forEach(clearTimeout);window.__lunariaTimers=[];
+   notificationSourceItems().forEach(item=>expandRepeat(item).slice(0,20).forEach(d=>{const ms=d-Date.now();if(ms>0&&ms<2147483647)window.__lunariaTimers.push(setTimeout(()=>new Notification(item.title,{body:item.body,tag:item.key}),ms))}));
+  }
+ }catch(e){console.error('Programmazione notifiche:',e)}
+}
+
+/* ---------- Input functions ---------- */
+async function addTodo(){
+  const input=document.getElementById("todoInput"),text=input?.value.trim();if(!text)return;
+  const priority=document.getElementById("todoPriority")?.value||"Media";
+  const due=document.getElementById("todoDue")?.value||"";
+  const note=document.getElementById("todoNote")?.value.trim()||"";
+  input.value="";const dueEl=document.getElementById("todoDue");if(dueEl)dueEl.value="";const noteEl=document.getElementById("todoNote");if(noteEl)noteEl.value="";
+  await addShared("todo",{text,status:"Da fare",priority,due,note,done:false},renderTodos);
+}
+async function updateTodoField(id,field,value){
+  const item=todos.find(x=>String(x._remoteId||x.id)===String(id));if(!item)return;
+  item[field]=value;item._author=currentUser;if(field==="status")item.done=(value==="Completata");
+  try{if(sharedReady)Object.assign(item,await sharedUpdate("todo",item));}catch(e){showSupabaseError("Non riesco a sincronizzare l'attività.",e)}
+  setSectionArray("todo",todos);renderTodos();
+}
+const TODO_PRIORITY_ORDER={Alta:0,Media:1,Bassa:2};
+const TODO_PRIORITY_STYLE={Alta:"background:#f4e5eb;color:#9a4f6b",Media:"background:#fdf1df;color:#b9832f",Bassa:"background:#e7f3ea;color:#3f8a56"};
+async function toggleTodo(id){const item=todos.find(x=>String(x._remoteId||x.id)===String(id));if(!item)return;item.done=!item.done;item._author=currentUser;try{if(sharedReady)Object.assign(item,await sharedUpdate("todo",item));}catch(e){showSupabaseError("Non riesco a sincronizzare l'attività.",e)}setSectionArray("todo",todos);renderTodos();scheduleAllNotifications()}
+async function deleteTodo(id){await deleteShared("todo",id,"todos",renderTodos)}
+async function addReminder(){const title=document.getElementById("reminderTitle")?.value.trim(),date=document.getElementById("reminderDate")?.value,time=document.getElementById("reminderTime")?.value,repeat=document.getElementById("reminderRepeat")?.value||"",note=document.getElementById("reminderNote")?.value.trim()||"";if(!title)return alert("Scrivi cosa devo ricordarti.");if(!date)return alert("Inserisci una data.");["reminderTitle","reminderDate","reminderTime","reminderNote"].forEach(id=>{const x=document.getElementById(id);if(x)x.value=""});const rep=document.getElementById("reminderRepeat");if(rep)rep.value="";await addShared("reminders",{title,date,time,repeat,note,done:false},renderReminders);scheduleAllNotifications()}
+async function toggleReminder(id){const r=reminders.find(x=>String(x._remoteId||x.id)===String(id));if(!r)return;r.done=!r.done;try{if(sharedReady)Object.assign(r,await sharedUpdate("reminders",r));}catch(e){showSupabaseError("Non riesco a sincronizzare il promemoria.",e)}setSectionArray("reminders",reminders);renderReminders();scheduleAllNotifications()}
+async function deleteReminder(id){await deleteShared("reminders",id,"reminders",renderReminders)}
+async function addAgendaEvent(){const title=document.getElementById("agendaTitle")?.value.trim(),date=document.getElementById("agendaDate")?.value,time=document.getElementById("agendaTime")?.value,location=document.getElementById("agendaLocation")?.value.trim()||"",note=document.getElementById("agendaNote")?.value.trim();if(!title)return alert("Inserisci il nome dell'evento.");if(!date)return alert("Inserisci una data.");["agendaTitle","agendaDate","agendaTime","agendaLocation","agendaNote"].forEach(id=>{const x=document.getElementById(id);if(x)x.value=""});await addShared("agenda",{title,date,time,location,note},renderAgenda);scheduleAllNotifications()}
+async function deleteAgenda(id){await deleteShared("agenda",id,"agendaEvents",renderAgenda)}
+async function addCost(){
+  const description=document.getElementById("costDescription")?.value.trim();
+  const amount=Number(document.getElementById("costAmount")?.value);
+  if(!description)return alert("Scrivi cosa rappresenta questo costo.");
+  if(!amount||amount<0)return alert("Inserisci un importo valido.");
+  const category=document.getElementById("costCategory")?.value||"Altro";
+  const quantity=Number(document.getElementById("costQty")?.value)||1;
+  const supplier=document.getElementById("costSupplier")?.value.trim()||"";
+  const date=document.getElementById("costDate")?.value||"";
+  const status=document.getElementById("costStatus")?.value||"Preventivo";
+  const note=document.getElementById("costNote")?.value.trim()||"";
+  ["costDescription","costAmount","costSupplier","costDate","costNote"].forEach(id=>{const x=document.getElementById(id);if(x)x.value=""});
+  const qtyEl=document.getElementById("costQty");if(qtyEl)qtyEl.value="1";
+  await addShared("costs",{description,category,amount,quantity,supplier,date,status,note},renderCosts);
+}
+const COST_STATUS_STYLE={Preventivo:"background:#eef0f6;color:#5b6478",Previsto:"background:#fdf1df;color:#b9832f",Pagato:"background:#e7f3ea;color:#3f8a56"};
+async function deleteCost(id){await deleteShared("costs",id,"costs",renderCosts)}
+async function addName(){
+  const name=document.getElementById("nameIdea")?.value.trim();
+  if(!name)return alert("Scrivi almeno un nome.");
+  const type=document.getElementById("nameType")?.value;
+  const note=document.getElementById("nameNote")?.value.trim()||"";
+  document.getElementById("nameIdea").value="";const noteEl=document.getElementById("nameNote");if(noteEl)noteEl.value="";
+  await addShared("names",{name,type,note},renderNames);
+}
+async function deleteName(id){await deleteShared("names",id,"names",renderNames)}
+async function addGrant(){
+  const title=document.getElementById("grantTitle")?.value.trim();
+  if(!title)return alert("Inserisci almeno il nome del bando.");
+  const entity=document.getElementById("grantEntity")?.value.trim();
+  const openDate=document.getElementById("grantOpenDate")?.value;
+  const closeDate=document.getElementById("grantCloseDate")?.value;
+  const amountRaw=document.getElementById("grantAmount")?.value;
+  const amount=amountRaw?Number(amountRaw):null;
+  const status=document.getElementById("grantStatus")?.value||"Da valutare";
+  const link=document.getElementById("grantLink")?.value.trim()||"";
+  const requirements=document.getElementById("grantRequirements")?.value.trim()||"";
+  const description=document.getElementById("grantDescription")?.value.trim();
+  ["grantTitle","grantEntity","grantOpenDate","grantCloseDate","grantAmount","grantLink","grantRequirements","grantDescription"].forEach(id=>{const x=document.getElementById(id);if(x)x.value=""});
+  await addShared("grants",{title,entity,openDate,closeDate,amount,status,link,requirements,description},renderGrants);
+}
+const GRANT_STATUS_STYLE={"Da valutare":"background:#eef0f6;color:#5b6478","Interessante":"background:#f3e8fb;color:#8a4fc9","In preparazione":"background:#fdf1df;color:#b9832f","Presentato":"background:#e7f3ea;color:#3f8a56","Scaduto":"background:#f4e5eb;color:#9a4f6b"};
+async function deleteGrant(id){await deleteShared("grants",id,"grants",renderGrants)}
+async function addLab(){
+  const category=document.getElementById("labCategory")?.value||"Fase di lavorazione";
+  const name=document.getElementById("labName")?.value.trim();
+  const note=document.getElementById("labNote")?.value.trim();
+  if(!name&&!note)return alert("Scrivi almeno un nome o una nota.");
+  const quantity=document.getElementById("labQty")?.value?Number(document.getElementById("labQty").value):null;
+  const cost=document.getElementById("labCost")?.value?Number(document.getElementById("labCost").value):null;
+  const supplier=document.getElementById("labSupplier")?.value.trim()||"";
+  const purchased=document.getElementById("labPurchased")?.value||"";
+  const priority=document.getElementById("labPriority")?.value||"";
+  const date=document.getElementById("labDate")?.value||"";
+  ["labName","labQty","labCost","labSupplier","labDate","labNote"].forEach(id=>{const x=document.getElementById(id);if(x)x.value=""});
+  const pu=document.getElementById("labPurchased");if(pu)pu.value="";const pr=document.getElementById("labPriority");if(pr)pr.value="";
+  await addShared("lab",{category,name,quantity,cost,supplier,purchased,priority,date,note},renderLab);
+}
+const LAB_CATEGORY_ICON={"Fase di lavorazione":"🧪","Attrezzatura":"🛠️","Materia prima":"🌿","Procedura":"📋","Fornitore":"🏭","Idea":"💡"};
+async function deleteLab(id){await deleteShared("lab",id,"labEntries",renderLab)}
+async function addColt(){
+  const crop=document.getElementById("coltCrop")?.value.trim()||"";
+  const variety=document.getElementById("coltVariety")?.value.trim()||"";
+  const phase=document.getElementById("coltPhase")?.value;
+  const date=document.getElementById("coltDate")?.value;
+  const area=document.getElementById("coltArea")?.value.trim()||"";
+  const quantity=document.getElementById("coltQty")?.value?Number(document.getElementById("coltQty").value):null;
+  const cost=document.getElementById("coltCost")?.value?Number(document.getElementById("coltCost").value):null;
+  const note=document.getElementById("coltNote")?.value.trim();
+  if(!note&&!crop)return alert("Scrivi almeno la coltura oppure una nota su questa lavorazione.");
+  ["coltCrop","coltVariety","coltArea","coltQty","coltCost","coltDate","coltNote"].forEach(id=>{const x=document.getElementById(id);if(x)x.value=""});
+  await addShared("coltivazione",{crop,variety,phase,date,area,quantity,cost,note},renderColt);
+}
+async function deleteColt(id){await deleteShared("coltivazione",id,"coltEntries",renderColt)}
+async function addProduct(){
+  const type=document.getElementById("productType")?.value;
+  const name=document.getElementById("productName")?.value.trim();
+  const format=document.getElementById("productFormat")?.value.trim()||"";
+  const status=document.getElementById("productStatus")?.value||"Idea";
+  const packaging=document.getElementById("productPackaging")?.value.trim()||"";
+  const ingredients=document.getElementById("productIngredients")?.value.trim()||"";
+  const note=document.getElementById("productNote")?.value.trim();
+  if(!name&&!note)return alert("Scrivi almeno un nome o una nota per questo prodotto.");
+  ["productName","productFormat","productPackaging","productIngredients","productNote"].forEach(id=>{const x=document.getElementById(id);if(x)x.value=""});
+  await addShared("products",{type,name,format,status,packaging,ingredients,note},renderProducts);
+}
+const PRODUCT_STATUS_STYLE={"Idea":"background:#eef0f6;color:#5b6478","Da sviluppare":"background:#f3e8fb;color:#8a4fc9","Test":"background:#fdf1df;color:#b9832f","Definitivo":"background:#e7f3ea;color:#3f8a56"};
+async function deleteProduct(id){await deleteShared("products",id,"products",renderProducts)}
+async function addTool(){
+  const name=document.getElementById("toolName")?.value.trim();
+  if(!name)return alert("Scrivi il nome dell'attrezzo.");
+  const cost=Number(document.getElementById("toolCost")?.value)||0;
+  const quantity=Number(document.getElementById("toolQty")?.value)||1;
+  const status=document.getElementById("toolStatus")?.value||"Disponibile";
+  const supplier=document.getElementById("toolSupplier")?.value.trim()||"";
+  const priority=document.getElementById("toolPriority")?.value||"";
+  const note=document.getElementById("toolNote")?.value.trim();
+  ["toolName","toolCost","toolSupplier","toolNote"].forEach(id=>{const x=document.getElementById(id);if(x)x.value=""});
+  const q=document.getElementById("toolQty");if(q)q.value="1";
+  const st=document.getElementById("toolStatus");if(st)st.value="Disponibile";
+  const pr=document.getElementById("toolPriority");if(pr)pr.value="";
+  await addShared("tools",{name,cost,quantity,status,supplier,priority,note},renderTools);
+}
+const TOOL_STATUS_STYLE={"Disponibile":"background:#e7f3ea;color:#3f8a56","Da acquistare":"background:#fdf1df;color:#b9832f","Da sostituire":"background:#f4e5eb;color:#9a4f6b"};
+async function deleteTool(id){await deleteShared("tools",id,"tools",renderTools)}
+
+async function addCosmetica(){const name=document.getElementById("cosmeticName")?.value.trim(),status=document.getElementById("cosmeticStatus")?.value,note=document.getElementById("cosmeticNote")?.value.trim();if(!name&&!note)return alert("Inserisci almeno un nome o una nota.");document.getElementById("cosmeticName").value="";document.getElementById("cosmeticNote").value="";await addShared("cosmetica",{name,status,note},renderCosmetica)}
+async function deleteCosmetica(id){await deleteShared("cosmetica",id,"cosmeticaEntries",renderCosmetica)}
+async function addPackaging(){const name=document.getElementById("packagingName")?.value.trim(),status=document.getElementById("packagingStatus")?.value,note=document.getElementById("packagingNote")?.value.trim();if(!name&&!note)return alert("Inserisci almeno una descrizione.");document.getElementById("packagingName").value="";document.getElementById("packagingNote").value="";await addShared("packaging",{name,status,note},renderPackaging)}
+async function deletePackaging(id){await deleteShared("packaging",id,"packagingEntries",renderPackaging)}
+
+/* ---------- Note vocali condivise ---------- */
+async function startVoiceRecording(){
+ try{
+  const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+  audioChunks=[];mediaRecorder=new MediaRecorder(stream);
+  mediaRecorder.ondataavailable=e=>{if(e.data.size)audioChunks.push(e.data)};
+  mediaRecorder.onstart=()=>{document.getElementById("recordingStatus").textContent="🔴 Registrazione in corso...";document.getElementById("startRecording").disabled=true;document.getElementById("stopRecording").disabled=false};
+  mediaRecorder.onstop=async()=>{
+   const blob=new Blob(audioChunks,{type:"audio/webm"});stream.getTracks().forEach(t=>t.stop());
+   const reader=new FileReader();
+   reader.onload=async()=>{
+    const obj={id:Date.now(),date:new Date().toLocaleString("it-IT"),dataUrl:reader.result};
+    const localUrl=URL.createObjectURL(blob);obj.url=localUrl;
+    if(sharedReady){
+      try{const remote=await sharedInsert("voice",obj);obj._remoteId=remote._remoteId;obj._author=currentUser;}catch(e){showSupabaseError("La nota vocale è rimasta solo su questo telefono perché non sono riuscita a sincronizzarla.",e)}
+    }
+    voiceNotes.unshift(obj);writeLocal("lunariaVoiceNotes",voiceNotes);renderVoiceNotes();
+    document.getElementById("recordingStatus").textContent="✅ Registrazione terminata.";
+    document.getElementById("startRecording").disabled=false;document.getElementById("stopRecording").disabled=true;
+   };
+   reader.readAsDataURL(blob);
+  };
+  mediaRecorder.start();
+ }catch(e){console.error(e);alert("Non posso accedere al microfono. Controlla i permessi del browser.")}
+}
+function stopVoiceRecording(){if(mediaRecorder&&mediaRecorder.state!=="inactive")mediaRecorder.stop()}
+
+/* ---------- Idee ---------- */
+async function saveIdea(){
+ const title=document.getElementById("title").value.trim(),body=document.getElementById("body").value.trim();if(!title)return alert("Dai almeno un titolo all'idea 💜");
+ const row={title,body,category:document.getElementById("category").value,status:document.getElementById("status").value,author:currentUser,date:dateLabel()};
+ try{
+  if(remoteReady){const {data,error}=await supabaseClient.from("ideas").insert(row).select("*").single();if(error)throw error;ideas.unshift(data)}
+  else{ideas.unshift(row);saveIdeasLocal()}
+  saveIdeasLocal();["title","body"].forEach(x=>document.getElementById(x).value="");closeModal();render();
+ }catch(e){showSupabaseError("Non riesco a salvare l'idea su Supabase.",e)}
+}
+function viewIdea(idx){
+ const i=ideas[idx];if(!i)return;
+ document.getElementById("editTitle").value=i.title||"";document.getElementById("editBody").value=i.body||"";document.getElementById("editCategory").value=i.category||"Altro";document.getElementById("editStatus").value=i.status||"Idea";
+ document.getElementById("editModal").dataset.index=idx;document.getElementById("editModal").classList.add("open");
+}
+function closeEditModal(){document.getElementById("editModal").classList.remove("open")}
+async function saveEditedIdea(){
+ const modal=document.getElementById("editModal"),idx=Number(modal.dataset.index),i=ideas[idx];if(!i)return;
+ const title=document.getElementById("editTitle").value.trim()||i.title,body=document.getElementById("editBody").value.trim(),category=document.getElementById("editCategory").value,status=document.getElementById("editStatus").value;
+ try{
+  if(remoteReady&&i.id){const {data,error}=await supabaseClient.from("ideas").update({title,body,category,status}).eq("id",i.id).select("*").single();if(error)throw error;ideas[idx]=data}
+  else Object.assign(i,{title,body,category,status});
+  saveIdeasLocal();closeEditModal();render();
+ }catch(e){showSupabaseError("Non riesco a salvare la modifica dell'idea.",e)}
+}
+async function deleteIdea(){
+ const modal=document.getElementById("editModal"),idx=Number(modal.dataset.index),i=ideas[idx];if(!i)return;if(!confirm("Vuoi davvero eliminare questa idea?\n\n"+(i.title||"Idea senza titolo")))return;
+ try{if(remoteReady&&i.id){const {error}=await supabaseClient.from("ideas").delete().eq("id",i.id);if(error)throw error}ideas.splice(idx,1);saveIdeasLocal();closeEditModal();render()}catch(e){showSupabaseError("Non riesco a eliminare l'idea.",e)}
+}
+function filterCat(c){currentCat=c;document.getElementById("search").value="";render()}
+function render(){
+ const q=(document.getElementById("search")?.value||"").toLowerCase();
+ const list=ideas.filter(i=>(!currentCat||i.category===currentCat)&&(!q||(i.title+" "+(i.body||"")+" "+(i.category||"")).toLowerCase().includes(q)));
+ renderHome(list,q);
+ renderHomeTabs();
+}
+function renderHome(filtered,isSearching){
+ const list=filtered||ideas,recent=document.getElementById("recentIdeas"),highlight=document.getElementById("highlightIdea"),homeCount=document.getElementById("homeIdeaCount");
+ if(homeCount)homeCount.textContent=ideas.length;
+ if(recent){
+  const latest=isSearching?list:list.slice(0,4);
+  recent.innerHTML=latest.length?latest.map(i=>`<div class="recent-item" data-action="viewIdea" data-idx="${ideas.indexOf(i)}" style="cursor:pointer"><div class="recent-icon">💡</div><div class="recent-content"><div class="recent-title" style="display:flex;justify-content:space-between;gap:8px"><span>${esc(i.title)}</span>${ideaFavoriteButton(i)}</div><div class="recent-meta">${esc(i.author||"")} · ${esc(i.date||"")} · ${esc(i.status||"Idea")}</div></div></div>`).join(""):'<div class="empty">Ancora nessuna attività.</div>';
+ }
+ if(highlight){
+  const candidate=ideas.find(i=>["In sviluppo","Da provare","Da valutare"].includes(i.status))||ideas[0];
+  highlight.innerHTML=candidate?`<div class="highlight-inner"><h4>💜 ${esc(candidate.title)}</h4><p>${esc(candidate.body||"Questa idea merita un po' di attenzione.")}</p><div class="highlight-meta"><span class="highlight-tag">${esc(candidate.category||"Altro")}</span><span class="highlight-tag">${esc(candidate.status||"Idea")}</span></div></div>`:'<div class="empty">Nessuna idea in evidenza.</div>';
+ }
+}
+
+/* ---------- Home a tab: Scadenze / In evidenza / Da fare / Promemoria / Idee recenti ---------- */
+const HOME_SHARED_SECTIONS=["todo","grants","names","agenda","reminders","costs","lab","coltivazione","products","tools","cosmetica","packaging"];
+function homeItemLabel(sec,x){return x.name||x.title||x.description||x.phase||x.text||x.crop||"Voce"}
+function setHomeTab(tab){
+ document.querySelectorAll("#homeTabBar button").forEach(b=>{b.className=b.dataset.tab===tab?"active":"ghost"});
+ ["due","featured","todo","reminders","ideas"].forEach(t=>{
+   const el=document.getElementById("homeTab"+t.charAt(0).toUpperCase()+t.slice(1));if(!el)return;
+   if(t===tab){el.style.display="";el.classList.remove("tab-fade");void el.offsetWidth;el.classList.add("tab-fade");}
+   else el.style.display="none";
+ });
+}
+function renderHomeTabs(){
+ const today=new Date();today.setHours(0,0,0,0);
+ /* --- Scadenze: agenda, bandi in chiusura, attività con scadenza --- */
+ const dueItems=[];
+ agendaEvents.forEach(e=>{if(e.date)dueItems.push({date:e.date,icon:"📅",label:e.title,meta:e.location?"📍 "+e.location:"",section:"agenda"})});
+ grants.forEach(g=>{if(g.closeDate&&g.status!=="Presentato"&&g.status!=="Scaduto")dueItems.push({date:g.closeDate,icon:"📑",label:g.title,meta:"Chiusura bando",section:"grants"})});
+ todos.forEach(t=>{if(t.due&&t.status!=="Completata")dueItems.push({date:t.due,icon:"📋",label:t.text,meta:"Da fare · "+(t.priority||"Media"),section:"todo"})});
+ dueItems.sort((a,b)=>a.date.localeCompare(b.date));
+ /* --- Riepilogo veloce --- */
+ const statsEl=document.getElementById("homeStats");
+ if(statsEl){
+  const openTodos=todos.filter(t=>t.status!=="Completata").length;
+  const urgentCount=dueItems.filter(x=>{const d=new Date(x.date+"T00:00:00");const diff=Math.round((d-today)/86400000);return diff<=7;}).length;
+  const totalCosts=costs.reduce((a,c)=>a+Number(c.amount||0)*Number(c.quantity||1),0);
+  statsEl.innerHTML=`<div class="badge" style="font-size:13px;padding:9px 14px">📋 ${openTodos} attivit${openTodos===1?"à":"à"} aperte</div><div class="badge" style="font-size:13px;padding:9px 14px;${urgentCount?"background:#fdf1df;color:#b9832f":""}">⏰ ${urgentCount} scaden${urgentCount===1?"za":"ze"} entro 7 giorni</div><div class="badge" style="font-size:13px;padding:9px 14px">💰 € ${totalCosts.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2})} spesi</div>`;
+ }
+ const dueEl=document.getElementById("homeTabDue");
+ if(dueEl){
+  const upcoming=dueItems.filter(x=>{const d=new Date(x.date+"T00:00:00");const diff=Math.round((d-today)/86400000);return diff<=14;}).slice(0,8);
+  dueEl.innerHTML=upcoming.length?upcoming.map(x=>{const d=new Date(x.date+"T00:00:00"),diff=Math.round((d-today)/86400000);const style=diff<0?"background:#f4e5eb;color:#9a4f6b":diff<=2?"background:#fdf1df;color:#b9832f":"";
+   return `<div data-action="openSection" data-section="${x.section}" style="display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer"><span style="font-size:18px">${x.icon}</span><div style="flex:1"><div style="font-weight:600">${esc(x.label)}</div><div style="font-size:11px;color:var(--muted)">${x.meta}</div></div><span class="badge" style="${style}">${diff<0?"Scaduto":d.toLocaleDateString("it-IT")}</span></div>`;
+  }).join(""):'<div class="empty">Nessuna scadenza nei prossimi 14 giorni.</div>';
+ }
+ /* --- In evidenza: anteprima elementi preferiti --- */
+ const featuredEl=document.getElementById("homeTabFeatured");
+ if(featuredEl){
+  const out=[];
+  ideas.filter(i=>i.favorite).forEach(i=>out.push({icon:"💡",label:i.title,meta:esc(i.category||"Idea")}));
+  HOME_SHARED_SECTIONS.forEach(sec=>sectionArray(sec).filter(x=>x.favorite).forEach(x=>out.push({icon:"⭐",label:homeItemLabel(sec,x),meta:secLabel(sec)})));
+  featuredEl.innerHTML=out.length?(out.slice(0,8).map(x=>`<div style="display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line)"><span style="font-size:18px">${x.icon}</span><div style="flex:1"><div style="font-weight:600">${esc(x.label)}</div><div style="font-size:11px;color:var(--muted)">${x.meta}</div></div></div>`).join("")+`<button class="ghost" data-action="openSection" data-section="featured" style="margin-top:10px;width:100%">Vedi tutti gli elementi in evidenza →</button>`):'<div class="empty">Nessun elemento in evidenza. Tocca ☆ accanto a una voce per aggiungerla.</div>';
+ }
+ /* --- Da fare: attività aperte, ordinate per priorità e scadenza --- */
+ const todoEl=document.getElementById("homeTabTodo");
+ if(todoEl){
+  const open=todos.filter(t=>t.status!=="Completata").sort((a,b)=>{const ap=TODO_PRIORITY_ORDER[a.priority]??1,bp=TODO_PRIORITY_ORDER[b.priority]??1;if(ap!==bp)return ap-bp;if(a.due&&b.due)return a.due.localeCompare(b.due);if(a.due)return -1;if(b.due)return 1;return 0;}).slice(0,8);
+  todoEl.innerHTML=open.length?(open.map(t=>`<div style="display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line)"><span class="badge" style="${TODO_PRIORITY_STYLE[t.priority]||""}">${t.priority||"Media"}</span><div style="flex:1;font-weight:600">${esc(t.text)}</div>${t.due?`<span style="font-size:11px;color:var(--muted)">${new Date(t.due+"T00:00:00").toLocaleDateString("it-IT")}</span>`:""}</div>`).join("")+`<button class="ghost" data-action="openSection" data-section="todo" style="margin-top:10px;width:100%">Vedi tutte le attività →</button>`):'<div class="empty">Nessuna attività aperta. 🎉</div>';
+ }
+ /* --- Promemoria: prossimi, non completati --- */
+ const remEl=document.getElementById("homeTabReminders");
+ if(remEl){
+  const upcoming=reminders.filter(r=>!r.done).sort((a,b)=>(a.date||"").localeCompare(b.date||"")).slice(0,8);
+  remEl.innerHTML=upcoming.length?(upcoming.map(r=>`<div style="display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line)"><span style="font-size:18px">🔔</span><div style="flex:1"><div style="font-weight:600">${esc(r.title)}</div>${r.repeat?`<div style="font-size:11px;color:var(--muted)">🔁 ${esc(r.repeat)}</div>`:""}</div>${r.date?`<span class="badge">${new Date(r.date+"T00:00:00").toLocaleDateString("it-IT")}</span>`:""}</div>`).join("")+`<button class="ghost" data-action="openSection" data-section="reminders" style="margin-top:10px;width:100%">Vedi tutti i promemoria →</button>`):'<div class="empty">Nessun promemoria in arrivo.</div>';
+ }
+}
+
+/* ---------- Sezioni ---------- */
+function toggleMenu(){document.getElementById("sideMenu").classList.toggle("open")}
+function closeMenu(){document.getElementById("sideMenu").classList.remove("open")}
+const CATEGORY_COLOR={todo:"#6d4e8f",grants:"#8a4fc9",names:"#c68196",agenda:"#5b8fc9",reminders:"#a98fd2",costs:"#b8935f",lab:"#7b9b82",coltivazione:"#5fa86f",products:"#d98fa3",tools:"#8b7d92",cosmetica:"#e0a0c0",packaging:"#a67c52",featured:"#d4af37",voice:"#6d4e8f"};
+function openSection(section,silent=false){
+ if(!silent)closeMenu();
+ const app=document.getElementById("appSection"),home=document.querySelector(".home-sections"),search=document.getElementById("search"),title=document.getElementById("sectionTitle"),content=document.getElementById("sectionContent");
+ const panelEl=document.querySelector("#appSection .panel");if(panelEl)panelEl.style.setProperty("--accent",CATEGORY_COLOR[section]||"var(--lav)");
+ const namesTitle={todo:"📋 Da fare",costs:"💰 Costi",grants:"📑 Bandi",names:"✨ Nomi & Branding",voice:"🎙️ Note vocali",agenda:"📅 Agenda",reminders:"🔔 Promemoria",lab:"🧪 Laboratorio",coltivazione:"🌿 Coltivazione",products:"🧴 Prodotti",cosmetica:"🌸 Cosmetica",packaging:"📦 Packaging",tools:"🛠️ Attrezzi",featured:"⭐ In evidenza"};
+ if(section==="ideas"){app.style.display="none";home.style.display="grid";search.focus();return}
+ title.textContent=namesTitle[section]||"Sezione";
+ const templates={
+  todo:`<div><div style="display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:10px;margin-bottom:10px"><input id="todoInput" class="search" placeholder="✏️ Cosa devi fare?"><select id="todoPriority" class="search"><option>Media</option><option>Alta</option><option>Bassa</option></select><input id="todoDue" class="search" type="date"></div><input id="todoNote" class="search" placeholder="📝 Nota (facoltativa)" style="margin-bottom:10px"><button class="primary" data-action="addTodo">＋ Aggiungi</button><div id="todoList" style="margin-top:18px"></div></div>`,
+  grants:`<div><input id="grantTitle" class="search" placeholder="📑 Nome del bando" style="margin-bottom:10px"><input id="grantEntity" class="search" placeholder="🏛️ Ente" style="margin-bottom:10px"><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><input id="grantOpenDate" class="search" type="date"><input id="grantCloseDate" class="search" type="date"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><input id="grantAmount" class="search" type="number" min="0" step="0.01" placeholder="€ Importo/contributo"><select id="grantStatus" class="search"><option>Da valutare</option><option>Interessante</option><option>In preparazione</option><option>Presentato</option><option>Scaduto</option></select></div><input id="grantLink" class="search" type="url" placeholder="🔗 Link al bando" style="margin-bottom:10px"><textarea id="grantRequirements" class="search" placeholder="✅ Requisiti principali" style="min-height:70px;margin-bottom:10px"></textarea><textarea id="grantDescription" class="search" placeholder="📝 Breve descrizione del bando" style="min-height:100px;margin-bottom:10px"></textarea><button class="primary" data-action="addGrant">＋ Aggiungi</button><div id="grantList" style="margin-top:18px"></div></div>`,
+  names:`<div><div style="display:grid;grid-template-columns:1fr .8fr auto;gap:10px;margin-bottom:10px"><input id="nameIdea" class="search" placeholder="✨ Scrivi un nome..."><select id="nameType" class="search"><option>Bombe da bagno</option><option>Spumanti da bagno</option><option>Saponette</option><option>Candele</option><option>Acque profumate</option><option>Roll-on tempie</option><option>Profumo solido</option><option>Olio massaggio solido</option><option>Olio massaggio liquido</option><option>Tisane</option><option>Miele</option><option>Polverine corpo</option><option>Distillati e miscele</option><option>Maschere viso</option><option>Maschere mani</option><option>Maschere piedi</option><option>Maschere intimo</option><option>Scrub</option><option>Sali da bagno</option><option>Linea</option><option>Collezione</option><option>Branding</option><option>Altro</option></select><button class="primary" data-action="addName">＋ Aggiungi</button></div><input id="nameNote" class="search" placeholder="📝 Nota o descrizione (facoltativa)" style="margin-bottom:15px"><div id="nameList"></div></div>`,
+  voice:`<div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px"><button class="primary" id="startRecording" data-action="startVoiceRecording">🎙️ Inizia registrazione</button><button class="ghost" id="stopRecording" data-action="stopVoiceRecording" disabled>⏹️ Ferma</button></div><div id="recordingStatus" class="empty">Nessuna registrazione in corso.</div><div id="voiceList"></div></div>`,
+  agenda:`<div><div style="display:grid;grid-template-columns:1.2fr .8fr .6fr;gap:10px;margin-bottom:10px"><input id="agendaTitle" class="search" placeholder="📅 Cosa devi fare?"><input id="agendaDate" class="search" type="date"><input id="agendaTime" class="search" type="time"></div><input id="agendaLocation" class="search" placeholder="📍 Luogo (facoltativo)" style="margin-bottom:10px"><textarea id="agendaNote" class="search" placeholder="📝 Nota (facoltativa)" style="min-height:80px;margin-bottom:10px"></textarea><button class="primary" data-action="addAgendaEvent">＋ Aggiungi evento</button><div id="agendaList" style="margin-top:18px"></div></div>`,
+  reminders:`<div><div style="display:grid;grid-template-columns:1.2fr .8fr .6fr;gap:10px;margin-bottom:10px"><input id="reminderTitle" class="search" placeholder="🔔 Cosa devo ricordarti?"><input id="reminderDate" class="search" type="date"><input id="reminderTime" class="search" type="time"></div><div style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px"><select id="reminderRepeat" class="search"><option value="">Nessuna ripetizione</option><option value="Giornaliera">🔁 Ogni giorno</option><option value="Settimanale">🔁 Ogni settimana</option><option value="Mensile">🔁 Ogni mese</option><option value="Annuale">🔁 Ogni anno</option></select></div><textarea id="reminderNote" class="search" placeholder="📝 Descrizione (facoltativa)" style="min-height:70px;margin-bottom:10px"></textarea><button class="primary" data-action="addReminder">＋ Aggiungi</button><div id="reminderList" style="margin-top:15px"></div></div>`,
+  costs:`<div><div style="display:grid;grid-template-columns:1.3fr .8fr;gap:10px;margin-bottom:10px"><input id="costDescription" class="search" placeholder="💰 Es. Distillatore"><select id="costCategory" class="search"><option>Materiali</option><option>Attrezzature</option><option>Servizi</option><option>Marketing</option><option>Formazione</option><option>Altro</option></select></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px"><input id="costAmount" class="search" type="number" min="0" step="0.01" placeholder="€ Importo"><input id="costQty" class="search" type="number" min="1" step="1" placeholder="Quantità" value="1"><input id="costSupplier" class="search" placeholder="🏭 Fornitore"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><input id="costDate" class="search" type="date"><select id="costStatus" class="search"><option>Preventivo</option><option>Previsto</option><option>Pagato</option></select></div><input id="costNote" class="search" placeholder="📝 Nota (facoltativa)" style="margin-bottom:10px"><button class="primary" data-action="addCost">＋ Aggiungi</button><div id="costTotal" style="font-weight:800;font-size:18px;margin:15px 0">Totale: € 0,00</div><div id="costList"></div></div>`,
+  lab:`<div><div style="display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-bottom:10px"><select id="labCategory" class="search"><option>Fase di lavorazione</option><option>Attrezzatura</option><option>Materia prima</option><option>Procedura</option><option>Fornitore</option><option>Idea</option></select><input id="labName" class="search" placeholder="Nome (es. Distillazione lavanda, Distillatore...)"></div><div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:10px;margin-bottom:10px"><input id="labQty" class="search" type="number" min="0" step="1" placeholder="Quantità"><input id="labCost" class="search" type="number" min="0" step="0.01" placeholder="€ Costo"><input id="labSupplier" class="search" placeholder="🏭 Fornitore"></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px"><select id="labPurchased" class="search"><option value="">— Acquisto —</option><option value="Da acquistare">Da acquistare</option><option value="Acquistato">Acquistato</option></select><select id="labPriority" class="search"><option value="">— Priorità —</option><option>Alta</option><option>Media</option><option>Bassa</option></select><input id="labDate" class="search" type="date"></div><textarea id="labNote" class="search" placeholder="📝 Note, procedura, dettagli..." style="min-height:100px;margin-bottom:10px"></textarea><button class="primary" data-action="addLab">＋ Aggiungi</button><div id="labList" style="margin-top:18px"></div></div>`,
+  coltivazione:`<div><div style="background:linear-gradient(145deg,#fbf7fd,#eee5f4);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px;font-size:13px;color:var(--muted);line-height:1.6">🌱 <strong style="color:var(--ink)">Promemoria generali sulla lavanda:</strong><br>Potatura: due volte l'anno — una leggera a fine inverno/inizio primavera per dare forma, una più decisa dopo la fioritura (fine estate) per mantenere la pianta compatta.<br>Raccolta: quando i primi fiori sui rametti iniziano ad aprirsi ma la maggior parte è ancora in boccio.</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><input id="coltCrop" class="search" placeholder="🌿 Coltura/pianta (es. Lavanda)"><input id="coltVariety" class="search" placeholder="Varietà (facoltativa)"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><select id="coltPhase" class="search"><option>Potatura</option><option>Raccolta</option><option>Semina / Trapianto</option><option>Irrigazione</option><option>Concimazione</option><option>Trattamento fitosanitario</option><option>Altra lavorazione</option></select><input id="coltDate" class="search" type="date"></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px"><input id="coltArea" class="search" placeholder="📐 Superficie (es. 50 m²)"><input id="coltQty" class="search" type="number" min="0" step="1" placeholder="Quantità piante"><input id="coltCost" class="search" type="number" min="0" step="0.01" placeholder="€ Costo"></div><textarea id="coltNote" class="search" placeholder="📝 Note su questa lavorazione..." style="min-height:100px;margin-bottom:10px"></textarea><button class="primary" data-action="addColt">＋ Aggiungi</button><div id="coltList" style="margin-top:18px"></div></div>`,
+  products:`<div><div style="display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-bottom:10px"><select id="productType" class="search">${PRODUCT_TYPES.map(p=>`<option>${p}</option>`).join("")}</select><input id="productName" class="search" placeholder="✨ Nome (facoltativo)"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><input id="productFormat" class="search" placeholder="📏 Formato (es. 50 ml)"><select id="productStatus" class="search"><option>Idea</option><option>Da sviluppare</option><option>Test</option><option>Definitivo</option></select></div><input id="productPackaging" class="search" placeholder="📦 Packaging previsto (facoltativo)" style="margin-bottom:10px"><textarea id="productIngredients" class="search" placeholder="🧴 Ingredienti / idee ingredienti" style="min-height:70px;margin-bottom:10px"></textarea><textarea id="productNote" class="search" placeholder="📝 Altre note: ricetta, stato di sviluppo..." style="min-height:80px;margin-bottom:10px"></textarea><button class="primary" data-action="addProduct">＋ Aggiungi</button><div id="productList" style="margin-top:18px"></div></div>`,
+  tools:`<div><div style="display:grid;grid-template-columns:1.5fr .7fr;gap:10px;margin-bottom:10px"><input id="toolName" class="search" placeholder="🛠️ Es. Distillatore"><input id="toolCost" class="search" type="number" min="0" step="0.01" placeholder="€ Costo"></div><div style="display:grid;grid-template-columns:.7fr 1fr 1.3fr;gap:10px;margin-bottom:10px"><input id="toolQty" class="search" type="number" min="1" step="1" placeholder="Quantità" value="1"><select id="toolStatus" class="search"><option>Disponibile</option><option>Da acquistare</option><option>Da sostituire</option></select><input id="toolSupplier" class="search" placeholder="🏭 Fornitore"></div><select id="toolPriority" class="search" style="margin-bottom:10px"><option value="">— Priorità —</option><option>Alta</option><option>Media</option><option>Bassa</option></select><textarea id="toolNote" class="search" placeholder="📝 Note (facoltative)" style="min-height:80px;margin-bottom:10px"></textarea><button class="primary" data-action="addTool">＋ Aggiungi</button><div id="toolTotal" style="font-weight:800;font-size:18px;margin-top:15px">Totale: € 0,00</div><div id="toolList" style="margin-top:12px"></div></div>`,
+  cosmetica:`<div><div style="display:grid;grid-template-columns:1.2fr .8fr;gap:10px;margin-bottom:10px"><input id="cosmeticName" class="search" placeholder="🌸 Nome / idea cosmetica"><select id="cosmeticStatus" class="search"><option>Idea</option><option>Da sviluppare</option><option>In prova</option><option>Definitiva</option></select></div><textarea id="cosmeticNote" class="search" placeholder="📝 Formula, ingredienti, funzione, appunti..." style="min-height:100px;margin-bottom:10px"></textarea><button class="primary" data-action="addCosmetica">＋ Aggiungi</button><div id="cosmeticaList" style="margin-top:18px"></div></div>`,
+  packaging:`<div><div style="display:grid;grid-template-columns:1.2fr .8fr;gap:10px;margin-bottom:10px"><input id="packagingName" class="search" placeholder="📦 Tipo / idea di packaging"><select id="packagingStatus" class="search"><option>Idea</option><option>Da valutare</option><option>Campione</option><option>Scelto</option></select></div><textarea id="packagingNote" class="search" placeholder="📝 Materiale, formato, etichetta, dimensioni, costi..." style="min-height:100px;margin-bottom:10px"></textarea><button class="primary" data-action="addPackaging">＋ Aggiungi</button><div id="packagingList" style="margin-top:18px"></div></div>`,
+  featured:`<div><div style="background:linear-gradient(145deg,#fbf7fd,#eee5f4);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px;font-size:13px;color:var(--muted);line-height:1.6">⭐ Qui trovi le idee e le voci che hai contrassegnato come importanti. Per rimuoverle, tocca di nuovo la stella.</div><div id="featuredList"></div></div>`
+ };
+ content.innerHTML=templates[section]||"";home.style.display="none";app.style.display="block";
+ ({todo:renderTodos,grants:renderGrants,names:renderNames,voice:renderVoiceNotes,agenda:renderAgenda,reminders:renderReminders,costs:renderCosts,lab:renderLab,coltivazione:renderColt,products:renderProducts,tools:renderTools,cosmetica:renderCosmetica,packaging:renderPackaging,featured:renderFeatured}[section]||(()=>{}))();
+}
+function closeSection(){document.getElementById("appSection").style.display="none";document.querySelector(".home-sections").style.display="grid"}
+
+/* ---------- Eventi ---------- */
+document.addEventListener("click",async e=>{
+ const el=e.target.closest("[data-action]");if(!el)return;const a=el.dataset.action;
+ if(a==="enableNotifications"){await enableNotifications();return;}
+ if(a==="toggleMenu")toggleMenu();else if(a==="openSection")openSection(el.dataset.section);else if(a==="openModal")openModal();else if(a==="focusSearch")document.getElementById("search").focus();else if(a==="closeSection")closeSection();else if(a==="closeModal")closeModal();
+ else if(a==="saveIdea")saveIdea();else if(a==="closeEditModal")closeEditModal();else if(a==="deleteIdea")deleteIdea();else if(a==="saveEditedIdea")saveEditedIdea();else if(a==="viewIdea")viewIdea(Number(el.dataset.idx));
+ else if(a==="addTodo")addTodo();else if(a==="deleteTodo")deleteTodo(el.dataset.id);else if(a==="addGrant")addGrant();else if(a==="deleteGrant")deleteGrant(el.dataset.id);else if(a==="addName")addName();else if(a==="deleteName")deleteName(el.dataset.id);
+ else if(a==="startVoiceRecording")startVoiceRecording();else if(a==="stopVoiceRecording")stopVoiceRecording();else if(a==="addAgendaEvent")addAgendaEvent();else if(a==="deleteAgenda")deleteAgenda(el.dataset.id);
+ else if(a==="addReminder")addReminder();else if(a==="deleteReminder")deleteReminder(el.dataset.id);else if(a==="addCost")addCost();else if(a==="deleteCost")deleteCost(el.dataset.id);
+ else if(a==="addLab")addLab();else if(a==="deleteLab")deleteLab(el.dataset.id);else if(a==="addColt")addColt();else if(a==="deleteColt")deleteColt(el.dataset.id);
+ else if(a==="addProduct")addProduct();else if(a==="deleteProduct")deleteProduct(el.dataset.id);else if(a==="addTool")addTool();else if(a==="deleteTool")deleteTool(el.dataset.id);else if(a==="addCosmetica")addCosmetica();else if(a==="deleteCosmetica")deleteCosmetica(el.dataset.id);else if(a==="addPackaging")addPackaging();else if(a==="deletePackaging")deletePackaging(el.dataset.id);else if(a==="toggleSharedFavorite")toggleSharedFavorite(el.dataset.section,el.dataset.id);else if(a==="toggleIdeaFavorite")toggleIdeaFavorite(el.dataset.id);else if(a==="setNameStatus")setNameStatus(el.dataset.id,el.dataset.status);
+ else if(a==="toggleComments")toggleComments(el.dataset.section,el.dataset.id);
+ else if(a==="addComment"){const input=document.querySelector(`[data-comment-input="${el.dataset.section}-${el.dataset.id}"]`);await addComment(el.dataset.section,el.dataset.id,input)}
+ else if(a==="viewImage")openImageLightbox(el.dataset.url,el.dataset.section,el.dataset.id);else if(a==="closeLightbox")closeLightbox();else if(a==="removeImage")await removeImage(el.dataset.section,el.dataset.id);
+ else if(a==="pickImage"){await pickImage(el.dataset.section,el.dataset.id);}
+ else if(a==="setHomeTab")setHomeTab(el.dataset.tab);
+});
+document.addEventListener("change",async e=>{const el=e.target.closest("[data-action]");if(!el)return;const a=el.dataset.action;if(a==="toggleTodo")toggleTodo(el.dataset.id);else if(a==="toggleReminder")toggleReminder(el.dataset.id);else if(a==="setTodoStatus")await updateTodoField(el.dataset.id,"status",el.value);else if(a==="setTodoPriority")await updateTodoField(el.dataset.id,"priority",el.value);else if(a==="setTodoDue")await updateTodoField(el.dataset.id,"due",el.value);});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target?.id==="todoInput")addTodo();if(e.key==="Enter"&&e.target?.dataset?.commentInput){e.preventDefault();const [section,id]=e.target.dataset.commentInput.split("-");addComment(section,id,e.target)}});
+const searchInput=document.getElementById("search");if(searchInput)searchInput.addEventListener("input",render);
+function openModal(){document.getElementById("modal").classList.add("open");document.getElementById("title").focus()}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+function exportData(){const blob=new Blob([JSON.stringify({ideas,todos,grants,names,agendaEvents,reminders,costs,labEntries,coltEntries,products,tools,cosmeticaEntries,packagingEntries},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="lunaria-idee.json";a.click();URL.revokeObjectURL(a.href)}
+
+(async function init(){
+  localLoad();
+  await chooseUser();
+  await loadIdeas();
+  await loadSharedAll();
+  subscribeRealtime();
+  updateWelcome();
+  await refreshNotificationStatus();
+  if(notificationReady) await scheduleAllNotifications();
+})();
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script></body>
+</html>
