@@ -22,6 +22,9 @@ jobs:
       - name: Aggiungi Android
         run: npx cap add android
 
+      - name: Genera icona app
+        run: npx capacitor-assets generate --android
+
       - name: Aggiungi permesso microfono
         run: |
           sed -i '/<manifest/a\    <uses-permission android:name="android.permission.RECORD_AUDIO" />' android/app/src/main/AndroidManifest.xml
